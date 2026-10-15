@@ -8,6 +8,37 @@ export default function Icon({
   className?: string;
 }) {
   const shapes = {
+    droplet: <path d="M12 2C10 6 4 10 4 15a8 8 0 0 0 16 0c0-5-6-9-8-13ZM8 15c0 3 2 4 4 4" />,
+    scarab: (
+      <>
+        <ellipse cx="12" cy="13" rx="5" ry="8" />
+        <path d="M12 5v16M9 6 7 2m8 4 2-4M7 9 3 6m4 7H2m5 4-4 4M17 9l4-3m-4 7h5m-5 4 4 4M8 11h8" />
+      </>
+    ),
+    prism: <path d="m12 2 10 19H2Zm0 0v19M2 21l10-6 10 6M3 8h4m10 0h4M1 12h4m14 0h4" />,
+    hourglass: (
+      <path d="M5 2h14M5 22h14M7 2v4c0 3 5 6 5 6s5-3 5-6V2M7 22v-4c0-3 5-6 5-6s5 3 5 6v4M9 6h6m-6 13 3-3 3 3" />
+    ),
+    quill: <path d="M3 21 17 7M5 17C2 8 12 1 22 2c0 10-7 20-16 17M9 13h6m-2-4h6" />,
+    antlers: (
+      <path d="M9 22v-8L4 9V3m5 19h6V14l5-5V3M4 7 1 4m3 5 4-4m12 2 3-3m-3 5-4-4M9 15l3-3 3 3M9 18h6" />
+    ),
+    ferry: <path d="M2 14h20l-4 6H6Zm10 0V2m0 0-8 9h8M3 23q3-2 6 0t6 0 6 0" />,
+    orrery: (
+      <>
+        <path d="M12 4v16m-5 2h10M3 13q9 6 18 0" />
+        <ellipse cx="12" cy="10" rx="10" ry="4" />
+        <circle cx="12" cy="10" r="2" />
+        <circle cx="19" cy="7" r="2" />
+      </>
+    ),
+    comet: (
+      <>
+        <path d="m14 3-8 8m14-6-8 8m10-3-8 8" />
+        <circle cx="7" cy="17" r="5" />
+        <path d="m5 17 2-2 2 2-2 2Z" />
+      </>
+    ),
     download: <path d="M12 3v12m-5-5 5 5 5-5M3 15v6h18v-6" />,
     upload: <path d="M12 15V3m-5 5 5-5 5 5M3 15v6h18v-6" />,
     restart: <path d="M4 9a8 8 0 1 1 0 7M4 3v6h6" />,
@@ -106,7 +137,7 @@ export default function Icon({
       viewBox="0 0 24 24"
       aria-hidden="true"
     >
-      {shapes[name]}
+      {shapes[name === 'settings' ? 'gear' : name]}
     </svg>
   );
 }

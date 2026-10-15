@@ -14,6 +14,15 @@ export type Reading = 'rich' | 'plain';
 export type Support = 'guided' | 'light';
 export type Ending = 'beacon' | 'refuge';
 export type IconName =
+  | 'droplet'
+  | 'scarab'
+  | 'prism'
+  | 'hourglass'
+  | 'quill'
+  | 'antlers'
+  | 'ferry'
+  | 'orrery'
+  | 'comet'
   | 'owl'
   | 'balance'
   | 'gear'

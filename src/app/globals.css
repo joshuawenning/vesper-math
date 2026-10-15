@@ -56,6 +56,7 @@
   }
   body {
     @apply bg-night font-sans text-base leading-[1.5] text-body;
+    text-wrap: pretty;
     background-image: radial-gradient(ellipse at 60% 0%, var(--glow), transparent 65%);
   }
 

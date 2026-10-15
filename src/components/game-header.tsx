@@ -5,23 +5,21 @@ import { getPersona } from '@/content/personas';
 import type { DialogView, IconName, Progress } from '@/lib/types';
 
 function NavButton({
-  active = false,
   onClick,
   icon,
   children,
 }: {
-  active?: boolean;
   onClick: () => void;
   icon: IconName;
   children: ReactNode;
 }) {
   return (
     <button
-      className={`relative flex min-h-11 h-full items-center gap-2 border-0 bg-transparent py-3 text-[0.75rem] tablet:text-xs ${active ? 'text-gold after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:bg-gold' : 'text-subtle'}`}
+      className="flex min-h-11 h-full flex-col items-center justify-center gap-1 min-[480px]:flex-row min-[480px]:gap-2 border-0 bg-transparent py-3 text-[0.75rem] text-subtle hover:text-gold tablet:text-xs"
       onClick={onClick}
     >
       <Icon name={icon} className="size-4 tablet:size-5" />
-      {children}
+      <span className="inline-flex items-center gap-2">{children}</span>
     </button>
   );
 }
@@ -38,25 +36,27 @@ export default function GameHeader({
   const links: { title: string; icon: IconName; kind: 'map' | 'journal' | 'settings' }[] = [
     { title: 'World map', icon: 'map', kind: 'map' },
     { title: 'Journal', icon: 'book', kind: 'journal' },
-    { title: 'Settings', icon: 'settings', kind: 'settings' },
+    { title: 'Settings', icon: 'gear', kind: 'settings' },
   ];
   return (
     <header className="mx-[18px] flex min-h-[75px] flex-wrap items-center justify-between border-b border-line tablet:mx-[25px] desktop:min-h-[89px] desktop:flex-nowrap desktop:gap-[25px] desktop:mx-[42px]">
-      <div className="flex items-center gap-[14px] py-[15px] text-gold tablet:py-0">
+      <a
+        href="#adventure"
+        onClick={close}
+        aria-label="Vesper Math — current adventure"
+        className="flex items-center gap-[14px] py-[15px] text-gold tablet:py-0"
+      >
         <Icon name="star" className="h-[43px] w-7 tablet:w-[37px]" />
         <div>
           <div className="whitespace-nowrap font-story text-[clamp(1.5rem,5vw,2.3125rem)] font-semibold tracking-[2px]">
             Vesper Math
           </div>
         </div>
-      </div>
+      </a>
       <nav
-        className="order-3 grid w-full grid-cols-2 gap-x-4 gap-y-1 py-2 min-[480px]:flex min-[480px]:justify-around desktop:flex border-t border-line desktop:order-0 desktop:h-full desktop:w-auto desktop:justify-start desktop:gap-5 desktop:border-t-0 desktop:gap-[30px]"
+        className="order-3 grid w-full grid-cols-3 gap-x-3 gap-y-1 py-2 min-[480px]:flex min-[480px]:justify-around desktop:flex border-t border-line desktop:order-0 desktop:h-full desktop:w-auto desktop:justify-start desktop:gap-5 desktop:border-t-0 desktop:gap-[30px]"
         aria-label="Main"
       >
-        <NavButton active onClick={close} icon="leaf">
-          Adventure
-        </NavButton>
         {links.map((link) => (
           <NavButton key={link.kind} onClick={() => open({ kind: link.kind })} icon={link.icon}>
             {link.title}
