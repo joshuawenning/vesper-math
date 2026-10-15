@@ -112,3 +112,7 @@ All included scenes are original AI-generated illustrations from the built-in im
 - [Next.js installation and App Router](https://nextjs.org/docs/app/getting-started/installation)
 - [Next.js lazy loading](https://nextjs.org/docs/app/guides/lazy-loading)
 - [Vercel GitHub deployments](https://vercel.com/docs/git/vercel-for-github)
+
+## Optional language model
+
+Elian currently runs entirely on-device. See [the free-LLM options and integration boundaries](docs/ELIAN-LLM-OPTIONS.md) before choosing an optional provider. No LLM service is enabled by this update.
