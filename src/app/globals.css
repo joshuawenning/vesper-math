@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-night: var(--canvas);
   --color-ink: #192625;
   --color-paper: #eee5d0;
   --color-gold: var(--accent);
@@ -20,6 +19,7 @@
 }
 
 @theme inline {
+  --color-night: var(--canvas);
   --font-story: var(--font-literary), Georgia, serif;
   --font-sans: var(--font-ui), sans-serif;
 }

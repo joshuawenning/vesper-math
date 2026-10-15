@@ -14,6 +14,7 @@ import StoryStrip from './adventure/story-strip';
 import EncounterGrid from './adventure/encounter-grid';
 import { MobileCompanionCard } from './adventure/companion-card';
 import WorldNavigator from './adventure/world-navigator';
+import WorldAtmosphere from './adventure/world-atmosphere';
 import AdventureFooter from './adventure/adventure-footer';
 
 // The full dialog and challenge interface is fetched only after an interaction.
@@ -96,7 +97,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
     close();
   }
   return (
-    <>
+    <WorldAtmosphere worldId={progress.worldId}>
       <GameHeader progress={progress} open={setView} close={close} />
       <div className="mx-auto block max-w-[1600px] px-[15px] pt-[19px] pb-6 tablet:grid tablet:grid-cols-[200px_minmax(0,1fr)] tablet:gap-[23px] tablet:p-[25px] desktop:grid-cols-[208px_minmax(0,1fr)] desktop:gap-[33px] desktop:px-[42px] desktop:pt-[33px] desktop:pb-6 wide:pt-10">
         <ChapterSidebar chapter={chapter} progress={progress} onCompanion={companion} />
@@ -164,6 +165,6 @@ export default function Game({ scene }: { scene: ReactNode }) {
           onRestart={restart}
         />
       )}
-    </>
+    </WorldAtmosphere>
   );
 }
