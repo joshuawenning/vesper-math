@@ -13,7 +13,7 @@ import ChapterScene from './adventure/chapter-scene';
 import StoryStrip from './adventure/story-strip';
 import EncounterGrid from './adventure/encounter-grid';
 import { MobileCompanionCard } from './adventure/companion-card';
-import WorldHorizon from './adventure/world-horizon';
+import WorldNavigator from './adventure/world-navigator';
 import AdventureFooter from './adventure/adventure-footer';
 
 // The full dialog and challenge interface is fetched only after an interaction.
@@ -101,18 +101,14 @@ export default function Game({ scene }: { scene: ReactNode }) {
       <div className="mx-auto block max-w-[1600px] px-[15px] pt-[19px] pb-6 tablet:grid tablet:grid-cols-[200px_minmax(0,1fr)] tablet:gap-[23px] tablet:p-[25px] desktop:grid-cols-[208px_minmax(0,1fr)] desktop:gap-[33px] desktop:px-[42px] desktop:pt-[33px] desktop:pb-6 wide:pt-10">
         <ChapterSidebar chapter={chapter} progress={progress} onCompanion={companion} />
         <main id="adventure" tabIndex={-1}>
-          <div className="mb-3 flex flex-col items-start justify-between gap-2 desktop:flex-row desktop:items-center desktop:gap-4 tablet:mb-[17px]">
-            <div className="text-[0.875rem] leading-relaxed text-subtle">
-              {chapter.region} <span className="px-[9px] text-subtle"> / </span> {chapter.title}
-            </div>
-            <div className="text-[0.875rem] leading-relaxed text-subtle before:pr-[6px] before:text-[0.75rem] before:content-['●']">
-              {!loaded
-                ? 'Preparing your journey'
-                : storageOK
-                  ? 'Progress saved on this device'
-                  : 'Progress available this session'}
-            </div>
-          </div>
+          <WorldNavigator chapter={chapter} progress={progress} onWorld={selectWorld} />
+          <p className="mb-4 text-[0.75rem] leading-relaxed text-subtle" role="status">
+            {!loaded
+              ? 'Preparing your journey'
+              : storageOK
+                ? 'Progress saved on this device'
+                : 'Progress available this session'}
+          </p>
           {worldError && (
             <p role="alert" className="mb-4 border border-gold/30 p-3 text-gold">
               {worldError}
@@ -146,7 +142,6 @@ export default function Game({ scene }: { scene: ReactNode }) {
               <StoryStrip chapter={chapter} progress={progress} onContinue={continueJourney} />
               <MobileCompanionCard onSpeak={companion} />
               <EncounterGrid chapter={chapter} progress={progress} onEncounter={openEncounter} />
-              <WorldHorizon onAtlas={() => setView({ kind: 'map' })} />
               <AdventureFooter chapter={chapter} />
             </>
           )}

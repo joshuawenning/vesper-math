@@ -55,34 +55,34 @@ export const worlds = [
     id: 'glass-desert',
     icon: 'crystal',
     title: 'The Glass Desert',
-    chapter: 'Beyond the veil',
+    chapter: 'The Palace of Reflections',
     number: 4,
-    playable: false,
-    image: null,
+    playable: true,
+    image: '/art/glass-desert.webp',
     teaser: 'A horizon that changes when you look away.',
-    encounters: [],
+    encounters: ['mirrors-well', 'scarab-caravan', 'prism-gate'],
   },
   {
     id: 'winter-archive',
     icon: 'snowflake',
     title: 'The Winter Archive',
-    chapter: 'Beyond the veil',
+    chapter: 'The Book of Borrowed Hours',
     number: 5,
-    playable: false,
-    image: null,
+    playable: true,
+    image: '/art/winter-archive.webp',
     teaser: 'Behind the frost, a thousand quiet doors.',
-    encounters: [],
+    encounters: ['borrowed-hours', 'frostbound-index', 'door-of-thaw'],
   },
   {
     id: 'astral-vault',
     icon: 'orbit',
     title: 'The Astral Vault',
-    chapter: 'Beyond the veil',
+    chapter: 'The Unwritten Constellation',
     number: 6,
-    playable: false,
-    image: null,
+    playable: true,
+    image: '/art/astral-vault.webp',
     teaser: 'Some journeys begin where the stars disappear.',
-    encounters: [],
+    encounters: ['starless-ferry', 'orrery-keeper', 'unwritten-star'],
   },
 ] as const satisfies readonly {
   id: string;
@@ -108,8 +108,14 @@ export async function loadChapter(id: string): Promise<Chapter> {
       return (await import('./foundry')).chapter;
     case 'tideglass-coast':
       return (await import('./coast')).chapter;
+    case 'glass-desert':
+      return (await import('./glass-desert')).chapter;
+    case 'winter-archive':
+      return (await import('./winter-archive')).chapter;
+    case 'astral-vault':
+      return (await import('./astral-vault')).chapter;
     default:
-      throw new Error('This world is still beyond the veil.');
+      throw new Error('This world could not be found.');
   }
 }
 

@@ -1,0 +1,66 @@
+{
+  "method": "Built-in image_gen tool",
+  "style": "Hand-drawn fantasy illustration with ink, gouache, and watercolor",
+  "assets": [
+    {
+      "id": "glass-desert",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. A vast desert of smoky rose glass dunes, shattered mirror monoliths and a slender ruined palace. A turquoise glass serpent winds between the dunes, tiny distant robed travelers for scale. Amber sun and lavender shadows. Wide magical landscape with strong drawn contours.",
+      "src": "/art/glass-desert.webp"
+    },
+    {
+      "id": "mirrors-well",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. A beautiful dark-skinned woman with a shaved head and copper jewelry kneels beside an ancient circular well in a glass desert, pouring turquoise water between two ceramic vessels. Curious tiny glass lizards watch. Sculptural drawn figure, patterned saffron robes, delicately inked mirrored ruins.",
+      "src": "/art/mirrors-well.webp"
+    },
+    {
+      "id": "scarab-caravan",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. A handsome silver-haired male caravan keeper in an indigo cloak tends a gigantic jewel-colored scarab carrying woven baskets of desert seeds, surrounded by three smaller scarabs. Strange rose glass dunes, exquisite ornamental beetle shells, hand-painted fantastical anatomy.",
+      "src": "/art/scarab-caravan.webp"
+    },
+    {
+      "id": "prism-gate",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. An eerie sentient prism gate among broken glass towers: a many-eyed translucent sphinx curls around angular amber and teal crystals, thin black ink lines and glowing geometric pools. The central magical item and creature dominate, no humans. Fascinating and slightly unsettling.",
+      "src": "/art/prism-gate.webp"
+    },
+    {
+      "id": "winter-archive",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. A vast frozen library carved into a cliff, snowy bridges, blue ice towers, warm amber windows. Antlered owl spirits perch on frost-covered shelves outside. A tiny cloaked figure approaches. Intricate hand-inked winter fantasy landscape, silver blue and warm ochre.",
+      "src": "/art/winter-archive.webp"
+    },
+    {
+      "id": "borrowed-hours",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. An elegant beautiful older woman with long white braids, plum velvet robes and a small raven on her shoulder tends floating hourglasses in a frozen library chamber. Ice drips into a brass bowl. Her face is strongly drawn and painterly, not photographic. Burgundy, ice blue and brass.",
+      "src": "/art/borrowed-hours.webp"
+    },
+    {
+      "id": "frostbound-index",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. A handsome bearded male archivist with warm brown skin and ornate moss-green robes opens an enormous book. Pale moth spirits pour from its pages and arrange themselves among shelves of frozen scrolls. He has a kindly thoughtful expression. Fine black pen work, watercolor washes, luminous paper texture.",
+      "src": "/art/frostbound-index.webp"
+    },
+    {
+      "id": "door-of-thaw",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. A tall strange skeletal stag spirit made of hoarfrost stands before a round wooden archive door, its branching antlers carrying tiny candle flames. Frosty tiles form a geometric pattern at its feet. Beautiful dark fairytale, creepy but no gore. Midnight blue and amber ink-and-gouache illustration.",
+      "src": "/art/door-of-thaw.webp"
+    },
+    {
+      "id": "astral-vault",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. An impossible ancient observatory floating among violet nebulae, broken stone rings and golden orbital bridges surrounding a dark star. Tiny luminous ray-like creatures swim through space. Hand-drawn celestial architecture and painterly midnight colors, no sci-fi machinery, mysterious fantasy.",
+      "src": "/art/astral-vault.webp"
+    },
+    {
+      "id": "starless-ferry",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. A beautiful auburn-haired woman ferryman in a pale teal embroidered cloak guides a narrow crescent boat through an inky sea of stars. A luminous silver manta spirit swims beside the hull, stone lanterns hang in the void. Expressive stylized figure, intricate ink lines and watercolor, wondrous not realistic.",
+      "src": "/art/starless-ferry.webp"
+    },
+    {
+      "id": "orrery-keeper",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. A handsome androgynous male elf with dark curling hair and a gold embroidered midnight robe carefully turns a brass orrery, luminous planets circling his hands. A tiny mischievous winged imp peeks from behind the instrument. Starry stone vault, hand-drawn ornamental detail, vivid flat painted colors.",
+      "src": "/art/orrery-keeper.webp"
+    },
+    {
+      "id": "unwritten-star",
+      "prompt": "Use case: illustration-story. Asset: landscape 3:2 illustration for Vesper Math, a mature fantasy adventure. Style: distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration, intricate irregular pen outlines, crosshatching, luminous watercolor and opaque gouache on visibly textured paper. Flattened imaginative shapes and stylized painted faces, expressive unusual proportions. NOT photorealistic, NOT cinematic realism, no 3D, no smooth digital concept-art finish. Beautiful, mysterious, slightly eerie. Whole image is artwork, no border, no lettering, no logos, no UI. A mysterious floating obsidian reliquary opens to reveal a small living star in a cupped pair of ancient stone hands. Around it drift translucent feathered serpents and torn celestial maps without readable lettering. Gorgeous eerie final treasure, purple black, pale gold, coral watercolor, bold ink silhouettes.",
+      "src": "/art/unwritten-star.webp"
+    }
+  ]
+}

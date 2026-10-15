@@ -6,7 +6,7 @@ import { encounterStatus } from '@/lib/progress';
 import type { Chapter, Progress } from '@/lib/types';
 import Icon from '../icon';
 import Button from '../ui/button';
-import { Eyebrow, Muted, Narrative } from '../ui/typography';
+import { Eyebrow, Narrative } from '../ui/typography';
 
 export default function WorldMapContent({
   chapter,
@@ -45,9 +45,10 @@ export default function WorldMapContent({
               <button
                 type="button"
                 key={world.id}
+                aria-current={world.id === progress.worldId ? 'location' : undefined}
                 disabled={Boolean(loading)}
                 onClick={() => void visit(world.id)}
-                className="group overflow-hidden border border-[#909c8360] bg-[#e5dfcb] text-left disabled:opacity-50"
+                className="group overflow-hidden border border-[#909c8360] bg-[#e5dfcb] text-left aria-[current=location]:ring-2 aria-[current=location]:ring-[#775a26] disabled:opacity-50"
               >
                 <div className="relative h-[140px]">
                   <Image
@@ -90,27 +91,6 @@ export default function WorldMapContent({
           {error}
         </p>
       )}
-      <div className="mt-7">
-        <Eyebrow tone="brown">Beyond the veil</Eyebrow>
-        <Muted>These places are still taking shape. Their stories stay hidden for now.</Muted>
-        <div className="grid gap-2.5 tablet:grid-cols-3">
-          {worlds
-            .filter((world) => !world.playable)
-            .map((world) => (
-              <article
-                key={world.id}
-                className="relative overflow-hidden border border-dashed border-[#909c8370] bg-[#23372c] p-4 text-[#dedcc5]"
-              >
-                <Icon name={world.icon} className="mb-5 size-7 text-[#a6ac8a]" />
-                <h3 className="font-story text-[1.4375rem]">{world.title}</h3>
-                <p className="mt-2 font-story text-base italic text-[#b6c1a9]">{world.teaser}</p>
-                <span className="mt-4 block text-[0.75rem] uppercase tracking-[1px] text-[#b5a778]">
-                  Not yet charted
-                </span>
-              </article>
-            ))}
-        </div>
-      </div>
       <div className="mt-7 border-t border-[#909c8340] pt-5">
         <Eyebrow tone="brown">Your trail in {chapter.region}</Eyebrow>
         <ol className="my-[14px] list-none p-0">

@@ -1,13 +1,17 @@
 # Vesper Math
 
-> Vesper Math is an illustrated math adventure, built with Next.js. Exploration comes first; three playable chapters cover operations, fractions, measurements, percentages, geometry, and early equations.
+> Vesper Math is an illustrated math adventure, built with Next.js. Exploration comes first; six playable chapters cover operations, fractions, measurements, percentages, geometry, and early equations.
 
 ## The current adventure
 
 - **The Flooded Observatory:** three illustrated encounters in the Merewood.
 - **The Sleeping Foundry:** three encounters in the Ember Peaks.
 - **The Lanterns of Low Tide:** three encounters on the Tideglass Coast.
-- Three additional regions appear only as spoiler-light, non-playable previews.
+- **The Palace of Reflections:** three discoveries in the Glass Desert.
+- **The Book of Borrowed Hours:** three discoveries in the Winter Archive.
+- **The Unwritten Constellation:** three discoveries in the Astral Vault.
+- A current-world selector preserves each trail’s progress. The title returns to the adventure; the atlas provides illustrated context for all six worlds.
+- Discovery cards reveal their artwork in sequence: current and completed discoveries are clear, later ones are blurred.
 - Three independent math levels: Foundations, Growing fluency, and Further challenges. Narrative reading level and visual support remain separate.
 - Six predefined Arcanist, Ranger, and Warden personas (woman/man variants), a custom name, local discovery history, world endings, and practice totals.
 
@@ -23,7 +27,7 @@ This is a focused local tutoring engine, not a large language model. No API key,
 - `lib/math.ts` parses a small arithmetic grammar; it never uses `eval`, `Function`, HTML interpretation, property access, or external tools. Inputs, token count, nesting, numeric magnitude, and division by zero are bounded.
 - Chat messages are limited to 400 characters; only the latest 24 messages remain in memory. One quiz is active at a time. Hints and skips do not count as attempts. A correct answer closes the quiz so the same pending question cannot be scored again.
 - Names, personas, skill levels, world IDs, progress order, history IDs, and practice totals are validated when importing saves. The profile is local and user-owned, not an authenticated or tamper-proof account.
-- Tutor and profile interfaces are separate lazy chunks. New chapter content is imported only when selected. World metadata and teaser text remain small; no future encounter content is shipped for veiled regions.
+- Tutor and profile interfaces are separate lazy chunks. New chapter content is imported only when selected. World metadata stays small; chapter narrative and challenges are loaded only when that world is selected.
 - One optimized portrait atlas serves all six personas. New scenery is delivered as separate responsive WebP assets.
 - Response headers prevent framing and object embedding, constrain base/form destinations, and disable unused camera, microphone, and location permissions. The static route remains prerendered.
 
@@ -90,7 +94,7 @@ The existing 750px and 1100px layout boundaries are preserved with the mobile-fi
 - `next/font` self-hosts the two font families with swap behavior; the browser makes no runtime Google Fonts requests.
 - No UI framework, animation library, game engine, analytics, account service, or database is required.
 
-The production HTML response with the current expansion is about 34 KB, compared with the previous 51.5 MB standalone HTML. This comparison measures HTML only, not total page transfer. JavaScript, fonts, and requested images are separate cached resources.
+HTML contains markup rather than embedded artwork. JavaScript, fonts, and requested images are separate cached resources. Discovery thumbnails load lazily and use responsive image sizes. Global text wrapping uses `text-wrap: pretty`, with normal wrapping as the browser fallback.
 
 ## Adding a world
 
@@ -104,7 +108,7 @@ Browser storage is specific to an origin. A save from a `file:` URL or a differe
 
 ## Art
 
-All included scenes are original AI-generated illustrations from the built-in image generation tool. `ART-PROMPTS.json` and `EXPANSION-ART-PROMPTS.json` record the prompts. User-supplied reference images are not bundled. Preferences depicts a wayfarer's outfitting alcove; the journal retains its separate book-and-maps illustration.
+All included scenes are original AI-generated illustrations from the built-in image generation tool. `ART-PROMPTS.json`, `EXPANSION-ART-PROMPTS.json`, `STORY-ART-PROMPTS.json`, and `FINAL-WORLDS-ART-PROMPTS.json` record the prompts. The final three worlds use visibly drawn ink, gouache, and watercolor textures with a mix of people, creatures, landscapes, and magical objects. User-supplied reference images are not bundled. Preferences depicts a wayfarer's outfitting alcove; the journal retains its separate book-and-maps illustration.
 
 ## References
 

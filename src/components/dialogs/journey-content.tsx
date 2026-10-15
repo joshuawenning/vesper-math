@@ -1,4 +1,4 @@
-import type { Progress } from '@/lib/types';
+import type { Chapter, Progress } from '@/lib/types';
 import Preferences from '../preferences';
 import Icon from '../icon';
 import Button from '../ui/button';
@@ -6,10 +6,12 @@ import { Actions } from '../ui/panels';
 import { Muted, Narrative } from '../ui/typography';
 
 export function WelcomeContent({
+  chapter,
   progress,
   onChange,
   onStart,
 }: {
+  chapter: Chapter;
   progress: Progress;
   onChange: (progress: Progress) => void;
   onStart: () => void;
@@ -29,7 +31,7 @@ export function WelcomeContent({
       <Preferences progress={progress} onChange={onChange} />
       <Actions>
         <Button onClick={onStart}>
-          Enter the Merewood
+          Enter {chapter.region}
           <Icon name="arrow" />
         </Button>
       </Actions>

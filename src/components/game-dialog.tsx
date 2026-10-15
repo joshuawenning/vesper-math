@@ -117,7 +117,12 @@ export default function GameDialog({
     case 'welcome':
       content = (
         <>
-          <WelcomeContent progress={progress} onChange={onChange} onStart={onStart} />
+          <WelcomeContent
+            chapter={chapter}
+            progress={progress}
+            onChange={onChange}
+            onStart={onStart}
+          />
           <Button
             variant="secondary"
             className="mt-3"

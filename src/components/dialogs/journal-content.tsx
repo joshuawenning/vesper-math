@@ -59,7 +59,8 @@ export default function JournalContent({
           ))
       ) : (
         <Muted>
-          Your pages are waiting. Explore the broken crossing to make your first discovery.
+          Your pages are waiting. Explore {chapter.encounters[0].title} to make your first
+          discovery.
         </Muted>
       )}
       {progress.ending && (

@@ -13,7 +13,7 @@ const ui = DM_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-ui' 
 export const metadata: Metadata = {
   title: 'Vesper Math · The Flooded Observatory',
   description:
-    'A personal, illustrated math adventure with three worlds to explore, a private on-device tutor, and room to learn at your own pace.',
+    'A personal, illustrated math adventure with six worlds to explore, a private on-device tutor, and room to learn at your own pace.',
 };
 export const viewport: Viewport = { themeColor: '#172323' };
 
