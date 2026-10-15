@@ -16,9 +16,9 @@ function EncounterCard({
       className="relative min-h-[95px] border border-line bg-surface px-[17px] py-[14px] text-left text-body hover:border-gold hover:bg-surface-hover tablet:min-h-[128px] tablet:px-3 tablet:py-[15px] desktop:px-[18px] desktop:py-[17px]"
       onClick={onClick}
     >
-      <div className="absolute right-4 top-[15px] flex items-center justify-between text-gold tablet:static">
-        <Icon name={encounter.icon} className="hidden size-5 tablet:inline-block" />
-        <small className="text-[8px] uppercase tracking-[1.3px]">
+      <div className="flex min-h-5 items-center justify-between gap-3 text-gold">
+        <Icon name={encounter.icon} className="size-4 tablet:size-5" />
+        <small className="text-right text-[8px] leading-5 uppercase tracking-[1.3px]">
           {status === 'done'
             ? 'Discovered'
             : status === 'current'
@@ -26,13 +26,13 @@ function EncounterCard({
               : 'Further along the trail'}
         </small>
       </div>
-      <h3 className="mt-2 mb-1 font-story text-[23px] font-medium tablet:mt-[13px] tablet:mb-[5px] tablet:text-xl desktop:text-[22px]">
+      <h3 className="mt-3 mb-1 font-story text-[23px] font-medium leading-[1.2] tablet:mt-[13px] tablet:mb-[5px] tablet:text-xl desktop:text-[22px]">
         {encounter.title}
       </h3>
-      <p className="text-[9px] text-subtle">{encounter.skill}</p>
-      <span className="absolute right-4 bottom-[15px] text-gold tablet:bottom-[18px]">
-        <Icon name={status === 'done' ? 'check' : 'arrow'} />
-      </span>
+      <div className="mt-2 flex items-center justify-between gap-3">
+        <p className="text-[9px] leading-[1.6] text-subtle">{encounter.skill}</p>
+        <Icon name={status === 'done' ? 'check' : 'arrow'} className="size-5 text-gold" />
+      </div>
     </button>
   );
 }
@@ -48,11 +48,11 @@ export default function EncounterGrid({
 }) {
   return (
     <section aria-labelledby="discoveries-heading">
-      <div className="mt-[26px] mb-[13px] flex items-center justify-between">
+      <div className="mt-[26px] mb-[13px] flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
         <h2 id="discoveries-heading" className="font-story text-[23px] font-medium text-body">
           Follow your curiosity
         </h2>
-        <small className="text-[8px] tracking-[.6px] text-subtle tablet:text-[9px]">
+        <small className="text-[8px] leading-5 tracking-[.6px] text-subtle tablet:text-[9px]">
           THREE DISCOVERIES. ONE FORGOTTEN STORY.
         </small>
       </div>
