@@ -1,0 +1,6 @@
+import type { Challenge, Support } from '@/lib/types';
+
+export default function DivisionChallenge({ challenge, route, value, support, onRoute, onValue }: { challenge: Extract<Challenge, { kind: 'division' }>; route: string; value: string; support: Support; onRoute: (route: string) => void; onValue: (value: string) => void }) {
+  const tactic = challenge.routes.find(r => r.id === route) ?? challenge.routes[0];
+  return <div className="toolbox"><div className="eyebrow" style={{ color: '#7c713f', textAlign: 'center' }}>Guardian’s ward · {challenge.total} sparks</div><div className="sparks" aria-hidden="true">{Array.from({ length: challenge.total }, (_, i) => <span className="spark" key={i}/>)}</div><div className="route-choice">{challenge.routes.map(t => <button key={t.id} type="button" className={t.id === route ? 'selected' : ''} aria-pressed={t.id === route} onClick={() => onRoute(t.id)}>{t.label}</button>)}</div><label className="answer-label" htmlFor="answer">{tactic.question}</label><input id="answer" className="answer" type="number" min="0" step="1" inputMode="numeric" value={value} onChange={event => onValue(event.target.value)} aria-describedby="equation"/><span id="equation">{support === 'guided' ? `${challenge.total} ÷ ${tactic.groups} = ?` : 'sparks per group'}</span></div>;
+}
