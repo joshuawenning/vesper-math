@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import type { Encounter, Progress } from '@/lib/types';
 import { validateAnswer, answerFeedback, type Answer } from '@/lib/challenges';
+import { lessons } from '@/content/tutor-lessons';
 import ReadAloud from '../accessibility/read-aloud';
 import SumChallenge from './sum-challenge';
 import FractionChallenge from './fraction-challenge';
@@ -22,6 +23,22 @@ export default function EncounterPanel({
   onComplete: (id: string) => void;
 }) {
   const c = encounter.challenge;
+  const principle =
+    c.kind === 'sum'
+      ? 'Addition combines lengths measured in the same unit. Add each selected length once, then compare that sum with the gap. A total that is shorter or longer will not fit; equal totals describe the same distance.'
+      : c.kind === 'fraction'
+        ? lessons.fractions.why
+        : c.kind === 'division'
+          ? 'Division splits a total into equal groups. Multiplication checks your division: the number of groups times the amount in each group must equal the total.'
+          : /solve|x =|x \+|× x/i.test(c.question)
+            ? lessons.variables.why
+            : /%|percent/.test(c.question)
+              ? lessons.percentages.why
+              : /area|perimeter/.test(c.question)
+                ? lessons.geometry.why
+                : /meter|centimeter|kilometer/.test(c.question)
+                  ? lessons.measurement.why
+                  : lessons.arithmetic.why;
   const [answer, setAnswer] = useState<Answer>(() => ({
     selected: [],
     fill: c.kind === 'fraction' ? c.start : 0,
@@ -52,7 +69,9 @@ export default function EncounterPanel({
     >
       <ReadAloud
         settings={progress.speech}
-        text={`${encounter.title}. ${encounter[progress.reading]}. ${c.kind === 'number' ? c.question : c.kind === 'sum' ? `Choose ${c.count} planks totaling ${c.target} ${c.unit}. Available lengths: ${c.planks.join(', ')}.` : c.kind === 'fraction' ? `The cistern starts at ${c.start}/${c.denominator}. Reach ${c.target}/${c.denominator} by adding or removing measures.` : `${c.total} sparks. ${c.routes.find((r) => r.id === answer.route)?.label}. ${c.routes.find((r) => r.id === answer.route)?.question}`}${hint > 0 ? ` Hint: ${encounter.hint[hint - 1]}` : ''}`}
+        text={`${encounter.title}. ${encounter[progress.reading]}. ${c.kind === 'number' ? c.question : c.kind === 'sum' ? `Choose ${c.count} planks totaling ${c.target} ${c.unit}. Available lengths: ${c.planks.join(', ')}.` : c.kind === 'fraction' ? `The cistern starts at ${c.start}/${c.denominator}. Reach ${c.target}/${c.denominator} by adding or removing measures.` : `${c.total} sparks. ${c.routes.find((r) => r.id === answer.route)?.label}. ${c.routes.find((r) => r.id === answer.route)?.question}`}${
+          hint > 0 ? ` Hint: ${encounter.hint[hint - 1]}. Why this works: ${principle}` : ''
+        }`}
       />
       <Narrative>{encounter[progress.reading]}</Narrative>
       {c.kind === 'number' && (
@@ -94,6 +113,9 @@ export default function EncounterPanel({
           aria-live="polite"
         >
           {encounter.hint[hint - 1]}
+          <p className="mt-3 font-sans text-sm not-italic leading-relaxed">
+            Why this works: {principle}
+          </p>
         </div>
       )}
       <Actions>

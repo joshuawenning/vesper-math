@@ -24,8 +24,13 @@ export default function TutorChat({
     {
       id: 0,
       role: 'elian',
-      text: `Welcome, ${name}. Ask me about a math idea, type a calculation, or invite me to quiz you. We can take this at your pace.`,
+      text: `Welcome, ${name}. Ask me about a math idea, type a calculation, or invite me to quiz you. What would you like to understand today? We can start with a small example and follow your curiosity.`,
     },
+  ]);
+  const [suggestions, setSuggestions] = useState([
+    'Explain fractions',
+    'Explain division',
+    'Quiz me',
   ]);
   const [input, setInput] = useState('');
   const [question, setQuestion] = useState(false);
@@ -45,6 +50,7 @@ export default function TutorChat({
       session.current,
     );
     session.current = result.session;
+    setSuggestions(result.suggestions ?? []);
     setQuestion(Boolean(result.session.question));
     const id = ++sequence.current;
     setMessages((old) =>
@@ -100,18 +106,28 @@ export default function TutorChat({
         settings={progress.speech}
         label="Read Elian’s reply aloud"
       />
-      <div className="mb-4 flex flex-wrap gap-2">
-        {topics.map((topic) => (
-          <button
-            type="button"
-            key={topic}
-            className="border border-[#909c8360] px-2.5 py-1.5 text-[0.75rem] capitalize hover:bg-[#dce3cf]"
-            onClick={() => send(`Explain ${topic}`)}
-          >
-            {topic}
-          </button>
+      <div className="mb-4 flex flex-wrap gap-2" aria-label="Continue the conversation">
+        {suggestions.map((prompt) => (
+          <Button key={prompt} variant="secondary" onClick={() => send(prompt)}>
+            {prompt}
+          </Button>
         ))}
       </div>
+      <details className="mb-4">
+        <summary className="cursor-pointer py-3 text-sm">Explore math topics</summary>
+        <div className="mb-4 flex flex-wrap gap-2">
+          {topics.map((topic) => (
+            <button
+              type="button"
+              key={topic}
+              className="min-h-11 border border-[#909c8360] px-2.5 py-1.5 text-[0.75rem] capitalize hover:bg-[#dce3cf]"
+              onClick={() => send(`Explain ${topic}`)}
+            >
+              {topic}
+            </button>
+          ))}
+        </div>
+      </details>
       <form
         onSubmit={(event) => {
           event.preventDefault();

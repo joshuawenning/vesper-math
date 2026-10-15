@@ -1,3 +1,4 @@
+import { lessons, operations } from '@/content/tutor-lessons';
 import { cleanName } from '@/content/personas';
 import type { SkillLevel } from './types';
 import { approximatelyEqual, calculate, formatNumber } from './math';
@@ -15,6 +16,10 @@ export interface Quiz {
 export interface TutorSession {
   question: Quiz | null;
   count: number;
+  topic?: Topic;
+  operation?: keyof typeof operations;
+  turns?: number;
+  hintStep?: number;
 }
 export interface TutorContext {
   name: string;
@@ -25,6 +30,7 @@ export interface TutorTurn {
   text: string;
   session: TutorSession;
   assessment?: boolean;
+  suggestions?: string[];
 }
 export const topics: Topic[] = [
   'arithmetic',
@@ -69,7 +75,7 @@ export function makeQuiz(topic: Topic, level: SkillLevel, seed: number): Quiz {
       ...base,
       prompt: `Combine 1/${d} and ${(a % 3) + 1}/${d} of a measure. How much is that? A fraction or decimal is fine.`,
       answer: ((a % 3) + 2) / d,
-      hint: 'The parts already have the same denominator. Add the numerators.',
+      hint: 'The denominator names the size of the parts, and the numerator counts them. These parts have the same size, so add the numerators and keep the denominator.',
       explanation: `Add the numerators and keep the denominator: ${(a % 3) + 2}/${d}. Equivalent fractions and decimals are accepted.`,
     };
   }
@@ -78,7 +84,7 @@ export function makeQuiz(topic: Topic, level: SkillLevel, seed: number): Quiz {
       ...base,
       prompt: `A rope measures ${advanced ? `${a}.5` : a} meters. How many centimeters is that?`,
       answer: (advanced ? a + 0.5 : a) * 100,
-      hint: 'There are 100 centimeters in each meter.',
+      hint: 'The rope stays the same length. Centimeters are 100 times smaller than meters, so we need 100 times as many of them. Multiply the meter count by 100.',
       explanation: `${advanced ? a + 0.5 : a} × 100 = ${(advanced ? a + 0.5 : a) * 100} centimeters.`,
     };
   if (topic === 'percentages') {
@@ -89,8 +95,8 @@ export function makeQuiz(topic: Topic, level: SkillLevel, seed: number): Quiz {
       prompt: `A merchant sets aside ${percent}% of ${total} coins. How many coins is that?`,
       answer: (total * percent) / 100,
       hint: advanced
-        ? 'Find 10% and 5%, then add them.'
-        : '25% is one quarter. Divide the total by 4.',
+        ? '10% is one tenth of the whole. Find it by dividing by 10. Half of that is 5%; combine them to make 15%.'
+        : '25 out of 100 is one of four equal groups. That is why 25% equals one quarter. Divide the total by 4.',
       explanation: `${percent}/100 × ${total} = ${(total * percent) / 100} coins.`,
     };
   }
@@ -99,7 +105,9 @@ export function makeQuiz(topic: Topic, level: SkillLevel, seed: number): Quiz {
       ...base,
       prompt: `A rectangular garden is ${a} meters wide and ${b} meters long. What is its ${advanced ? 'area in square meters' : 'perimeter in meters'}?`,
       answer: advanced ? a * b : 2 * (a + b),
-      hint: advanced ? 'Multiply width by length.' : 'Count both widths and both lengths.',
+      hint: advanced
+        ? 'Area counts the unit squares inside. Each row has the same number of squares, so multiply width by length.'
+        : 'Perimeter follows the outside edge. A rectangle has two widths and two lengths; add all four sides.',
       explanation: advanced
         ? `Area = ${a} × ${b} = ${a * b} square meters.`
         : `Perimeter = 2 × (${a} + ${b}) = ${2 * (a + b)} meters.`,
@@ -111,7 +119,9 @@ export function makeQuiz(topic: Topic, level: SkillLevel, seed: number): Quiz {
         ? `Solve ${b} × x = ${a * b}. What is x?`
         : `Solve x + ${b} = ${a + b}. What is x?`,
       answer: a,
-      hint: advanced ? `Divide both sides by ${b}.` : `Subtract ${b} from both sides.`,
+      hint: advanced
+        ? `Division undoes multiplication. Divide both sides by ${b} to keep the equation balanced.`
+        : `Subtraction undoes addition. Subtract ${b} from both sides to keep the equation balanced.`,
       explanation: `x = ${a}. Check by putting ${a} back into the original equation.`,
     };
   const x = level === 'developing' ? a * 10 : a;
@@ -122,14 +132,14 @@ export function makeQuiz(topic: Topic, level: SkillLevel, seed: number): Quiz {
       : `There are ${x} packs with ${b} supplies each. How many supplies altogether?`,
     answer: advanced ? b : x * b,
     hint: advanced
-      ? 'First reach zero, then count what remains.'
-      : 'Multiply the number of packs by the supplies in each pack.',
+      ? 'A negative value is below zero. Adding moves upward: use part of the increase to reach zero, then count what remains above zero.'
+      : 'Each pack is an equal group. Multiplication counts repeated equal groups: multiply packs by supplies per pack.',
     explanation: advanced ? `−${a} + ${a + b} = ${b}.` : `${x} × ${b} = ${x * b}.`,
   };
 }
 
 /** Pure, replaceable tutoring adapter: no network, tools, HTML, or arbitrary code. */
-export function tutorReply(raw: string, context: TutorContext, session: TutorSession): TutorTurn {
+function respond(raw: string, context: TutorContext, session: TutorSession): TutorTurn {
   if (raw.length > 400)
     return {
       text: 'Let’s take one short math question at a time. Please keep it under 400 characters.',
@@ -139,8 +149,19 @@ export function tutorReply(raw: string, context: TutorContext, session: TutorSes
     lower = text.toLowerCase(),
     name = cleanName(context.name) ? `, ${cleanName(context.name)}` : '';
   if (!text) return { text: 'What would you like to explore?', session };
-  if (/^(hint|help|i don.t know|not sure)\b/.test(lower) && session.question)
-    return { text: session.question.hint, session };
+  if (/^(hint|a hint|help|i don.t know|not sure)\b/.test(lower) && session.question)
+    return {
+      text: `${(session.hintStep ?? 0) > 0 ? lessons[session.question.topic].why + ' ' : ''}${session.question.hint} What first step could you try?`,
+      session: { ...session, hintStep: Math.min(2, (session.hintStep ?? 0) + 1) },
+    };
+  if (
+    /^(show (?:the )?(?:answer|solution)|solve it|tell me the answer)/.test(lower) &&
+    session.question
+  )
+    return {
+      text: `Here is the reasoning${name}. ${session.question.explanation} ${lessons[session.question.topic].why} Shall we try a similar one together?`,
+      session: { ...session, question: null, hintStep: 0 },
+    };
   if (/^(skip|stop quiz|cancel quiz)\b/.test(lower))
     return {
       text: `Of course${name}. We can return to it later. Ask me about a math idea, or start a fresh quiz.`,
@@ -149,6 +170,7 @@ export function tutorReply(raw: string, context: TutorContext, session: TutorSes
   if (/quiz|test me|practice|another question|ask me/.test(lower)) {
     const topic =
       detectTopic(lower) ??
+      session.topic ??
       (context.skill === 'stretch'
         ? 'percentages'
         : context.skill === 'developing'
@@ -156,8 +178,8 @@ export function tutorReply(raw: string, context: TutorContext, session: TutorSes
           : 'arithmetic');
     const question = makeQuiz(topic, context.skill, session.count + 1);
     return {
-      text: `Let’s try this${name}. ${question.prompt}`,
-      session: { question, count: session.count + 1 },
+      text: `${['Let’s try a small puzzle', 'Here is something to wonder about', 'Let’s put the idea to work', 'One step at a time'][session.count % 4]}${name}. ${question.prompt}`,
+      session: { ...session, question, topic, count: session.count + 1, hintStep: 0 },
     };
   }
   const expression = text
@@ -169,8 +191,8 @@ export function tutorReply(raw: string, context: TutorContext, session: TutorSes
     const correct = approximatelyEqual(value, session.question.answer);
     return {
       text: correct
-        ? `That’s right${name}. ${session.question.explanation} Ask for another quiz whenever you’re ready.`
-        : `Let’s take another look${name}. ${session.question.hint} Try again, ask for a hint, or say “skip.”`,
+        ? `${['That’s right', 'You found it', 'That works', 'Yes, that checks out'][session.count % 4]}${name}. ${session.question.explanation} ${lessons[session.question.topic].invitation}`
+        : `${['Let’s try a different angle', 'Let’s slow that step down', 'We can work from what we know'][(session.turns ?? 0) % 3]}${name}. ${session.question.hint} What would you do first? You can also ask for another hint or say “skip.”`,
       assessment: correct,
       session: correct ? { ...session, question: null } : session,
     };
@@ -194,12 +216,37 @@ export function tutorReply(raw: string, context: TutorContext, session: TutorSes
       session,
     };
   }
-  const topic = detectTopic(lower);
-  if (topic)
+  const followUp =
+    /^(why|how|example|another way|break it down|explain more|tell me more|yes|show me|what about|i don.t understand)/.test(
+      lower,
+    );
+  const topic =
+    detectTopic(lower) ?? (followUp ? (session.question?.topic ?? session.topic) : null);
+  if (topic) {
+    const operation = /subtract|minus/.test(lower)
+      ? 'subtraction'
+      : /multipli|times/.test(lower)
+        ? 'multiplication'
+        : /divi|sharing/.test(lower)
+          ? 'division'
+          : /add|plus/.test(lower)
+            ? 'addition'
+            : session.operation;
+    const lesson = lessons[topic];
+    const detail = /\b(?:why|how|understand)\b|break it down/.test(lower)
+      ? lesson.why
+      : /example|show me|another way|yes/.test(lower)
+        ? lesson.example
+        : topic === 'arithmetic' && operation
+          ? operations[operation]
+          : (session.turns ?? 0) % 2
+            ? lesson.example
+            : explanations[topic];
     return {
-      text: `${context.reading === 'rich' ? `Let’s look closely${name}. ` : ''}${explanations[topic]}`,
-      session,
+      text: `${context.reading === 'rich' ? ['Let’s look closely', 'Let’s make it concrete', 'Here is a way to picture it'][(session.turns ?? 0) % 3] + name + '. ' : ''}${detail} ${session.question ? session.question.hint + ' What could your first step be?' : lesson.invitation}`,
+      session: { ...session, topic, operation },
     };
+  }
   if (/stupid|bad at|can.t do|frustrat|too hard/.test(lower))
     return {
       text: `You can take this slowly${name}. We can use smaller numbers, work one step at a time, and revisit any idea. Choose Foundations in preferences if you’d like a gentler starting point.`,
@@ -207,11 +254,28 @@ export function tutorReply(raw: string, context: TutorContext, session: TutorSes
     };
   if (/^(hi|hello|hey|thank)/.test(lower))
     return {
-      text: `Hello${name}. I can explain arithmetic, fractions, measurements, percentages, geometry, and early equations. Tell me a topic, type a calculation, or ask me to quiz you.`,
+      text: /^thank/.test(lower)
+        ? `You’re welcome${name}. What felt clearer that time? We can try the idea with new numbers, or explore something else.`
+        : `${['Hello', 'Good to see you', 'Welcome back'][(session.turns ?? 0) % 3]}${name}. There is no rush. Is there a math idea you want to understand, or shall I offer a small puzzle?`,
       session,
     };
   return {
     text: `I’m an on-device math guide${name}. I understand supported math topics, arithmetic expressions, simple x + a = b equations, and quiz requests. Try “explain fractions,” “(12 + 6) / 3,” or “quiz me on geometry.”`,
     session,
+  };
+}
+
+/** A bounded conversation remembers the current topic, never runs external code, and stays on-device. */
+export function tutorReply(raw: string, context: TutorContext, session: TutorSession): TutorTurn {
+  const result = respond(raw, context, session);
+  const topic = result.session.question?.topic ?? result.session.topic;
+  return {
+    ...result,
+    session: { ...result.session, turns: Math.min(10000, (session.turns ?? 0) + 1) },
+    suggestions: result.session.question
+      ? ['A hint', 'Why does this work?', 'Show the solution']
+      : topic
+        ? ['Show me an example', 'Why does this work?', `Quiz me on ${topic}`]
+        : ['Explain fractions', 'Explain division', 'Quiz me'],
   };
 }

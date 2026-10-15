@@ -66,3 +66,28 @@ test('tutor stays scoped, limits input, and handles supported equations', () => 
     null,
   );
 });
+
+test('conversation remembers topics for follow-up examples, explanations, and practice', () => {
+  const start = tutorReply('Explain fractions', context, fresh());
+  const example = tutorReply('Show me an example', context, start.session);
+  assert.match(example.text, /strip of paper/);
+  const why = tutorReply('Why does this work?', context, example.session);
+  assert.match(why.text, /denominator names the size/);
+  const quiz = tutorReply('Quiz me', context, why.session);
+  assert.equal(quiz.session.question?.topic, 'fractions');
+  assert.notEqual(
+    tutorReply('Hi', context, start.session).text,
+    tutorReply('Hi', context, example.session).text,
+  );
+  assert.match(tutorReply('Explain division', context, fresh()).text, /12 stones/);
+});
+test('showing a solution explains the principle without awarding quiz credit', () => {
+  const quiz = tutorReply('quiz me on variables', context, fresh());
+  const result = tutorReply('Show the solution', context, quiz.session);
+  assert.equal(result.session.question, null);
+  assert.equal(result.assessment, undefined);
+  assert.match(result.text, /balanced scales/);
+  const hint = tutorReply('A hint', context, quiz.session);
+  assert.match(hint.text, /undoes addition/);
+  assert.equal(hint.session.question?.id, quiz.session.question?.id);
+});
