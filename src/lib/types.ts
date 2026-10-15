@@ -14,7 +14,28 @@ export type Reading = 'rich' | 'plain';
 export type Support = 'guided' | 'light';
 export type Ending = 'beacon' | 'refuge';
 export type IconName =
-  'star' | 'moon' | 'bridge' | 'book' | 'map' | 'settings' | 'leaf' | 'arrow' | 'pin' | 'check';
+  | 'owl'
+  | 'balance'
+  | 'gear'
+  | 'mosaic'
+  | 'coins'
+  | 'ruler'
+  | 'lantern'
+  | 'crystal'
+  | 'snowflake'
+  | 'orbit'
+  | 'flame'
+  | 'waves'
+  | 'star'
+  | 'moon'
+  | 'bridge'
+  | 'book'
+  | 'map'
+  | 'settings'
+  | 'leaf'
+  | 'arrow'
+  | 'pin'
+  | 'check';
 export type Challenge =
   | {
       kind: 'number';

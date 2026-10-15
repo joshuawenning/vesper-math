@@ -75,7 +75,7 @@ export const chapter: Chapter = {
       skill: 'Division · equal groups',
       subtitle: 'Quiet an ancient guardian',
       reward: 'The lost star chart',
-      icon: 'star',
+      icon: 'owl',
       rich: 'A stone owl unfolds its wings above the chart chamber. Eighteen sparks bind it to an old command. Release them in equal groups, and the keeper may rest.',
       plain:
         'A stone owl guards the star chart. It has 18 sparks of magic. Divide them into equal groups to calm it.',

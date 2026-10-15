@@ -21,7 +21,7 @@ export const chapter: Chapter = {
       title: 'The fair exchange',
       skill: 'Money \u00b7 percentages',
       subtitle: 'The fair exchange',
-      icon: 'star',
+      icon: 'coins',
       rich: 'A harbor merchant offers the rope needed to reach the old causeway. Work out a fair exchange before setting out.',
       plain:
         'A harbor merchant offers the rope needed to reach the old causeway. Work out a fair exchange before setting out.',
@@ -64,7 +64,7 @@ export const chapter: Chapter = {
       title: 'The tidekeeper\u2019s measure',
       skill: 'Measurement \u00b7 conversions',
       subtitle: 'The tidekeeper\u2019s measure',
-      icon: 'star',
+      icon: 'ruler',
       rich: 'The causeway is visible only at low tide. A stone marker gives the length of rope needed for the crossing.',
       plain:
         'The causeway is visible only at low tide. A stone marker gives the length of rope needed for the crossing.',
@@ -115,7 +115,7 @@ export const chapter: Chapter = {
       title: 'A harbor of small lights',
       skill: 'Fractions \u00b7 equations',
       subtitle: 'A harbor of small lights',
-      icon: 'star',
+      icon: 'lantern',
       rich: 'Moonwater fuels the lanterns along the final path. Leave exactly what the garden needs to guide the next traveler.',
       plain:
         'Moonwater fuels the lanterns along the final path. Leave exactly what the garden needs to guide the next traveler.',

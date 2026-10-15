@@ -1,4 +1,4 @@
-import type { Chapter, SkillLevel } from '@/lib/types';
+import type { Chapter, IconName, SkillLevel } from '@/lib/types';
 
 export const skillLevels: { id: SkillLevel; label: string; description: string }[] = [
   {
@@ -20,6 +20,7 @@ export const skillLevels: { id: SkillLevel; label: string; description: string }
 export const worlds = [
   {
     id: 'flooded-observatory',
+    icon: 'leaf',
     title: 'The Merewood',
     chapter: 'The Flooded Observatory',
     number: 1,
@@ -30,6 +31,7 @@ export const worlds = [
   },
   {
     id: 'ember-foundry',
+    icon: 'flame',
     title: 'The Ember Peaks',
     chapter: 'The Sleeping Foundry',
     number: 2,
@@ -40,6 +42,7 @@ export const worlds = [
   },
   {
     id: 'tideglass-coast',
+    icon: 'waves',
     title: 'The Tideglass Coast',
     chapter: 'The Lanterns of Low Tide',
     number: 3,
@@ -50,6 +53,7 @@ export const worlds = [
   },
   {
     id: 'glass-desert',
+    icon: 'crystal',
     title: 'The Glass Desert',
     chapter: 'Beyond the veil',
     number: 4,
@@ -60,6 +64,7 @@ export const worlds = [
   },
   {
     id: 'winter-archive',
+    icon: 'snowflake',
     title: 'The Winter Archive',
     chapter: 'Beyond the veil',
     number: 5,
@@ -70,6 +75,7 @@ export const worlds = [
   },
   {
     id: 'astral-vault',
+    icon: 'orbit',
     title: 'The Astral Vault',
     chapter: 'Beyond the veil',
     number: 6,
@@ -78,7 +84,17 @@ export const worlds = [
     teaser: 'Some journeys begin where the stars disappear.',
     encounters: [],
   },
-] as const;
+] as const satisfies readonly {
+  id: string;
+  icon: IconName;
+  title: string;
+  chapter: string;
+  number: number;
+  playable: boolean;
+  image: string | null;
+  teaser: string;
+  encounters: readonly string[];
+}[];
 
 export const firstWorldId = 'flooded-observatory';
 export function getWorld(id: string) {

@@ -21,7 +21,7 @@ export const chapter: Chapter = {
       title: 'The counterweight',
       skill: 'Subtraction \u00b7 balance',
       subtitle: 'The counterweight',
-      icon: 'star',
+      icon: 'balance',
       rich: 'A suspended lift waits above a stream. Add the missing weight to make both sides equal.',
       plain:
         'A suspended lift waits above a stream. Add the missing weight to make both sides equal.',
@@ -70,7 +70,7 @@ export const chapter: Chapter = {
       title: 'The brass chorus',
       skill: 'Multiplication \u00b7 percentages',
       subtitle: 'The brass chorus',
-      icon: 'star',
+      icon: 'gear',
       rich: 'The gear keeper has arranged new teeth in equal bundles. Count the parts to wake the first wheel.',
       plain:
         'The gear keeper has arranged new teeth in equal bundles. Count the parts to wake the first wheel.',
@@ -114,7 +114,7 @@ export const chapter: Chapter = {
       title: 'The maker\u2019s mosaic',
       skill: 'Geometry \u00b7 early variables',
       subtitle: 'The maker\u2019s mosaic',
-      icon: 'star',
+      icon: 'mosaic',
       rich: 'A stone mosaic marks the last safe work space beneath the forge. Follow its dimensions to restore the old workshop.',
       plain:
         'A stone mosaic marks the last safe work space beneath the forge. Follow its dimensions to restore the old workshop.',

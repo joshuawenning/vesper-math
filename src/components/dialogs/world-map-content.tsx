@@ -68,7 +68,8 @@ export default function WorldMapContent({
                   </span>
                 </div>
                 <span className="block p-4">
-                  <strong className="block font-story text-[27px] font-semibold">
+                  <strong className="flex items-center gap-2.5 font-story text-[27px] font-semibold">
+                    <Icon name={world.icon} className="size-5 text-[#64734c]" />
                     {world.title}
                   </strong>
                   <span className="mt-1 block font-story text-[18px] italic text-[#536249]">
@@ -100,7 +101,7 @@ export default function WorldMapContent({
                 key={world.id}
                 className="relative overflow-hidden border border-dashed border-[#909c8370] bg-[#23372c] p-4 text-[#dedcc5]"
               >
-                <Icon name="star" className="mb-5 size-7 text-[#a6ac8a]" />
+                <Icon name={world.icon} className="mb-5 size-7 text-[#a6ac8a]" />
                 <h3 className="font-story text-[23px]">{world.title}</h3>
                 <p className="mt-2 font-story text-base italic text-[#b6c1a9]">{world.teaser}</p>
                 <span className="mt-4 block text-[8px] uppercase tracking-[1px] text-[#b5a778]">

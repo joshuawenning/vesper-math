@@ -26,7 +26,7 @@ export default function WorldHorizon({ onAtlas }: { onAtlas: () => void }) {
           .filter((w) => !w.playable)
           .map((world) => (
             <article key={world.id} className="relative border border-line bg-surface p-4">
-              <Icon name="star" className="mb-4 size-5 text-gold/60" />
+              <Icon name={world.icon} className="mb-4 size-5 text-gold/60" />
               <h3 className="font-story text-[22px] text-body">{world.title}</h3>
               <p className="mt-2 font-story text-base italic leading-[1.5] text-subtle">
                 {world.teaser}
