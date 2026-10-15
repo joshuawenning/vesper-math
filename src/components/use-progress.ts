@@ -13,14 +13,20 @@ export function useProgress() {
     try {
       const raw = localStorage.getItem(SAVE_KEY);
       if (raw) setProgress(normalizeProgress(JSON.parse(raw), chapter));
-    } catch { setStorageOK(false); }
+    } catch {
+      setStorageOK(false);
+    }
     setLoaded(true);
   }, []);
 
   useEffect(() => {
     if (!loaded) return;
-    try { localStorage.setItem(SAVE_KEY, JSON.stringify(progress)); setStorageOK(true); }
-    catch { setStorageOK(false); }
+    try {
+      localStorage.setItem(SAVE_KEY, JSON.stringify(progress));
+      setStorageOK(true);
+    } catch {
+      setStorageOK(false);
+    }
   }, [progress, loaded]);
 
   return { progress, setProgress, loaded, storageOK };

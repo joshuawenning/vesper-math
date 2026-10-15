@@ -1,9 +1,16 @@
 import type { Chapter, ChapterStatus, Ending, Progress } from './types';
 export const SAVE_KEY = 'vesper-save-v1';
-export const initialProgress: Progress = { done: [], reading: 'rich', support: 'guided', started: false, ending: null };
+export const initialProgress: Progress = {
+  done: [],
+  reading: 'rich',
+  support: 'guided',
+  started: false,
+  ending: null,
+};
 
 export function normalizeProgress(value: unknown, chapter: Chapter): Progress {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return { ...initialProgress, done: [] };
+  if (!value || typeof value !== 'object' || Array.isArray(value))
+    return { ...initialProgress, done: [] };
   const raw = value as Record<string, unknown>;
   const ids = Array.isArray(raw.done) ? raw.done : [];
   const done: string[] = [];
@@ -12,7 +19,11 @@ export function normalizeProgress(value: unknown, chapter: Chapter): Progress {
     if (!ids.includes(encounter.id)) break;
     done.push(encounter.id);
   }
-  const ending: Ending | null = done.length === chapter.encounters.length && (raw.ending === 'beacon' || raw.ending === 'refuge') ? raw.ending : null;
+  const ending: Ending | null =
+    done.length === chapter.encounters.length &&
+    (raw.ending === 'beacon' || raw.ending === 'refuge')
+      ? raw.ending
+      : null;
   return {
     done,
     reading: raw.reading === 'plain' ? 'plain' : 'rich',
@@ -23,7 +34,9 @@ export function normalizeProgress(value: unknown, chapter: Chapter): Progress {
 }
 export function encounterStatus(id: string, progress: Progress, chapter: Chapter): ChapterStatus {
   if (progress.done.includes(id)) return 'done';
-  return chapter.encounters.find(e => !progress.done.includes(e.id))?.id === id ? 'current' : 'locked';
+  return chapter.encounters.find((e) => !progress.done.includes(e.id))?.id === id
+    ? 'current'
+    : 'locked';
 }
 export function endingText(ending: Ending | null): string {
   return ending === 'beacon'

@@ -1,6 +1,6 @@
 # Vesper
 
-An illustrated math adventure, built with Next.js 16 App Router, React 19, and TypeScript. Exploration comes first; the opening chapter covers addition and measurement, fractions and equivalence, and division with two guardian tactics.
+An illustrated math adventure, built with Next.js 16 App Router, React 19, TypeScript, and Tailwind CSS 4. Exploration comes first; the opening chapter covers addition and measurement, fractions and equivalence, and division with two guardian tactics.
 
 ## Run
 
@@ -23,6 +23,7 @@ If a local Homebrew libvips installation causes sharp to build from source, inst
 ## Validation
 
 ```sh
+npm run format:check
 npm test
 npm run typecheck
 npm run build
@@ -41,19 +42,27 @@ This project uses native Next.js image optimization and does not use `output: ex
 
 ## Project structure
 
-| Path | Responsibility |
-| --- | --- |
-| `src/app` | Server-rendered route, metadata, self-hosted Next fonts, global styles |
-| `src/components/game.tsx` | Client game state and navigation boundary |
-| `src/components/game-dialog.tsx` | Dialog content, loaded on demand |
-| `src/components/encounters` | Focus-preserving React challenge components |
-| `src/content/merewood.ts` | Chapter narrative, hints, rewards, artwork references, and challenge configuration |
-| `src/content/artwork.ts` | Shared illustrations and accessible descriptions |
-| `src/lib` | Typed contracts, answer validation, save normalization |
-| `public/art` | Separate optimized WebP artwork, including a distinct preferences scene |
-| `tests` | Math validation and legacy/corrupt save handling |
+| Path                             | Responsibility                                                                     |
+| -------------------------------- | ---------------------------------------------------------------------------------- |
+| `src/app`                        | Server-rendered route, metadata, self-hosted Next fonts, global styles             |
+| `src/components/game.tsx`        | Client game state and navigation boundary                                          |
+| `src/components/game-dialog.tsx` | Dialog content, loaded on demand                                                   |
+| `src/components/encounters`      | Focus-preserving React challenge components                                        |
+| `src/content/merewood.ts`        | Chapter narrative, hints, rewards, artwork references, and challenge configuration |
+| `src/content/artwork.ts`         | Shared illustrations and accessible descriptions                                   |
+| `src/lib`                        | Typed contracts, answer validation, save normalization                             |
+| `public/art`                     | Separate optimized WebP artwork, including a distinct preferences scene            |
+| `tests`                          | Math validation and legacy/corrupt save handling                                   |
 
 To extend the adventure, add chapter data using the `Chapter` type. Existing challenge configurations accept different quantities without rewriting their React components. Add a new challenge kind and validator only when introducing a new interaction. The Merewood shell and ending are chapter-specific; a second chapter should add its own layout and save namespace. The visual fraction-pouring control currently describes quarters and should receive new fraction wording when introducing other denominators.
+
+## Styling and component boundaries
+
+Tailwind utilities live with the component they style. `src/app/globals.css` contains only the Tailwind import, shared color/font/breakpoint tokens, body defaults, and base focus/reduced-motion rules. There are no global component selectors or CSS Modules.
+
+Use `components/ui` for repeated visual patterns rather than copying long utility lists. Build feature UI in `components/adventure`, `components/dialogs`, or `components/encounters`; keep game state and navigation in `game.tsx`. Use complete literal class names for conditional states so Tailwind can discover them. Inline style values are reserved for data-driven positions and quantities (hotspots, plank lengths, progress, and water levels).
+
+The existing 750px and 1100px layout boundaries are preserved with the mobile-first `tablet` and `desktop` variants. The `wide` variant adjusts the outer spacing at 1600px. Prettier formats the source; use `npm run format` after edits. Reach for a CSS Module only for a future behavior that cannot be expressed clearly with Tailwind.
 
 ## Performance
 
@@ -65,7 +74,7 @@ To extend the adventure, add chapter data using the `Chapter` type. Existing cha
 - `next/font` self-hosts the two font families with swap behavior; the browser makes no runtime Google Fonts requests.
 - No UI framework, animation library, game engine, analytics, account service, or database is required.
 
-The verified production HTML response was about 20 KB, compared with the previous 51.5 MB standalone HTML. This comparison measures HTML only, not total page transfer. JavaScript, fonts, and requested images are separate cached resources.
+The production HTML response after the Tailwind refactor is about 31 KB, compared with the previous 51.5 MB standalone HTML. This comparison measures HTML only, not total page transfer. JavaScript, fonts, and requested images are separate cached resources.
 
 ## Saves and migration
 

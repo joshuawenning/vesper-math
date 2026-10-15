@@ -6,6 +6,8 @@
     "dev": "next dev --hostname 127.0.0.1 --port 4318",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1 --port 4318",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "tsx --test tests/*.test.ts"
   },
@@ -16,9 +18,13 @@
     "sharp": "^0.35.5"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22.0.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "postcss": "^8.5.30",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.3",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0"
   },
