@@ -117,7 +117,7 @@ export default function TutorChat({
         </label>
         <textarea
           id="elian-message"
-          className="block min-h-[76px] w-full resize-y border border-[#6b795e] bg-[#f8f2df] px-3 py-2.5 text-[0.8125rem] leading-[1.5]"
+          className="block min-h-[76px] w-full resize-y border border-[#6b795e] bg-[#f8f2df] px-3 py-2.5 text-base leading-[1.5]"
           value={input}
           maxLength={400}
           onChange={(event) => setInput(event.target.value)}

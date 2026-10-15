@@ -78,7 +78,7 @@ export default function Dialog({
 
   return (
     <dialog
-      className="m-auto max-h-[90dvh] w-[calc(100%_-_28px)] max-w-[600px] border border-[#a68d55] bg-paper p-0 text-ink shadow-[0_30px_100px_#0009] backdrop:bg-[#071414ce] backdrop:backdrop-blur-[5px]"
+      className="m-auto max-h-[90dvh] w-[calc(100%_-_28px)] overscroll-contain max-w-[600px] border border-[#a68d55] bg-paper p-0 text-ink shadow-[0_30px_100px_#0009] backdrop:bg-[#071414ce] backdrop:backdrop-blur-[5px]"
       ref={ref}
       aria-labelledby="dialog-title"
       onKeyDown={keepFocusInside}

@@ -59,6 +59,10 @@
     background-image: radial-gradient(ellipse at 60% 0%, var(--glow), transparent 65%);
   }
 
+  /* iOS focuses controls smaller than 16px by zooming the page. Keep user zoom available. */
+  input, select, textarea {
+    font-size: max(1rem, 16px);
+  }
   button {
     cursor: pointer;
   }
