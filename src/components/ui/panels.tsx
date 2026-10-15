@@ -21,7 +21,7 @@ export function Feedback({
     <div
       role="status"
       aria-live="polite"
-      className={`mt-4 border-l-2 px-[15px] py-3 text-[13px] leading-[1.6] ${success ? 'border-[#4a7450] bg-[#4e7a5322]' : 'border-[#9b773b] bg-[#cba65b22]'}`}
+      className={`mt-4 border-l-2 px-[15px] py-3 text-[0.8125rem] leading-[1.6] ${success ? 'border-[#4a7450] bg-[#4e7a5322]' : 'border-[#9b773b] bg-[#cba65b22]'}`}
     >
       {children}
     </div>
@@ -29,14 +29,14 @@ export function Feedback({
 }
 export function Reward({ children }: { children: React.ReactNode }) {
   return (
-    <div className="border border-[#8c895c55] p-[22px] text-center font-story text-[25px] italic text-[#556244]">
+    <div className="border border-[#8c895c55] p-[22px] text-center font-story text-[1.5625rem] italic text-[#43533e]">
       {children}
     </div>
   );
 }
 export function Meter({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mt-5 text-center text-xs text-[#536249]" aria-live="polite">
+    <p className="mt-5 text-center text-xs text-[#43533e]" aria-live="polite">
       {children}
     </p>
   );

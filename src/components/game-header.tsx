@@ -17,7 +17,7 @@ function NavButton({
 }) {
   return (
     <button
-      className={`relative flex h-full items-center gap-[9px] border-0 bg-transparent py-3 text-[10px] tablet:text-xs ${active ? 'text-gold after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:bg-gold' : 'text-subtle'}`}
+      className={`relative flex min-h-11 h-full items-center gap-2 border-0 bg-transparent py-3 text-[0.75rem] tablet:text-xs ${active ? 'text-gold after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:bg-gold' : 'text-subtle'}`}
       onClick={onClick}
     >
       <Icon name={icon} className="size-4 tablet:size-5" />
@@ -41,17 +41,17 @@ export default function GameHeader({
     { title: 'Settings', icon: 'settings', kind: 'settings' },
   ];
   return (
-    <header className="mx-[18px] flex min-h-[75px] flex-wrap items-center justify-between border-b border-line tablet:mx-[25px] tablet:h-[89px] tablet:flex-nowrap tablet:gap-[25px] desktop:mx-[42px]">
+    <header className="mx-[18px] flex min-h-[75px] flex-wrap items-center justify-between border-b border-line tablet:mx-[25px] desktop:min-h-[89px] desktop:flex-nowrap desktop:gap-[25px] desktop:mx-[42px]">
       <div className="flex items-center gap-[14px] py-[15px] text-gold tablet:py-0">
         <Icon name="star" className="h-[43px] w-7 tablet:w-[37px]" />
         <div>
-          <div className="whitespace-nowrap font-story text-[31px] font-semibold tracking-[2px] tablet:text-[37px] tablet:tracking-[3px]">
+          <div className="whitespace-nowrap font-story text-[clamp(1.5rem,5vw,2.3125rem)] font-semibold tracking-[2px]">
             Vesper Math
           </div>
         </div>
       </div>
       <nav
-        className="order-3 flex h-[45px] w-full items-center justify-around border-t border-line tablet:order-0 tablet:h-full tablet:w-auto tablet:justify-start tablet:gap-5 tablet:border-t-0 desktop:gap-[30px]"
+        className="order-3 grid w-full grid-cols-2 gap-x-4 gap-y-1 py-2 min-[480px]:flex min-[480px]:justify-around desktop:flex border-t border-line desktop:order-0 desktop:h-full desktop:w-auto desktop:justify-start desktop:gap-5 desktop:border-t-0 desktop:gap-[30px]"
         aria-label="Main"
       >
         <NavButton active onClick={close} icon="leaf">
@@ -61,7 +61,7 @@ export default function GameHeader({
           <NavButton key={link.kind} onClick={() => open({ kind: link.kind })} icon={link.icon}>
             {link.title}
             {link.kind === 'journal' && progress.done.length > 0 && (
-              <small className="text-[9px]">{progress.done.length}</small>
+              <small className="text-[0.75rem]">{progress.done.length}</small>
             )}
           </NavButton>
         ))}
@@ -69,7 +69,7 @@ export default function GameHeader({
       <button
         type="button"
         aria-label="Your character profile"
-        className="ml-auto flex items-center gap-3 text-left text-xs tablet:ml-0"
+        className="ml-auto flex items-center gap-3 text-left text-xs desktop:ml-0"
         onClick={() => open({ kind: 'profile' })}
       >
         <CharacterPortrait
@@ -78,7 +78,7 @@ export default function GameHeader({
         />
         <span className="hidden desktop:block">
           {progress.profile.name || 'Wayfarer'}
-          <small className="mt-[3px] block text-[10px] text-muted">
+          <small className="mt-[3px] block text-[0.75rem] text-muted">
             {getPersona(progress.profile.persona).name} ·{' '}
             {progress.ending ? 'Chapter complete' : 'On the road'}
           </small>

@@ -19,7 +19,7 @@ function ChapterProgress({ progress, chapter }: { progress: Progress; chapter: C
           style={{ width: `${(progress.done.length / chapter.encounters.length) * 100}%` }}
         />
       </div>
-      <div className="flex justify-between text-[10px] text-subtle">
+      <div className="flex justify-between text-[0.75rem] text-subtle">
         <span>Chapter discoveries</span>
         <span>
           {progress.done.length} / {chapter.encounters.length}
@@ -36,15 +36,15 @@ function ChapterProgress({ progress, chapter }: { progress: Progress; chapter: C
           return (
             <li key={encounter.id} className={`mb-[25px] flex gap-[13px] ${colors[status]}`}>
               <div
-                className={`grid size-[26px] shrink-0 place-items-center rounded-full border font-story text-[15px] ${status === 'current' ? 'border-gold text-gold shadow-[0_0_0_4px_#ceb47b0a]' : 'border-line'}`}
+                className={`grid size-[26px] shrink-0 place-items-center rounded-full border font-sans text-[0.875rem] leading-none tabular-nums ${status === 'current' ? 'border-gold text-gold shadow-[0_0_0_4px_#ceb47b0a]' : 'border-line'}`}
               >
-                {status === 'done' ? '✓' : index + 1}
+                <span>{status === 'done' ? '✓' : index + 1}</span>
               </div>
               <div>
-                <strong className="mt-[3px] block text-[11px] font-medium">
+                <strong className="mt-[3px] block text-[0.75rem] font-medium">
                   {encounter.title}
                 </strong>
-                <small className="mt-[5px] block text-[9px] text-subtle">
+                <small className="mt-[5px] block text-[0.75rem] text-subtle">
                   {status === 'done'
                     ? 'Discovered'
                     : status === 'current'
@@ -74,7 +74,7 @@ export default function ChapterSidebar({
       <Eyebrow className="flex items-center gap-2 before:h-px before:w-[23px] before:bg-gold">
         Chapter {chapter.number ?? 1}
       </Eyebrow>
-      <h2 className="mt-[14px] mb-3 font-story text-[28px] font-medium leading-[1.1]">
+      <h2 className="mt-[14px] mb-3 font-story text-[1.75rem] font-medium leading-[1.1]">
         {chapter.heading ?? 'The light across the mere'}
       </h2>
       <p className="my-4 font-story text-base leading-[1.5] text-subtle">

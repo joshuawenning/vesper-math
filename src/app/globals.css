@@ -43,7 +43,7 @@
     --canvas: #f1ebdc;
     --foreground: #283e34;
     --accent: #775a26;
-    --subtle: #596c5d;
+    --subtle: #465b4a;
     --rule: #40594030;
     --surface: #e2e4d5;
     --surface-hover: #d5ddc9;
@@ -51,8 +51,11 @@
     --frame: #e3ddca;
     --glow: #d5dfc6aa;
   }
+  :root[data-text-size='large'] {
+    font-size: 125%;
+  }
   body {
-    @apply bg-night font-sans text-sm leading-[normal] text-body;
+    @apply bg-night font-sans text-base leading-[1.5] text-body;
     background-image: radial-gradient(ellipse at 60% 0%, var(--glow), transparent 65%);
   }
 

@@ -98,14 +98,14 @@ export default function Game({ scene }: { scene: ReactNode }) {
   return (
     <>
       <GameHeader progress={progress} open={setView} close={close} />
-      <div className="mx-auto block max-w-[1600px] px-[15px] pt-[19px] pb-6 tablet:grid tablet:grid-cols-[175px_minmax(0,1fr)] tablet:gap-[23px] tablet:p-[25px] desktop:grid-cols-[208px_minmax(0,1fr)] desktop:gap-[33px] desktop:px-[42px] desktop:pt-[33px] desktop:pb-6 wide:pt-10">
+      <div className="mx-auto block max-w-[1600px] px-[15px] pt-[19px] pb-6 tablet:grid tablet:grid-cols-[200px_minmax(0,1fr)] tablet:gap-[23px] tablet:p-[25px] desktop:grid-cols-[208px_minmax(0,1fr)] desktop:gap-[33px] desktop:px-[42px] desktop:pt-[33px] desktop:pb-6 wide:pt-10">
         <ChapterSidebar chapter={chapter} progress={progress} onCompanion={companion} />
         <main id="adventure">
-          <div className="mb-3 flex items-center justify-between gap-3 tablet:mb-[17px]">
-            <div className="text-[10px] text-subtle">
+          <div className="mb-3 flex flex-col items-start justify-between gap-2 desktop:flex-row desktop:items-center desktop:gap-4 tablet:mb-[17px]">
+            <div className="text-[0.875rem] leading-relaxed text-subtle">
               {chapter.region} <span className="px-[9px] text-subtle"> / </span> {chapter.title}
             </div>
-            <div className="text-[9px] text-subtle before:pr-[6px] before:text-[6px] before:content-['●']">
+            <div className="text-[0.875rem] leading-relaxed text-subtle before:pr-[6px] before:text-[0.75rem] before:content-['●']">
               {!loaded
                 ? 'Preparing your journey'
                 : storageOK

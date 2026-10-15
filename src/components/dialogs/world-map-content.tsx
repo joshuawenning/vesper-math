@@ -58,7 +58,7 @@ export default function WorldMapContent({
                     sizes="600px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#11251acc] to-transparent" />
-                  <span className="absolute bottom-3 left-4 text-[9px] uppercase tracking-[2px] text-[#eee5d0]">
+                  <span className="absolute bottom-3 left-4 text-[0.75rem] uppercase tracking-[2px] text-[#eee5d0]">
                     Chapter {world.number} ·{' '}
                     {world.id === progress.worldId
                       ? 'Your current trail'
@@ -68,14 +68,14 @@ export default function WorldMapContent({
                   </span>
                 </div>
                 <span className="block p-4">
-                  <strong className="flex items-center gap-2.5 font-story text-[27px] font-semibold">
-                    <Icon name={world.icon} className="size-5 text-[#64734c]" />
+                  <strong className="flex items-center gap-2.5 font-story text-[1.6875rem] font-semibold">
+                    <Icon name={world.icon} className="size-5 text-[#43533e]" />
                     {world.title}
                   </strong>
-                  <span className="mt-1 block font-story text-[18px] italic text-[#536249]">
+                  <span className="mt-1 block font-story text-[1.125rem] italic text-[#43533e]">
                     {world.teaser}
                   </span>
-                  <span className="mt-3 block text-[10px] text-[#647364]">
+                  <span className="mt-3 block text-[0.75rem] text-[#43533e]">
                     {loading === world.id
                       ? 'Opening the path…'
                       : `${journey?.done.length ?? 0} / ${world.encounters.length} discoveries · Enter ${world.chapter}`}
@@ -102,9 +102,9 @@ export default function WorldMapContent({
                 className="relative overflow-hidden border border-dashed border-[#909c8370] bg-[#23372c] p-4 text-[#dedcc5]"
               >
                 <Icon name={world.icon} className="mb-5 size-7 text-[#a6ac8a]" />
-                <h3 className="font-story text-[23px]">{world.title}</h3>
+                <h3 className="font-story text-[1.4375rem]">{world.title}</h3>
                 <p className="mt-2 font-story text-base italic text-[#b6c1a9]">{world.teaser}</p>
-                <span className="mt-4 block text-[8px] uppercase tracking-[1px] text-[#b5a778]">
+                <span className="mt-4 block text-[0.75rem] uppercase tracking-[1px] text-[#b5a778]">
                   Not yet charted
                 </span>
               </article>
@@ -123,8 +123,10 @@ export default function WorldMapContent({
               >
                 <Icon name={e.icon} />
                 <div>
-                  <strong className="block font-story text-[22px] font-semibold">{e.title}</strong>
-                  <p className="my-1 text-[11px] text-[#677361]">
+                  <strong className="block font-story text-[1.375rem] font-semibold">
+                    {e.title}
+                  </strong>
+                  <p className="my-1 text-[0.75rem] text-[#43533e]">
                     {status === 'done'
                       ? 'Explored'
                       : status === 'current'

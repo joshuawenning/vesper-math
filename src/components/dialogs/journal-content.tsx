@@ -17,7 +17,7 @@ function JournalEntry({
     <article className="border-b border-[#24392e22] py-[17px]">
       <Tag>{label}</Tag>
       <h3 className="mb-[7px] font-story text-2xl font-semibold">{title}</h3>
-      <p className="font-story text-[17px] leading-[1.5]">{children}</p>
+      <p className="font-story text-[1.0625rem] leading-[1.5]">{children}</p>
     </article>
   );
 }

@@ -63,12 +63,12 @@ export default function Dialog({
         <Eyebrow tone="brown">{label}</Eyebrow>
         <h2
           id="dialog-title"
-          className="mt-[9px] mr-[35px] font-story text-[30px] font-semibold leading-[1.1] tablet:text-[34px]"
+          className="mt-[9px] mr-[35px] font-story text-[1.875rem] font-semibold leading-[1.1] tablet:text-[2.125rem]"
         >
           {title}
         </h2>
         <button
-          className="absolute right-5 top-5 size-[33px] border-0 bg-transparent text-[25px] text-[#47544b]"
+          className="absolute right-5 top-5 size-[33px] border-0 bg-transparent text-[1.5625rem] text-[#47544b]"
           aria-label="Close dialog"
           onClick={onDismiss}
         >

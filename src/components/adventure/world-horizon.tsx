@@ -9,7 +9,7 @@ export default function WorldHorizon({ onAtlas }: { onAtlas: () => void }) {
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div>
           <Eyebrow small>There are other roads</Eyebrow>
-          <h2 id="horizon-heading" className="mt-1 font-story text-[26px]">
+          <h2 id="horizon-heading" className="mt-1 font-story text-[1.625rem]">
             Beyond the next horizon
           </h2>
         </div>
@@ -17,17 +17,17 @@ export default function WorldHorizon({ onAtlas }: { onAtlas: () => void }) {
           Open the world atlas →
         </Button>
       </div>
-      <p className="mb-4 text-[11px] leading-[1.6] text-subtle">
+      <p className="mb-4 text-[0.75rem] leading-[1.6] text-subtle">
         Three worlds are ready to explore. Farther places remain veiled, waiting for another
         chapter.
       </p>
-      <div className="grid gap-3 tablet:grid-cols-3">
+      <div className="grid gap-3 desktop:grid-cols-3">
         {worlds
           .filter((w) => !w.playable)
           .map((world) => (
             <article key={world.id} className="relative border border-line bg-surface p-4">
               <Icon name={world.icon} className="mb-4 size-5 text-gold/60" />
-              <h3 className="font-story text-[22px] text-body">{world.title}</h3>
+              <h3 className="font-story text-[1.375rem] text-body">{world.title}</h3>
               <p className="mt-2 font-story text-base italic leading-[1.5] text-subtle">
                 {world.teaser}
               </p>

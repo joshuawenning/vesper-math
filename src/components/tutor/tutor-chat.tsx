@@ -65,7 +65,7 @@ export default function TutorChat({
   }
   return (
     <>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-[10px] text-[#647364]">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-[0.75rem] text-[#43533e]">
         <span>On-device math guide · no messages leave this device</span>
         <span>{skillLevels.find((l) => l.id === progress.skill)?.label}</span>
       </div>
@@ -82,11 +82,11 @@ export default function TutorChat({
             key={message.id}
             className={`border px-4 py-3 ${message.role === 'elian' ? 'border-[#909c8340] bg-[#f4edda]' : 'ml-7 border-[#53674a50] bg-[#dce3cf]'}`}
           >
-            <strong className="mb-1 block text-[9px] uppercase tracking-[1px] text-[#647364]">
+            <strong className="mb-1 block text-[0.75rem] uppercase tracking-[1px] text-[#43533e]">
               {message.role === 'elian' ? 'Elian' : name}
             </strong>
             <p
-              className={`whitespace-pre-line leading-[1.5] ${message.role === 'elian' ? 'font-story text-[19px]' : 'text-[13px]'}`}
+              className={`whitespace-pre-line leading-[1.5] ${message.role === 'elian' ? 'font-story text-[1.1875rem]' : 'text-[0.8125rem]'}`}
             >
               {message.text}
             </p>
@@ -98,7 +98,7 @@ export default function TutorChat({
           <button
             type="button"
             key={topic}
-            className="border border-[#909c8360] px-2.5 py-1.5 text-[10px] capitalize hover:bg-[#dce3cf]"
+            className="border border-[#909c8360] px-2.5 py-1.5 text-[0.75rem] capitalize hover:bg-[#dce3cf]"
             onClick={() => send(`Explain ${topic}`)}
           >
             {topic}
@@ -116,7 +116,7 @@ export default function TutorChat({
         </label>
         <textarea
           id="elian-message"
-          className="block min-h-[76px] w-full resize-y border border-[#909c83] bg-[#f8f2df] px-3 py-2.5 text-[13px] leading-[1.5]"
+          className="block min-h-[76px] w-full resize-y border border-[#6b795e] bg-[#f8f2df] px-3 py-2.5 text-[0.8125rem] leading-[1.5]"
           value={input}
           maxLength={400}
           onChange={(event) => setInput(event.target.value)}
@@ -137,7 +137,7 @@ export default function TutorChat({
               A hint
             </Button>
           )}
-          <span className="ml-auto text-[9px] text-[#647364]">{input.length}/400</span>
+          <span className="ml-auto text-[0.75rem] text-[#43533e]">{input.length}/400</span>
         </div>
       </form>
       <Muted>

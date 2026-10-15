@@ -56,6 +56,20 @@ export default function Preferences({
         <option value="dark">Dark · After dusk</option>
         <option value="light">Light · By daylight</option>
       </PreferenceSelect>
+      <fieldset className="my-6 border-y border-[#909c8350] py-2">
+        <legend className="px-2 font-story text-2xl">Accessibility</legend>
+        <PreferenceSelect
+          label="Text size"
+          value={progress.textSize}
+          onChange={(e) =>
+            onChange({ ...progress, textSize: e.target.value === 'large' ? 'large' : 'standard' })
+          }
+        >
+          <option value="standard">Standard</option>
+          <option value="large">Larger · 125%</option>
+        </PreferenceSelect>
+        <Muted>Text also follows your browser’s zoom and font settings.</Muted>
+      </fieldset>
       <PreferenceSelect
         label="Math skill level"
         value={progress.skill}

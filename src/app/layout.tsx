@@ -23,7 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem('vesper-save-v1')||'{}').theme==='light'?'light':'dark'}catch{}`,
+            __html: `try{const p=JSON.parse(localStorage.getItem('vesper-save-v1')||'{}');document.documentElement.dataset.theme=p.theme==='light'?'light':'dark';document.documentElement.dataset.textSize=p.textSize==='large'?'large':'standard'}catch{}`,
           }}
         />
       </head>

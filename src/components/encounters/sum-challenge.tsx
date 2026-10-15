@@ -17,7 +17,7 @@ export default function SumChallenge({
           <button
             type="button"
             key={length}
-            className={`h-[47px] border border-[#826e46] bg-[linear-gradient(0deg,#a68a57,#d5b57a)] font-story text-[19px] font-semibold text-[#312c20] shadow-[inset_0_0_0_3px_#f3d7a12a] ${selected.includes(length) ? '-translate-y-1 outline-3 outline-offset-2 outline-[#346657]' : ''}`}
+            className={`h-[47px] border border-[#826e46] bg-[linear-gradient(0deg,#a68a57,#d5b57a)] font-story text-[1.1875rem] font-semibold text-[#312c20] shadow-[inset_0_0_0_3px_#f3d7a12a] ${selected.includes(length) ? '-translate-y-1 outline-3 outline-offset-2 outline-[#346657]' : ''}`}
             style={{ width: 45 + length * 9 }}
             aria-pressed={selected.includes(length)}
             onClick={() =>

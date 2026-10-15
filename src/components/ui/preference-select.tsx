@@ -6,12 +6,12 @@ export default function PreferenceSelect({
   ...props
 }: SelectHTMLAttributes<HTMLSelectElement> & { label: string }) {
   return (
-    <label className="my-[18px] flex flex-col items-start justify-between gap-[9px] text-[13px] tablet:flex-row tablet:items-center tablet:gap-5">
+    <label className="my-[18px] flex flex-col items-start justify-between gap-[9px] text-[0.8125rem] tablet:flex-row tablet:items-center tablet:gap-5">
       {label}
-      <span className="relative block w-full tablet:w-auto tablet:max-w-[210px]">
+      <span className="relative block w-full tablet:w-auto tablet:max-w-[280px]">
         <select
           {...props}
-          className="w-full appearance-none border border-[#909c83] bg-[#f3eddb] py-2.5 pl-3 pr-[39px] text-[#23392d]"
+          className="w-full appearance-none border border-[#6b795e] bg-[#f3eddb] py-2.5 pl-3 pr-[39px] text-[#23392d]"
         >
           {children}
         </select>

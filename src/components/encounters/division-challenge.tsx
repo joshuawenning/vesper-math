@@ -52,7 +52,7 @@ export default function DivisionChallenge({
       </label>
       <input
         id="answer"
-        className="mt-[9px] mr-2 w-[90px] border border-[#89977f] bg-[#fff9e7] p-2.5 font-story text-[25px] text-[#253a2c]"
+        className="mt-[9px] mr-2 w-[90px] border border-[#89977f] bg-[#fff9e7] p-2.5 font-story text-[1.5625rem] text-[#253a2c]"
         type="number"
         min="0"
         step="1"

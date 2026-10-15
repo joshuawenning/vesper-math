@@ -22,6 +22,7 @@ export function useProgress() {
   useEffect(() => {
     if (!loaded) return;
     document.documentElement.dataset.theme = progress.theme;
+    document.documentElement.dataset.textSize = progress.textSize;
     try {
       localStorage.setItem(SAVE_KEY, JSON.stringify(progress));
       setStorageOK(true);

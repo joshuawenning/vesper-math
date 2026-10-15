@@ -31,10 +31,10 @@ export default function ProfileContent({
           onDismiss();
         }}
       >
-        <label className="mb-5 block text-[13px]">
+        <label className="mb-5 block text-[0.8125rem]">
           Your name
           <input
-            className="mt-2 block w-full border border-[#909c83] bg-[#f3eddb] px-3 py-2.5 text-ink"
+            className="mt-2 block w-full border border-[#6b795e] bg-[#f3eddb] px-3 py-2.5 text-ink"
             value={name}
             maxLength={24}
             autoComplete="off"
@@ -43,7 +43,7 @@ export default function ProfileContent({
           />
         </label>
         <fieldset>
-          <legend className="mb-3 text-[13px]">Choose your character</legend>
+          <legend className="mb-3 text-[0.8125rem]">Choose your character</legend>
           <div className="grid grid-cols-2 gap-2.5 tablet:grid-cols-3">
             {personas.map((p) => (
               <button
@@ -55,7 +55,7 @@ export default function ProfileContent({
               >
                 <CharacterPortrait persona={p.id} className="aspect-square w-full" />
                 <span className="block px-2 py-2.5 text-center">
-                  <strong className="block text-[9px] font-medium uppercase tracking-[1.8px] text-[#53634e]">
+                  <strong className="block text-[0.75rem] font-medium uppercase tracking-[1.8px] text-[#43533e]">
                     {p.name}
                   </strong>
                 </span>
@@ -83,8 +83,8 @@ export default function ProfileContent({
             [progress.practice.correct, 'Quizzes solved'],
           ].map(([number, label]) => (
             <div key={label} className="border border-[#909c8340] p-2">
-              <strong className="block font-story text-[30px]">{number}</strong>
-              <span className="text-[9px] text-[#647364]">{label}</span>
+              <strong className="block font-story text-[1.875rem]">{number}</strong>
+              <span className="text-[0.75rem] text-[#43533e]">{label}</span>
             </div>
           ))}
         </div>
@@ -105,7 +105,7 @@ export default function ProfileContent({
                   <p className="mt-1 font-story text-xl capitalize">
                     {record.encounterId.replaceAll('-', ' ')}
                   </p>
-                  <small className="text-[10px] text-[#647364]">
+                  <small className="text-[0.75rem] text-[#43533e]">
                     {record.at
                       ? new Date(record.at).toLocaleDateString()
                       : 'From an earlier journey'}

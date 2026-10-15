@@ -14,6 +14,7 @@ export const emptyJourney = (): Journey => ({ done: [], started: false, ending: 
 export const initialProgress: Progress = {
   ...emptyJourney(),
   theme: 'dark',
+  textSize: 'standard',
   reading: 'rich',
   support: 'guided',
   skill: 'foundations',
@@ -116,6 +117,7 @@ export function normalizeProgress(value: unknown, _legacyChapter?: Chapter): Pro
     journeys,
     history: history.slice(-128),
     theme: raw.theme === 'light' ? 'light' : 'dark',
+    textSize: raw.textSize === 'large' ? 'large' : 'standard',
     reading: raw.reading === 'plain' ? 'plain' : 'rich',
     support: raw.support === 'light' ? 'light' : 'guided',
     skill: cleanLevel(raw.skill),

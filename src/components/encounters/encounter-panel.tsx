@@ -85,7 +85,7 @@ export default function EncounterPanel({
       {feedback && <Feedback>{feedback}</Feedback>}
       {hint > 0 && (
         <div
-          className="mt-[17px] border-l-2 border-[#ac9963] pl-[14px] font-story text-[18px] italic leading-[1.5]"
+          className="mt-[17px] border-l-2 border-[#ac9963] pl-[14px] font-story text-[1.125rem] italic leading-[1.5]"
           aria-live="polite"
         >
           {encounter.hint[hint - 1]}

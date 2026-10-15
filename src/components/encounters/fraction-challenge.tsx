@@ -15,9 +15,9 @@ export default function FractionChallenge({
 }) {
   return (
     <Toolbox>
-      <div className="flex items-center justify-center gap-[25px]">
+      <div className="flex flex-col items-center justify-center gap-[25px] min-[480px]:flex-row">
         <div
-          className="relative flex h-40 w-[95px] flex-col-reverse overflow-hidden rounded-[4px_4px_28px_28px] border-2 border-[#6b8074] bg-[#eee8d5]"
+          className="relative flex h-40 w-[95px] shrink-0 flex-col-reverse overflow-hidden rounded-[4px_4px_28px_28px] border-2 border-[#6b8074] bg-[#eee8d5]"
           role="img"
           aria-label={`Cistern ${fill} of ${challenge.denominator} equal parts full`}
         >
@@ -34,9 +34,9 @@ export default function FractionChallenge({
           />
         </div>
         <div>
-          <div className="font-story text-[40px] font-medium" aria-live="polite">
+          <div className="font-story text-[2.5rem] font-medium" aria-live="polite">
             {fill}/{challenge.denominator}
-            <small className="mt-[7px] block font-sans text-[11px] font-normal text-[#677765]">
+            <small className="mt-[7px] block font-sans text-[0.75rem] font-normal text-[#4b5e49]">
               Target: {challenge.target}/{challenge.denominator} full
             </small>
           </div>
