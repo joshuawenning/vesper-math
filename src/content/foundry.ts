@@ -78,7 +78,7 @@ export const chapter: Chapter = {
         'A deep musical note travels through the mountain. The great wheel turns for the first time in years.',
       reward: 'Brass tuning key',
       artwork: {
-        src: '/art/brass-chorus-illustrated.webp',
+        src: '/art/brass-chorus-corrected.webp',
         alt: 'An elderly dwarf gear keeper arranges brass gear teeth at a workbench as a great wheel glows behind her.',
       },
       hint: ['Equal groups can be multiplied.', 'Add 3 four times.', '4 \u00d7 3 = 12.'],

@@ -93,8 +93,15 @@
       "id": "brass-chorus",
       "revised": true,
       "prompt": "Use case: style-transfer. Repaint the attached image in distinctly HAND-DRAWN early fantasy trading-card and tabletop book illustration style: irregular black pen contours, expressive crosshatching, flattened shapes, translucent watercolor and opaque gouache on coarse paper. Preserve the original concept, objects, character identities, clothing, composition and aspect ratio. Scene: Kind elderly woman dwarf gear keeper with white braids arranging brass teeth in equal bundles at her workbench, enormous wheel behind her. Her face and hands must look visibly drawn rather than photographic. Reduce realistic photographic detail and digital polish substantially. No photorealism, cinematic realism or 3D, no writing, logos or UI.",
-      "src": "/art/brass-chorus-illustrated.webp",
-      "input": "/art/brass-chorus.webp (previous version)"
+      "src": "/art/brass-chorus-corrected.webp",
+      "input": "/art/brass-chorus.webp (previous version)",
+      "edits": [
+        {
+          "method": "Built-in image_gen tool",
+          "input": "/art/brass-chorus-illustrated.webp (previous version)",
+          "prompt": "Use case: precise-object-edit. Edit target: the attached Vesper Math brass gear-keeper illustration. Make a localized correction ONLY to the elderly woman's two exposed forearms and hands, especially the large forearm across the lower-left/center (approximately x 28%, y 58%). Remove the strange rectangular, block-like and ladder-like line patterns on her skin. Redraw natural believable elbow-to-wrist contours, relaxed wrists, anatomically coherent hands and five fingers on each hand. Keep the same pose: the hand on viewer's left carefully arranges brass gear teeth on the bench; the hand on viewer's right holds a small group of gear teeth. Use soft watercolor volume, sparse fine curved pen hatching following the rounded anatomy, and a few delicate age creases. No grids, rectangular stripes, scars, tattoos, geometric skin marks, extra fingers or limbs. Preserve her age, face, hair, expression, rolled sleeves, apron, clothing, all brass parts, workshop, enormous gear, lighting, composition, color palette and 3:2 aspect ratio. Preserve the hand-drawn old fantasy ink-and-gouache style. Do not repaint or rearrange the surrounding scene."
+        }
+      ]
     },
     {
       "id": "makers-mosaic",
