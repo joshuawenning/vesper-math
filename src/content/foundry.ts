@@ -6,7 +6,7 @@ export const chapter: Chapter = {
   number: 2,
   heading: 'The mountain remembers',
   scene: {
-    src: '/art/foundry.webp',
+    src: '/art/foundry-illustrated.webp',
     alt: 'An intricately illustrated mountain foundry with brass wheels and warm furnaces.',
   },
   subtitle: 'Every small part has its place.',
@@ -29,7 +29,7 @@ export const chapter: Chapter = {
         'The lift settles level with the workshop door. Elian sketches the old balancing arms.',
       reward: 'Copper balance seal',
       artwork: {
-        src: '/art/counterweight.webp',
+        src: '/art/counterweight-illustrated.webp',
         alt: 'A copper lift suspended beside a mountain workshop, with a brass balancing arm and hanging stone counterweights.',
       },
       hint: [
@@ -78,7 +78,7 @@ export const chapter: Chapter = {
         'A deep musical note travels through the mountain. The great wheel turns for the first time in years.',
       reward: 'Brass tuning key',
       artwork: {
-        src: '/art/brass-chorus.webp',
+        src: '/art/brass-chorus-illustrated.webp',
         alt: 'An elderly dwarf gear keeper arranges brass gear teeth at a workbench as a great wheel glows behind her.',
       },
       hint: ['Equal groups can be multiplied.', 'Add 3 four times.', '4 \u00d7 3 = 12.'],
@@ -122,7 +122,7 @@ export const chapter: Chapter = {
         'The final stone rests in place. Warm light spreads across the foundry floor, and the work bells answer.',
       reward: 'Maker\u2019s compass',
       artwork: {
-        src: '/art/makers-mosaic.webp',
+        src: '/art/makers-mosaic-illustrated.webp',
         alt: 'A teal, ochre, and ivory foundry floor mosaic with a loose final tile and a brass maker’s compass.',
       },
       hint: [

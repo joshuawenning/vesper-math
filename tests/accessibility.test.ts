@@ -1,4 +1,6 @@
 import test from 'node:test';
+import { worldAtmospheres } from '../src/content/atmospheres';
+import { worlds } from '../src/content/worlds';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
@@ -34,6 +36,38 @@ test('both theme palettes meet 4.5:1 for supporting text and accents on their su
           contrast(rgb(palette[foreground]), background) >= 4.5,
           `${mode}: ${foreground} on ${surface}`,
         );
+    }
+  }
+});
+
+function overlay(base: number[], hex: string) {
+  const value = hex.replace('#', '');
+  const alpha = value.length === 8 ? parseInt(value.slice(6), 16) / 255 : 1;
+  return rgb(value).map((v, i) => v * alpha + base[i] * (1 - alpha));
+}
+test('each world has paper palettes that retain readable text in both modes', () => {
+  assert.deepEqual(Object.keys(worldAtmospheres).sort(), worlds.map((w) => w.id).sort());
+  for (const [world, themes] of Object.entries(worldAtmospheres)) {
+    for (const mode of ['dark', 'light'] as const) {
+      const selector = mode === 'dark' ? ':root' : ":root[data-theme='light']";
+      const block = css.slice(css.indexOf(selector + ' {')).split('}')[0];
+      const palette = Object.fromEntries(
+        Array.from(block.matchAll(/--([\w-]+): #([a-f0-9]{6,8});/g), (m) => [m[1], m[2]]),
+      );
+      const paper = themes[mode];
+      const canvas = rgb(paper.canvas.slice(1));
+      // Include the strongest wash combination as well as the unwashed paper.
+      for (const base of [canvas, overlay(overlay(canvas, paper.glow), paper.undertone)]) {
+        for (const surface of [
+          base,
+          overlay(base, palette.surface),
+          overlay(base, palette['surface-hover']),
+        ]) {
+          for (const text of ['foreground', 'subtle', 'accent']) {
+            assert.ok(contrast(rgb(palette[text]), surface) >= 4.5, `${world}, ${mode}: ${text}`);
+          }
+        }
+      }
     }
   }
 });

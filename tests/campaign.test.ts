@@ -8,6 +8,7 @@ import { chapter as coast } from '../src/content/coast';
 import { chapter as desert } from '../src/content/glass-desert';
 import { chapter as winter } from '../src/content/winter-archive';
 import { chapter as astral } from '../src/content/astral-vault';
+import { chapter as orchard } from '../src/content/hollow-orchard';
 import { cleanName } from '../src/content/personas';
 import { normalizeProgress, recordDiscovery, switchWorld } from '../src/lib/progress';
 import { levelEncounter } from '../src/lib/difficulty';
@@ -95,6 +96,14 @@ test('new chapter answers have verified solutions across all three levels', () =
         [12, 25, 9],
       ],
     ],
+    [
+      orchard,
+      [
+        [12, 7 / 12, 150],
+        [6, 175, 6],
+        [8, 28, 15],
+      ],
+    ],
   ] as const) {
     chapter.encounters.forEach((encounter, i) => {
       (['foundations', 'developing', 'stretch'] as const).forEach((level, j) => {
@@ -129,13 +138,14 @@ test('original encounters scale without changing earlier recorded discoveries', 
   );
 });
 
-test('chapter continuation traverses all six worlds and ends at the Astral Vault', () => {
+test('chapter continuation traverses all seven worlds and ends at the Hollow Orchard', () => {
   assert.equal(nextPlayableWorld(merewood.id)?.id, foundry.id);
   assert.equal(nextPlayableWorld(foundry.id)?.id, coast.id);
   assert.equal(nextPlayableWorld(coast.id)?.id, desert.id);
   assert.equal(nextPlayableWorld(desert.id)?.id, winter.id);
   assert.equal(nextPlayableWorld(winter.id)?.id, astral.id);
-  assert.equal(nextPlayableWorld(astral.id), undefined);
+  assert.equal(nextPlayableWorld(astral.id)?.id, orchard.id);
+  assert.equal(nextPlayableWorld(orchard.id), undefined);
   assert.equal(nextPlayableWorld('invented'), undefined);
   let p = normalizeProgress({ done: ['bridge', 'cistern', 'guardian'], ending: 'beacon' });
   p = switchWorld(p, nextPlayableWorld(merewood.id)!.id);
@@ -144,12 +154,12 @@ test('chapter continuation traverses all six worlds and ends at the Astral Vault
   assert.deepEqual(p.done, []);
 });
 
-test('all eighteen discoveries have distinct shipped story art, separate from world landscapes', () => {
-  const chapters = [merewood, foundry, coast, desert, winter, astral];
+test('all twenty-one discoveries have distinct shipped story art, separate from world landscapes', () => {
+  const chapters = [merewood, foundry, coast, desert, winter, astral, orchard];
   const art = chapters.flatMap((chapter) =>
     chapter.encounters.map((encounter) => encounter.artwork.src),
   );
-  assert.equal(new Set(art).size, 18);
+  assert.equal(new Set(art).size, 21);
   for (const src of art) {
     assert.ok(existsSync(new URL(`../public${src}`, import.meta.url)), src);
     assert.ok(!chapters.some((chapter) => chapter.scene?.src === src));
@@ -173,11 +183,30 @@ test('world registry, lazy chapter data, and saved discoveries remain aligned th
     p = { ...p, ending: 'beacon' };
     p = normalizeProgress(JSON.parse(JSON.stringify(p)));
   }
-  assert.equal(p.history.length, 18);
+  assert.equal(p.history.length, 21);
   assert.equal(p.profile.name, 'Mira');
   for (const world of worlds) {
     p = switchWorld(p, world.id);
     assert.equal(p.ending, 'beacon');
     assert.deepEqual(p.done, [...world.encounters]);
   }
+});
+
+test('a six-world save gains an empty seventh trail without changing earlier discoveries', () => {
+  const oldSave = {
+    worldId: astral.id,
+    done: astral.encounters.map((e) => e.id),
+    ending: 'refuge',
+    profile: { name: 'Mira', persona: 'arcanist-female' },
+    journeys: { [desert.id]: { done: desert.encounters.map((e) => e.id), ending: 'beacon' } },
+  };
+  const restored = normalizeProgress(oldSave);
+  assert.equal(restored.ending, 'refuge');
+  const next = switchWorld(restored, orchard.id);
+  assert.deepEqual(next.done, []);
+  assert.equal(next.ending, null);
+  assert.equal(next.profile.name, 'Mira');
+  assert.equal(next.journeys[desert.id].ending, 'beacon');
+  assert.equal(next.journeys[astral.id].ending, 'refuge');
+  assert.equal(next.history.length, 6);
 });

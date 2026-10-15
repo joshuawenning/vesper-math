@@ -58,7 +58,7 @@ export default function JourneyContinuation({
           ? 'All discoveries are yours. Choose what this place will become before setting out.'
           : next
             ? `Your discoveries stay in your journal. ${next.teaser}`
-            : 'You have reached the end of the six-world trail. Revisit a favorite place or explore any roads you have yet to travel.'}
+            : 'You have reached the end of the charted trail. Revisit a favorite place or explore any roads you have yet to travel.'}
       </Muted>
       <Button
         onClick={!progress.ending ? onFinale : next ? () => void travel() : onAtlas}

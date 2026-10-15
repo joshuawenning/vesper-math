@@ -1,6 +1,6 @@
 # Vesper Math
 
-> Vesper Math is an illustrated math adventure, built with Next.js. Exploration comes first; six playable chapters cover operations, fractions, measurements, percentages, geometry, and early equations.
+> Vesper Math is an illustrated math adventure, built with Next.js. Exploration comes first; seven playable chapters cover operations, fractions, measurements, percentages, geometry, and early equations.
 
 ## The current adventure
 
@@ -10,7 +10,8 @@
 - **The Palace of Reflections:** three discoveries in the Glass Desert.
 - **The Book of Borrowed Hours:** three discoveries in the Winter Archive.
 - **The Unwritten Constellation:** three discoveries in the Astral Vault.
-- A current-world selector preserves each trail’s progress. The title returns to the adventure; the atlas provides illustrated context for all six worlds.
+- **The Orchard of Borrowed Names:** three discoveries in the Hollow Orchard, with a key-bee keeper, a masked snail merchant, and a pomegranate guardian.
+- A current-world selector preserves each trail’s progress. The title returns to the adventure; the atlas provides illustrated context for all seven worlds.
 - Discovery cards reveal their artwork in sequence: current and completed discoveries are clear, later ones are blurred.
 - Three independent math levels: Foundations, Growing fluency, and Further challenges. Narrative reading level and visual support remain separate.
 - Six predefined Arcanist, Ranger, and Warden personas (woman/man variants), a custom name, local discovery history, world endings, and practice totals.
@@ -90,7 +91,7 @@ The existing 750px and 1100px layout boundaries are preserved with the mobile-fi
 - The illustrated scene is rendered through a server component and passed into the client shell.
 - `next/image` supplies responsive sizes, caching, blur placeholder for the main scene, and lazy loading for secondary images. Source images are capped at 1536 px to avoid oversized variants.
 - The main scene is preloaded; the modal interface is split into a separate JavaScript chunk and is requested when opened.
-- Artwork is served as separate WebP files, never embedded into the HTML. The six original PNG scenes were reduced from 23.0 MB to 3.35 MB (85% smaller), before adding the new preferences illustration.
+- Artwork is served as separate WebP files, never embedded into the HTML. Earlier PNG scenes and revised paintings are shipped as separate optimized WebP assets, with smaller versions requested for thumbnails.
 - `next/font` self-hosts the two font families with swap behavior; the browser makes no runtime Google Fonts requests.
 - No UI framework, animation library, game engine, analytics, account service, or database is required.
 
@@ -108,7 +109,7 @@ Browser storage is specific to an origin. A save from a `file:` URL or a differe
 
 ## Art
 
-All included scenes are original AI-generated illustrations from the built-in image generation tool. `ART-PROMPTS.json`, `EXPANSION-ART-PROMPTS.json`, `STORY-ART-PROMPTS.json`, and `FINAL-WORLDS-ART-PROMPTS.json` record the prompts. The final three worlds use visibly drawn ink, gouache, and watercolor textures with a mix of people, creatures, landscapes, and magical objects. User-supplied reference images are not bundled. Preferences depicts a wayfarer's outfitting alcove; the journal retains its separate book-and-maps illustration.
+All included scenes are original AI-generated illustrations from the built-in image generation tool. `ART-PROMPTS.json`, `EXPANSION-ART-PROMPTS.json`, `STORY-ART-PROMPTS.json`, and `FINAL-WORLDS-ART-PROMPTS.json`, and `ORCHARD-AND-REVISED-ART-PROMPTS.json` record the prompts. The worlds use visibly drawn ink, gouache, and watercolor textures with a mix of people, creatures, landscapes, and magical objects. User-supplied reference images are not bundled. Preferences depicts a wayfarer's outfitting alcove; the journal retains its separate book-and-maps illustration.
 
 ## References
 
@@ -120,3 +121,11 @@ All included scenes are original AI-generated illustrations from the built-in im
 ## Optional language model
 
 Elian currently runs entirely on-device. See [the free-LLM options and integration boundaries](docs/ELIAN-LLM-OPTIONS.md) before choosing an optional provider. No LLM service is enabled by this update.
+
+## World atmosphere and preferences
+
+`components/adventure/world-atmosphere.tsx` combines a small cached SVG paper grain with static color washes from `content/atmospheres.ts`. Each world has dark and light paper colors; foreground and control tokens stay consistent. There is no animation loop, canvas renderer, full-screen image download, or texture generation at runtime. The SVG tile repeats across the page and ignores pointer and accessibility input.
+
+Appearance, learning level, storytelling, and reading pace use visible native radio groups. Read-aloud and visual guidance use keyboard-accessible switches. Text size has A−/A+ controls for the existing standard and 125% settings. Only the longer voice list remains a dropdown. All preferences retain the existing save format.
+
+The earlier portraits, companion, first three world landscapes and their discovery art have been repainted with visible pen contours and watercolor/gouache texture while preserving their concepts. Journal and preference artwork use the same treatment. The six-person portrait atlas retains its layout and persona IDs, so existing characters continue to select the same portrait.

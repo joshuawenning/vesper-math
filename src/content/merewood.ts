@@ -29,7 +29,7 @@ export const chapter: Chapter = {
       discovery:
         'Your timbers settle into the ancient supports. Beyond the crossing, the observatory door stands open.',
       artwork: {
-        src: '/art/bridge.webp',
+        src: '/art/bridge-illustrated.webp',
         alt: 'A broken mossy crossing over teal water, with oak planks and measuring tools on the bank.',
       },
       challenge: {
@@ -59,7 +59,7 @@ export const chapter: Chapter = {
       discovery:
         'The water catches the moon. Brass rings begin to turn overhead, and a sealed stairway opens beneath your feet.',
       artwork: {
-        src: '/art/cistern.webp',
+        src: '/art/cistern-illustrated.webp',
         alt: 'A moonlit stone cistern, a brass pitcher, and the observatory’s ancient celestial mechanism.',
       },
       challenge: {
@@ -88,7 +88,7 @@ export const chapter: Chapter = {
       discovery:
         'The last spark settles into silence. The owl bows its weathered head. Behind it, a map of forgotten constellations unfurls.',
       artwork: {
-        src: '/art/guardian.webp',
+        src: '/art/guardian-illustrated.webp',
         alt: 'A stone owl unfolds its wings over an ancient star chart, surrounded by magical sparks.',
       },
       challenge: {

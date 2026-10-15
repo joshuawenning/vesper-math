@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import observatory from '../../public/art/observatory.webp';
+import observatory from '../../public/art/observatory-illustrated.webp';
 import { artwork } from '@/content/artwork';
 import Game from '@/components/game';
 

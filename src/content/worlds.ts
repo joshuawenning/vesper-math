@@ -25,7 +25,7 @@ export const worlds = [
     chapter: 'The Flooded Observatory',
     number: 1,
     playable: true,
-    image: '/art/observatory.webp',
+    image: '/art/observatory-illustrated.webp',
     teaser: 'An old light stirs beyond the willows.',
     encounters: ['bridge', 'cistern', 'guardian'],
   },
@@ -36,7 +36,7 @@ export const worlds = [
     chapter: 'The Sleeping Foundry',
     number: 2,
     playable: true,
-    image: '/art/foundry.webp',
+    image: '/art/foundry-illustrated.webp',
     teaser: 'Something beneath the mountain is waiting to turn again.',
     encounters: ['copper-lift', 'gearworks', 'forge-floor'],
   },
@@ -47,7 +47,7 @@ export const worlds = [
     chapter: 'The Lanterns of Low Tide',
     number: 3,
     playable: true,
-    image: '/art/coast.webp',
+    image: '/art/coast-illustrated.webp',
     teaser: 'The tide has drawn back from a path no map remembers.',
     encounters: ['harbor-trade', 'tidal-mark', 'lantern-garden'],
   },
@@ -84,6 +84,17 @@ export const worlds = [
     teaser: 'Some journeys begin where the stars disappear.',
     encounters: ['starless-ferry', 'orrery-keeper', 'unwritten-star'],
   },
+  {
+    id: 'hollow-orchard',
+    icon: 'orchard',
+    title: 'The Hollow Orchard',
+    chapter: 'The Orchard of Borrowed Names',
+    number: 7,
+    playable: true,
+    image: '/art/hollow-orchard.webp',
+    teaser: 'Some seeds remember what the stars have forgotten.',
+    encounters: ['honey-debt', 'snails-bargain', 'remembering-seed'],
+  },
 ] as const satisfies readonly {
   id: string;
   icon: IconName;
@@ -114,6 +125,8 @@ export async function loadChapter(id: string): Promise<Chapter> {
       return (await import('./winter-archive')).chapter;
     case 'astral-vault':
       return (await import('./astral-vault')).chapter;
+    case 'hollow-orchard':
+      return (await import('./hollow-orchard')).chapter;
     default:
       throw new Error('This world could not be found.');
   }

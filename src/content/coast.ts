@@ -6,7 +6,7 @@ export const chapter: Chapter = {
   number: 3,
   heading: 'Where the waters part',
   scene: {
-    src: '/art/coast.webp',
+    src: '/art/coast-illustrated.webp',
     alt: 'An intricately illustrated moonlit harbor with sailing ships and lanterns.',
   },
   subtitle: 'A careful measure can light the way.',
@@ -29,7 +29,7 @@ export const chapter: Chapter = {
         'The merchant ties your rope with a sailor\u2019s knot and points toward the retreating tide.',
       reward: 'Harbor token',
       artwork: {
-        src: '/art/fair-exchange.webp',
+        src: '/art/fair-exchange-illustrated.webp',
         alt: 'A harbor merchant offers a coiled rope across a counter with copper coins and brass scales, against a moonlit harbor.',
       },
       hint: [
@@ -72,7 +72,7 @@ export const chapter: Chapter = {
         'Your measured rope spans the gap. A line of pale stones leads toward the lantern garden.',
       reward: 'Tidekeeper\u2019s cord',
       artwork: {
-        src: '/art/tidekeepers-measure.webp',
+        src: '/art/tidekeepers-measure-illustrated.webp',
         alt: 'A knotted measuring rope spans a gap beside a weathered tidal marker and a moonlit sea causeway.',
       },
       hint: [
@@ -123,7 +123,7 @@ export const chapter: Chapter = {
         'The garden lanterns glow one by one. Across the dark water, a returning ship answers with a light of its own.',
       reward: 'Tideglass lantern',
       artwork: {
-        src: '/art/lantern-garden.webp',
+        src: '/art/lantern-garden-illustrated.webp',
         alt: 'Elian pours glowing moonwater into a garden lantern while a distant sailing ship carries a small answering light.',
       },
       hint: [

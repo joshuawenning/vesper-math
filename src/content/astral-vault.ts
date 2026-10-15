@@ -179,7 +179,7 @@ export const chapter: Chapter = {
       {
         id: 'beacon',
         title: 'Draw a constellation for everyone',
-        description: 'Connect the six worlds with a light every traveler can follow.',
+        description: 'Connect the charted worlds with a light every traveler can follow.',
         result:
           'Above every road, a new constellation shines. Its shape changes with the viewer, but it always points toward a place where a curious mind is welcome.',
       },
