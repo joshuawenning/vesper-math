@@ -19,7 +19,14 @@ export const viewport: Viewport = { themeColor: '#172323' };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${literary.variable} ${ui.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${literary.variable} ${ui.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem('vesper-save-v1')||'{}').theme==='light'?'light':'dark'}catch{}`,
+          }}
+        />
+      </head>
       <body>
         <a
           className="fixed -top-[100px] left-3 z-100 bg-paper p-3 text-ink focus:top-3"

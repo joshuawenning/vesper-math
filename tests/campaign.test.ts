@@ -13,6 +13,7 @@ test('switching worlds and round-tripping a save preserves personal history and 
     done: ['bridge'],
     profile: { name: 'Mira', persona: 'arcanist-female' },
     skill: 'stretch',
+    theme: 'light',
   });
   assert.equal(p.history.length, 1);
   p = switchWorld(p, foundry.id);
@@ -23,6 +24,7 @@ test('switching worlds and round-tripping a save preserves personal history and 
   assert.deepEqual(p.done, ['bridge']);
   p = normalizeProgress(JSON.parse(JSON.stringify(p)));
   assert.equal(p.profile.name, 'Mira');
+  assert.equal(p.theme, 'light');
   assert.equal(p.history.length, 2);
   p = switchWorld(p, foundry.id);
   assert.deepEqual(p.done, ['copper-lift']);
@@ -38,6 +40,7 @@ test('imports cannot forge unknown worlds, personas, skipped discoveries, or unb
     history: [{ worldId: 'invented', encounterId: 'guardian' }],
   });
   assert.equal(p.worldId, merewood.id);
+  assert.equal(p.theme, 'dark');
   assert.equal(p.profile.name.length, 24);
   assert.equal(p.profile.persona, 'ranger-female');
   assert.equal(p.practice.correct, 2);

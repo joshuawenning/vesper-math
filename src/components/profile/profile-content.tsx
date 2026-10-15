@@ -54,9 +54,10 @@ export default function ProfileContent({
                 onClick={() => setPersona(p.id)}
               >
                 <CharacterPortrait persona={p.id} className="aspect-square w-full" />
-                <span className="block px-2 py-2.5">
-                  <strong className="block font-story text-[22px] font-semibold">{p.name}</strong>
-                  <small className="text-[10px] text-[#647364]">{p.gender}</small>
+                <span className="block px-2 py-2.5 text-center">
+                  <strong className="block text-[9px] font-medium uppercase tracking-[1.8px] text-[#53634e]">
+                    {p.name}
+                  </strong>
                 </span>
               </button>
             ))}

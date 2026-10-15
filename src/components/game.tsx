@@ -102,10 +102,10 @@ export default function Game({ scene }: { scene: ReactNode }) {
         <ChapterSidebar chapter={chapter} progress={progress} onCompanion={companion} />
         <main id="adventure">
           <div className="mb-3 flex items-center justify-between gap-3 tablet:mb-[17px]">
-            <div className="text-[10px] text-[#91a296]">
-              {chapter.region} <span className="px-[9px] text-[#657a6d]"> / </span> {chapter.title}
+            <div className="text-[10px] text-subtle">
+              {chapter.region} <span className="px-[9px] text-subtle"> / </span> {chapter.title}
             </div>
-            <div className="text-[9px] text-[#8ba38d] before:pr-[6px] before:text-[6px] before:content-['●']">
+            <div className="text-[9px] text-subtle before:pr-[6px] before:text-[6px] before:content-['●']">
               {!loaded
                 ? 'Preparing your journey'
                 : storageOK

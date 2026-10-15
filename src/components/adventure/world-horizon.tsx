@@ -17,7 +17,7 @@ export default function WorldHorizon({ onAtlas }: { onAtlas: () => void }) {
           Open the world atlas →
         </Button>
       </div>
-      <p className="mb-4 text-[11px] leading-[1.6] text-[#9aab9c]">
+      <p className="mb-4 text-[11px] leading-[1.6] text-subtle">
         Three worlds are ready to explore. Farther places remain veiled, waiting for another
         chapter.
       </p>
@@ -25,10 +25,10 @@ export default function WorldHorizon({ onAtlas }: { onAtlas: () => void }) {
         {worlds
           .filter((w) => !w.playable)
           .map((world) => (
-            <article key={world.id} className="relative border border-line bg-[#1b2c26] p-4">
+            <article key={world.id} className="relative border border-line bg-surface p-4">
               <Icon name="star" className="mb-4 size-5 text-gold/60" />
-              <h3 className="font-story text-[22px] text-[#d8dece]">{world.title}</h3>
-              <p className="mt-2 font-story text-base italic leading-[1.5] text-[#8fa095]">
+              <h3 className="font-story text-[22px] text-body">{world.title}</h3>
+              <p className="mt-2 font-story text-base italic leading-[1.5] text-subtle">
                 {world.teaser}
               </p>
             </article>

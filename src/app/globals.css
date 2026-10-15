@@ -1,12 +1,18 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-night: #111c1c;
+  --color-night: var(--canvas);
   --color-ink: #192625;
   --color-paper: #eee5d0;
-  --color-gold: #ceb47b;
-  --color-muted: #8d9b91;
-  --color-line: #ffffff18;
+  --color-gold: var(--accent);
+  --color-muted: var(--subtle);
+  --color-line: var(--rule);
+  --color-body: var(--foreground);
+  --color-subtle: var(--subtle);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-track: var(--track);
+  --color-frame: var(--frame);
   --color-forest: #243d33;
   --breakpoint-tablet: 751px;
   --breakpoint-desktop: 1101px;
@@ -19,9 +25,35 @@
 }
 
 @layer base {
+  :root {
+    color-scheme: dark;
+    --canvas: #111c1c;
+    --foreground: #e5e5d7;
+    --accent: #ceb47b;
+    --subtle: #9eada2;
+    --rule: #ffffff18;
+    --surface: #23342e66;
+    --surface-hover: #2e443877;
+    --track: #ffffff10;
+    --frame: #101a1a;
+    --glow: #2b3c36aa;
+  }
+  :root[data-theme='light'] {
+    color-scheme: light;
+    --canvas: #f1ebdc;
+    --foreground: #283e34;
+    --accent: #775a26;
+    --subtle: #596c5d;
+    --rule: #40594030;
+    --surface: #e2e4d5;
+    --surface-hover: #d5ddc9;
+    --track: #40594020;
+    --frame: #e3ddca;
+    --glow: #d5dfc6aa;
+  }
   body {
-    @apply bg-night font-sans text-sm leading-[normal] text-[#e5e5d7];
-    background-image: radial-gradient(ellipse at 60% 0%, #2b3c36aa, transparent 65%);
+    @apply bg-night font-sans text-sm leading-[normal] text-body;
+    background-image: radial-gradient(ellipse at 60% 0%, var(--glow), transparent 65%);
   }
 
   button {

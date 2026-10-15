@@ -13,6 +13,7 @@ export const SAVE_KEY = 'vesper-save-v1';
 export const emptyJourney = (): Journey => ({ done: [], started: false, ending: null, levels: {} });
 export const initialProgress: Progress = {
   ...emptyJourney(),
+  theme: 'dark',
   reading: 'rich',
   support: 'guided',
   skill: 'foundations',
@@ -114,6 +115,7 @@ export function normalizeProgress(value: unknown, _legacyChapter?: Chapter): Pro
     worldId,
     journeys,
     history: history.slice(-128),
+    theme: raw.theme === 'light' ? 'light' : 'dark',
     reading: raw.reading === 'plain' ? 'plain' : 'rich',
     support: raw.support === 'light' ? 'light' : 'guided',
     skill: cleanLevel(raw.skill),

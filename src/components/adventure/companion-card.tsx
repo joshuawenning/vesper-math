@@ -5,7 +5,7 @@ import { Eyebrow } from '../ui/typography';
 
 export function CompanionCard({ complete, onSpeak }: { complete: boolean; onSpeak: () => void }) {
   return (
-    <div className="mt-[35px] overflow-hidden border border-line bg-[#ffffff03] px-[15px] pb-[18px]">
+    <div className="mt-[35px] overflow-hidden border border-line bg-surface px-[15px] pb-[18px]">
       <Image
         className="mx-[-15px] mb-[18px] block h-[155px] w-[calc(100%+30px)] max-w-none border-b border-[#bda36955] object-cover object-[center_28%]"
         src={artwork.elian.src}
@@ -16,7 +16,7 @@ export function CompanionCard({ complete, onSpeak }: { complete: boolean; onSpea
       />
       <Eyebrow small>Your companion</Eyebrow>
       <h3 className="mt-2.5 font-story text-[22px] font-medium">Elian, the cartographer</h3>
-      <p className="my-[9px] font-story text-[15px] italic leading-[1.5] text-[#9eada2]">
+      <p className="my-[9px] font-story text-[15px] italic leading-[1.5] text-subtle">
         “
         {complete
           ? 'Some maps show us where to go. Others show us what we have learned.'
@@ -33,7 +33,7 @@ export function CompanionCard({ complete, onSpeak }: { complete: boolean; onSpea
 export function MobileCompanionCard({ onSpeak }: { onSpeak: () => void }) {
   return (
     <button
-      className="mt-[18px] flex w-full items-center gap-[14px] border border-[#bda36944] bg-[#263b32] p-[11px] text-left tablet:hidden"
+      className="mt-[18px] flex w-full items-center gap-[14px] border border-[#bda36944] bg-surface p-[11px] text-left tablet:hidden"
       onClick={onSpeak}
     >
       <Image
@@ -45,10 +45,10 @@ export function MobileCompanionCard({ onSpeak }: { onSpeak: () => void }) {
         sizes="53px"
       />
       <span>
-        <strong className="block font-story text-[21px] font-medium text-[#e3dfc9]">
+        <strong className="block font-story text-[21px] font-medium text-body">
           Elian, the cartographer
         </strong>
-        <small className="mt-1 block text-[10px] text-[#a7b59f]">Speak with your companion</small>
+        <small className="mt-1 block text-[10px] text-subtle">Speak with your companion</small>
       </span>
       <span className="ml-auto mr-[7px] text-gold">→</span>
     </button>

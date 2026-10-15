@@ -17,7 +17,7 @@ function NavButton({
 }) {
   return (
     <button
-      className={`relative flex h-full items-center gap-[9px] border-0 bg-transparent py-3 text-[10px] tablet:text-xs ${active ? 'text-gold after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:bg-gold' : 'text-[#a3afa7]'}`}
+      className={`relative flex h-full items-center gap-[9px] border-0 bg-transparent py-3 text-[10px] tablet:text-xs ${active ? 'text-gold after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:bg-gold' : 'text-subtle'}`}
       onClick={onClick}
     >
       <Icon name={icon} className="size-4 tablet:size-5" />

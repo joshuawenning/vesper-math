@@ -7,10 +7,11 @@ export function Eyebrow({
   ...props
 }: HTMLAttributes<HTMLDivElement> & {
   small?: boolean;
-  tone?: 'gold' | 'brown' | 'moss' | 'sage';
+  tone?: 'gold' | 'brown' | 'moss' | 'sage' | 'illuminated';
 }) {
   const colors = {
     gold: 'text-gold',
+    illuminated: 'text-[#ceb47b]',
     brown: 'text-[#80703e]',
     moss: 'text-[#718151]',
     sage: 'text-[#7c713f]',

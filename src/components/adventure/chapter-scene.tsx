@@ -23,7 +23,7 @@ export default function ChapterScene({
 }) {
   return (
     <section
-      className="relative border border-[#c5a66c77] bg-[#101a1a] p-[6px] shadow-[0_10px_40px_#0003]"
+      className="relative border border-[#c5a66c77] bg-frame p-[6px] shadow-[0_10px_40px_#0003]"
       aria-label={`Explore ${chapter.title}`}
     >
       <div className="relative h-[400px] overflow-hidden bg-[#30443c] after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(180deg,#071c1b22,transparent_40%,#081c1ad9)] tablet:h-[clamp(340px,38vw,520px)]">
@@ -50,7 +50,9 @@ export default function ChapterScene({
           );
         })}
         <div className="absolute bottom-[22px] left-[18px] z-1 tablet:bottom-6 tablet:left-[29px]">
-          <Eyebrow small>An adventure in curiosity</Eyebrow>
+          <Eyebrow small tone="illuminated">
+            An adventure in curiosity
+          </Eyebrow>
           <h1 className="my-2 max-w-[270px] font-story text-[35px] font-medium leading-[1.05] tracking-[-.5px] text-[#fff1d4] tablet:max-w-none tablet:text-[37px] desktop:text-[clamp(30px,3.8vw,53px)]">
             {chapter.title}
           </h1>

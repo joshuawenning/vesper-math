@@ -47,6 +47,16 @@ export default function Preferences({
   return (
     <>
       <PreferenceSelect
+        label="Appearance"
+        value={progress.theme}
+        onChange={(e) =>
+          onChange({ ...progress, theme: e.target.value === 'light' ? 'light' : 'dark' })
+        }
+      >
+        <option value="dark">Dark · After dusk</option>
+        <option value="light">Light · By daylight</option>
+      </PreferenceSelect>
+      <PreferenceSelect
         label="Math skill level"
         value={progress.skill}
         onChange={(e) => onChange({ ...progress, skill: cleanLevel(e.target.value) })}

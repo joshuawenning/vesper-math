@@ -79,7 +79,9 @@ export interface JourneyRecord {
   level: SkillLevel;
   at: number | null;
 }
+export type Theme = 'dark' | 'light';
 export interface Progress extends Journey {
+  theme: Theme;
   reading: Reading;
   support: Support;
   skill: SkillLevel;
