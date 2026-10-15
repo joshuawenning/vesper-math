@@ -1,9 +1,30 @@
+export type SkillLevel = 'foundations' | 'developing' | 'stretch';
+export type PersonaId =
+  | 'arcanist-female'
+  | 'arcanist-male'
+  | 'ranger-female'
+  | 'ranger-male'
+  | 'warden-female'
+  | 'warden-male';
+export interface PlayerProfile {
+  name: string;
+  persona: PersonaId;
+}
 export type Reading = 'rich' | 'plain';
 export type Support = 'guided' | 'light';
 export type Ending = 'beacon' | 'refuge';
 export type IconName =
   'star' | 'moon' | 'bridge' | 'book' | 'map' | 'settings' | 'leaf' | 'arrow' | 'pin' | 'check';
 export type Challenge =
+  | {
+      kind: 'number';
+      question: string;
+      answer: number;
+      unit?: string;
+      variants?: Partial<
+        Record<SkillLevel, { question: string; answer: number; hint: string[]; lesson: string }>
+      >;
+    }
   | { kind: 'sum'; planks: number[]; count: number; target: number; unit: string }
   | { kind: 'fraction'; start: number; target: number; denominator: number }
   | {
@@ -37,13 +58,36 @@ export interface Chapter {
   region: string;
   intro: Record<Reading, string>;
   encounters: Encounter[];
+  number?: number;
+  scene?: Artwork;
+  subtitle?: string;
+  heading?: string;
+  completion?: {
+    question: string;
+    choices: { id: Ending; title: string; description: string; result: string }[];
+  };
 }
-export interface Progress {
+export interface Journey {
   done: string[];
-  reading: Reading;
-  support: Support;
   started: boolean;
   ending: Ending | null;
+  levels: Record<string, SkillLevel>;
+}
+export interface JourneyRecord {
+  worldId: string;
+  encounterId: string;
+  level: SkillLevel;
+  at: number | null;
+}
+export interface Progress extends Journey {
+  reading: Reading;
+  support: Support;
+  skill: SkillLevel;
+  profile: PlayerProfile;
+  worldId: string;
+  journeys: Record<string, Journey>;
+  history: JourneyRecord[];
+  practice: { attempts: number; correct: number };
 }
 export type DialogView =
   | {
@@ -55,7 +99,8 @@ export type DialogView =
         | 'companion'
         | 'finale'
         | 'complete'
-        | 'restart';
+        | 'restart'
+        | 'profile';
     }
   | { kind: 'encounter' | 'discovery' | 'locked'; id: string };
 export type ChapterStatus = 'done' | 'current' | 'locked';

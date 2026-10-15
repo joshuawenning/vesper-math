@@ -1,6 +1,33 @@
 # Vesper Math
 
-> Vesper Math is an illustrated math adventure, built with Next.js. Exploration comes first; the opening chapter covers addition and measurement, fractions and equivalence, and division with two guardian tactics.
+> Vesper Math is an illustrated math adventure, built with Next.js. Exploration comes first; three playable chapters cover operations, fractions, measurements, percentages, geometry, and early equations.
+
+## The current adventure
+
+- **The Flooded Observatory:** three illustrated encounters in the Merewood.
+- **The Sleeping Foundry:** three encounters in the Ember Peaks.
+- **The Lanterns of Low Tide:** three encounters on the Tideglass Coast.
+- Three additional regions appear only as spoiler-light, non-playable previews.
+- Three independent math levels: Foundations, Growing fluency, and Further challenges. Narrative reading level and visual support remain separate.
+- Six predefined Arcanist, Ranger, and Warden personas (woman/man variants), a custom name, local discovery history, world endings, and practice totals.
+
+## Elian’s on-device tutor
+
+Open “Speak with Elian.” Ask for an explanation, enter a short calculation, or request a topic quiz. The guide supports arithmetic, fractions, measurements, percentages, basic geometry, and early equations. Example requests: `explain fractions`, `(12 + 6) / 3`, `20% of 80`, `x + 3 = 11`, and `quiz me on geometry`.
+
+This is a focused local tutoring engine, not a large language model. No API key, hosted inference, account, telemetry, or server conversation endpoint is involved. Chat is not persisted. Only answer-attempt and correct-answer totals are saved. The visible interface identifies these boundaries instead of implying unrestricted AI understanding.
+
+### Boundaries and performance
+
+- `lib/tutor.ts` is a pure adapter with explicit context, session, quiz, and response types. Extend topic explanations or quiz generators there; presentation stays in `components/tutor`.
+- `lib/math.ts` parses a small arithmetic grammar; it never uses `eval`, `Function`, HTML interpretation, property access, or external tools. Inputs, token count, nesting, numeric magnitude, and division by zero are bounded.
+- Chat messages are limited to 400 characters; only the latest 24 messages remain in memory. One quiz is active at a time. Hints and skips do not count as attempts. A correct answer closes the quiz so the same pending question cannot be scored again.
+- Names, personas, skill levels, world IDs, progress order, history IDs, and practice totals are validated when importing saves. The profile is local and user-owned, not an authenticated or tamper-proof account.
+- Tutor and profile interfaces are separate lazy chunks. New chapter content is imported only when selected. World metadata and teaser text remain small; no future encounter content is shipped for veiled regions.
+- One optimized portrait atlas serves all six personas. New scenery is delivered as separate responsive WebP assets.
+- Response headers prevent framing and object embedding, constrain base/form destinations, and disable unused camera, microphone, and location permissions. The static route remains prerendered.
+
+Any future cloud tutor should be a separate server adapter with explicit data disclosure, authentication, spending limits, cancellation/timeouts, and server-side validation; no such service is enabled by this version.
 
 ## Run
 
@@ -43,7 +70,7 @@ GitHub Actions runs all three checks on pushes and pull requests. The lockfile p
 | `public/art`                     | Separate optimized WebP artwork, including a distinct preferences scene            |
 | `tests`                          | Math validation and legacy/corrupt save handling                                   |
 
-To extend the adventure, add chapter data using the `Chapter` type. Existing challenge configurations accept different quantities without rewriting their React components. Add a new challenge kind and validator only when introducing a new interaction. The Merewood shell and ending are chapter-specific; a second chapter should add its own layout and save namespace. The visual fraction-pouring control currently describes quarters and should receive new fraction wording when introducing other denominators.
+To extend the adventure, add chapter data using the `Chapter` type. Existing challenge configurations accept different quantities without rewriting their React components. Add a new challenge kind and validator only when introducing a new interaction. The shared chapter shell accepts chapter artwork and completion choices. Fraction controls now adapt their labels and fill divisions to the selected denominator.
 
 ## Styling and component boundaries
 
@@ -63,17 +90,21 @@ The existing 750px and 1100px layout boundaries are preserved with the mobile-fi
 - `next/font` self-hosts the two font families with swap behavior; the browser makes no runtime Google Fonts requests.
 - No UI framework, animation library, game engine, analytics, account service, or database is required.
 
-The production HTML response after the Tailwind refactor is about 31 KB, compared with the previous 51.5 MB standalone HTML. This comparison measures HTML only, not total page transfer. JavaScript, fonts, and requested images are separate cached resources.
+The production HTML response with the current expansion is about 34 KB, compared with the previous 51.5 MB standalone HTML. This comparison measures HTML only, not total page transfer. JavaScript, fonts, and requested images are separate cached resources.
+
+## Adding a world
+
+Add lightweight metadata and encounter IDs to `src/content/worlds.ts`, add a typed `Chapter` module, and add its lazy loader. A chapter supplies narrative, artwork, challenges, and completion choices. Existing `number` challenges can supply per-level question/hint/answer variants without introducing a new renderer. `lib/difficulty.ts` adapts the original visual challenges. The world atlas and save validator use the registry.
 
 ## Saves and migration
 
-The existing `vesper-save-v1` shape and storage key remain compatible. Saves are validated before use; invalid or out-of-order data cannot unlock later encounters. Hints have no penalty.
+The existing `vesper-save-v1` storage key remains compatible through migration. Legacy discoveries become first-world records with no invented timestamps. Each world has its own progress, ending, and recorded learning levels. Switching worlds preserves the previous path. Resetting a chapter clears only that world’s discoveries and records while retaining the character and other journeys. Saves are validated before use; invalid or out-of-order data cannot unlock later encounters. Hints have no penalty.
 
 Browser storage is specific to an origin. A save from a `file:` URL or a different port/domain cannot automatically appear on the Vercel domain. Preferences supports export/import of a small JSON file for moving between origins and devices. Existing legacy saves already stored at the same origin load automatically. A hosting move is not cross-device synchronization.
 
 ## Art
 
-All included scenes are original AI-generated illustrations from the built-in image generation tool. `ART-PROMPTS.json` records the prompts. User-supplied reference images are not bundled. Preferences depicts a wayfarer's outfitting alcove; the journal retains its separate book-and-maps illustration.
+All included scenes are original AI-generated illustrations from the built-in image generation tool. `ART-PROMPTS.json` and `EXPANSION-ART-PROMPTS.json` record the prompts. User-supplied reference images are not bundled. Preferences depicts a wayfarer's outfitting alcove; the journal retains its separate book-and-maps illustration.
 
 ## References
 

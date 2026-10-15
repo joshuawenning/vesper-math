@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
-import { chapter } from '@/content/merewood';
 import { encounterStatus } from '@/lib/progress';
-import type { Progress } from '@/lib/types';
+import type { Chapter, Progress } from '@/lib/types';
 import Icon from '../icon';
 import { Eyebrow } from '../ui/typography';
 
@@ -13,22 +12,25 @@ const positions = [
 
 export default function ChapterScene({
   artwork,
+  chapter,
   progress,
   onEncounter,
 }: {
   artwork: ReactNode;
+  chapter: Chapter;
   progress: Progress;
   onEncounter: (id: string) => void;
 }) {
   return (
     <section
       className="relative border border-[#c5a66c77] bg-[#101a1a] p-[6px] shadow-[0_10px_40px_#0003]"
-      aria-label="Explore the flooded observatory"
+      aria-label={`Explore ${chapter.title}`}
     >
       <div className="relative h-[400px] overflow-hidden bg-[#30443c] after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(180deg,#071c1b22,transparent_40%,#081c1ad9)] tablet:h-[clamp(340px,38vw,520px)]">
         {artwork}
         <div className="absolute left-[18px] top-[17px] z-1 text-[8px] tracking-[2px] text-[#f2e8cf] [text-shadow:0_2px_7px_#000] tablet:left-[25px] tablet:top-[23px] tablet:text-[9px]">
-          <Icon name="pin" className="mr-[6px] h-5 w-[14px]" /> THE MEREWOOD · DUSKFALL
+          <Icon name="pin" className="mr-[6px] h-5 w-[14px]" /> {chapter.region.toUpperCase()} ·
+          DUSKFALL
         </div>
         {chapter.encounters.map((encounter, index) => {
           const status = encounterStatus(encounter.id, progress, chapter);
@@ -53,7 +55,7 @@ export default function ChapterScene({
             {chapter.title}
           </h1>
           <p className="max-w-[240px] font-story text-[15px] italic text-[#d2dbc7] tablet:max-w-none tablet:text-[17px]">
-            Some doors open only to understanding.
+            {chapter.subtitle ?? 'Some doors open only to understanding.'}
           </p>
         </div>
         <div className="absolute bottom-7 right-[23px] z-1 hidden border border-[#d3bb7b66] bg-[#152722bb] px-3 py-[9px] text-[9px] tracking-[1px] text-[#d2c493] desktop:block">

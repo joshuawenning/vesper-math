@@ -1,6 +1,5 @@
-import { chapter } from '@/content/merewood';
 import { encounterStatus } from '@/lib/progress';
-import type { ChapterStatus, Encounter, Progress } from '@/lib/types';
+import type { Chapter, ChapterStatus, Encounter, Progress } from '@/lib/types';
 import Icon from '../icon';
 
 function EncounterCard({
@@ -24,7 +23,7 @@ function EncounterCard({
             ? 'Discovered'
             : status === 'current'
               ? 'Explore'
-              : 'Beyond the crossing'}
+              : 'Further along the trail'}
         </small>
       </div>
       <h3 className="mt-2 mb-1 font-story text-[23px] font-medium tablet:mt-[13px] tablet:mb-[5px] tablet:text-xl desktop:text-[22px]">
@@ -39,9 +38,11 @@ function EncounterCard({
 }
 
 export default function EncounterGrid({
+  chapter,
   progress,
   onEncounter,
 }: {
+  chapter: Chapter;
   progress: Progress;
   onEncounter: (id: string) => void;
 }) {

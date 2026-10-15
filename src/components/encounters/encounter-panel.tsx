@@ -6,6 +6,7 @@ import SumChallenge from './sum-challenge';
 import FractionChallenge from './fraction-challenge';
 import DivisionChallenge from './division-challenge';
 import Icon from '../icon';
+import NumberChallenge from './number-challenge';
 import Button from '../ui/button';
 import { Narrative } from '../ui/typography';
 import { Actions, Feedback } from '../ui/panels';
@@ -33,11 +34,13 @@ export default function EncounterPanel({
     setFeedback('');
   }
   const action =
-    c.kind === 'sum'
-      ? 'Lay the crossing'
-      : c.kind === 'fraction'
-        ? 'Turn the mechanism'
-        : (c.routes.find((r) => r.id === answer.route)?.action ?? 'Cast the spell');
+    c.kind === 'number'
+      ? 'Put your idea to work'
+      : c.kind === 'sum'
+        ? 'Lay the crossing'
+        : c.kind === 'fraction'
+          ? 'Turn the mechanism'
+          : (c.routes.find((r) => r.id === answer.route)?.action ?? 'Cast the spell');
   return (
     <form
       onSubmit={(event) => {
@@ -47,6 +50,13 @@ export default function EncounterPanel({
       }}
     >
       <Narrative>{encounter[progress.reading]}</Narrative>
+      {c.kind === 'number' && (
+        <NumberChallenge
+          challenge={c}
+          value={answer.value ?? ''}
+          onChange={(value) => update({ value })}
+        />
+      )}
       {c.kind === 'sum' && (
         <SumChallenge
           challenge={c}

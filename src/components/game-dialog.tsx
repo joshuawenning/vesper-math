@@ -1,9 +1,12 @@
 'use client';
+import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
-import { chapter } from '@/content/merewood';
 import { artwork } from '@/content/artwork';
-import type { Artwork, DialogView, Ending, Progress } from '@/lib/types';
+import type { Artwork, Chapter, DialogView, Ending, Progress } from '@/lib/types';
 import Dialog from './dialog';
+import { levelEncounter } from '@/lib/difficulty';
+const TutorChat = dynamic(() => import('./tutor/tutor-chat'));
+const ProfileContent = dynamic(() => import('./profile/profile-content'));
 import Preferences from './preferences';
 import Button from './ui/button';
 import EncounterPanel from './encounters/encounter-panel';
@@ -11,14 +14,11 @@ import JournalContent from './dialogs/journal-content';
 import WorldMapContent from './dialogs/world-map-content';
 import DiscoveryContent from './dialogs/discovery-content';
 import { EndingChoice, ChapterComplete } from './dialogs/ending-content';
-import {
-  WelcomeContent,
-  CompanionContent,
-  LockedContent,
-  RestartContent,
-} from './dialogs/journey-content';
+import { WelcomeContent, RestartContent } from './dialogs/journey-content';
 
 interface Props {
+  chapter: Chapter;
+  onWorld: (id: string) => Promise<void>;
   view: DialogView;
   progress: Progress;
   onChange: (value: Progress) => void;
@@ -38,20 +38,29 @@ interface DialogDefinition {
   artwork: Artwork;
 }
 const definitions = {
-  welcome: { title: 'Your journey, your pace', label: 'Welcome to Vesper', artwork: artwork.elian },
+  welcome: {
+    title: 'Your journey, your pace',
+    label: 'Welcome to Vesper Math',
+    artwork: artwork.elian,
+  },
   settings: { title: 'Make yourself at home', label: 'Preferences', artwork: artwork.preferences },
   restart: { title: 'Begin again?', label: 'A new beginning', artwork: artwork.preferences },
   companion: { title: 'A word with Elian', label: 'Elian · Cartographer', artwork: artwork.elian },
-  locked: { title: 'A path yet to open', label: chapter.title, artwork: artwork.observatory },
-  map: { title: 'The Merewood', label: 'Your chart · Chapter I', artwork: artwork.observatory },
+  profile: { title: 'Your wayfarer', label: 'A story of your own', artwork: artwork.preferences },
+  locked: {
+    title: 'A path yet to open',
+    label: 'A trail yet to open',
+    artwork: artwork.observatory,
+  },
+  map: { title: 'The world atlas', label: 'Paths ahead', artwork: artwork.observatory },
   journal: {
     title: 'The wayfarer’s journal',
     label: 'Collected discoveries',
     artwork: artwork.journal,
   },
   finale: {
-    title: 'A light for the living',
-    label: 'Chapter I · The final choice',
+    title: 'A future of your making',
+    label: 'The final choice',
     artwork: artwork.observatory,
   },
   complete: {
@@ -62,6 +71,8 @@ const definitions = {
 } satisfies Record<string, DialogDefinition>;
 
 export default function GameDialog({
+  chapter,
+  onWorld,
   view,
   progress,
   onChange,
@@ -75,22 +86,47 @@ export default function GameDialog({
   onRestart,
 }: Props) {
   const next = chapter.encounters.find((e) => !progress.done.includes(e.id));
-  const encounter = 'id' in view ? chapter.encounters.find((e) => e.id === view.id) : undefined;
-  const definition =
+  const original = 'id' in view ? chapter.encounters.find((e) => e.id === view.id) : undefined;
+  const encounter = original
+    ? levelEncounter(
+        original,
+        progress.done.includes(original.id)
+          ? (progress.levels[original.id] ?? 'foundations')
+          : progress.skill,
+      )
+    : undefined;
+  let definition =
     view.kind === 'encounter' || view.kind === 'discovery'
       ? encounter
         ? {
             title: encounter.title,
-            label: view.kind === 'encounter' ? encounter.skill : 'The Merewood · Discovery',
+            label: view.kind === 'encounter' ? encounter.skill : `${chapter.region} · Discovery`,
             artwork: encounter.artwork,
           }
         : definitions.locked
       : definitions[view.kind];
+  if (view.kind === 'locked' || view.kind === 'finale' || view.kind === 'complete')
+    definition = {
+      ...definition,
+      artwork: chapter.scene ?? artwork.observatory,
+      label: `Chapter ${chapter.number ?? 1} · ${chapter.region}`,
+    };
   let content: ReactNode;
 
   switch (view.kind) {
     case 'welcome':
-      content = <WelcomeContent progress={progress} onChange={onChange} onStart={onStart} />;
+      content = (
+        <>
+          <WelcomeContent progress={progress} onChange={onChange} onStart={onStart} />
+          <Button
+            variant="secondary"
+            className="mt-3"
+            onClick={() => onNavigate({ kind: 'profile' })}
+          >
+            Choose your character
+          </Button>
+        </>
+      );
       break;
     case 'settings':
       content = (
@@ -105,11 +141,22 @@ export default function GameDialog({
     case 'restart':
       content = <RestartContent onRestart={onRestart} onDismiss={onDismiss} />;
       break;
+    case 'profile':
+      content = <ProfileContent progress={progress} onChange={onChange} onDismiss={onDismiss} />;
+      break;
     case 'companion':
-      content = <CompanionContent next={next} onContinue={onContinue} />;
+      content = <TutorChat progress={progress} onChange={onChange} />;
       break;
     case 'locked':
-      content = <LockedContent id={view.id} onContinue={onContinue} />;
+      content = (
+        <>
+          <p className="mb-5 font-story text-xl leading-[1.5]">
+            Follow the earlier trail before reaching this place. Your next destination is{' '}
+            {next?.title ?? chapter.title}.
+          </p>
+          <Button onClick={onContinue}>Follow the path →</Button>
+        </>
+      );
       break;
     case 'encounter':
       if (encounter)
@@ -132,7 +179,7 @@ export default function GameDialog({
                 ? 'Continue exploring'
                 : progress.ending
                   ? 'Read your journal'
-                  : 'Decide the observatory’s future'
+                  : 'Decide this place’s future'
             }
             onNext={
               next ? onDismiss : () => onNavigate({ kind: progress.ending ? 'journal' : 'finale' })
@@ -142,17 +189,25 @@ export default function GameDialog({
         );
       break;
     case 'map':
-      content = <WorldMapContent progress={progress} onEncounter={onEncounter} />;
+      content = (
+        <WorldMapContent
+          chapter={chapter}
+          progress={progress}
+          onEncounter={onEncounter}
+          onWorld={onWorld}
+        />
+      );
       break;
     case 'journal':
-      content = <JournalContent progress={progress} />;
+      content = <JournalContent chapter={chapter} progress={progress} />;
       break;
     case 'finale':
-      content = <EndingChoice onEnding={onEnding} />;
+      content = <EndingChoice chapter={chapter} onEnding={onEnding} />;
       break;
     case 'complete':
       content = (
         <ChapterComplete
+          chapter={chapter}
           ending={progress.ending}
           onJournal={() => onNavigate({ kind: 'journal' })}
         />

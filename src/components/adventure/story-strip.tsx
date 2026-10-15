@@ -1,22 +1,24 @@
-import { chapter } from '@/content/merewood';
 import { endingText } from '@/lib/progress';
-import type { Progress } from '@/lib/types';
+import type { Chapter, Progress } from '@/lib/types';
 import Button from '../ui/button';
 import Icon from '../icon';
 
 export default function StoryStrip({
+  chapter,
   progress,
   onContinue,
 }: {
+  chapter: Chapter;
   progress: Progress;
   onContinue: () => void;
 }) {
   const next = chapter.encounters.find((e) => !progress.done.includes(e.id));
   const text = progress.ending
-    ? endingText(progress.ending)
+    ? endingText(progress.ending, chapter)
     : next
       ? chapter.intro[progress.reading]
-      : 'The star chart is yours. One decision remains: what will you do with the observatory’s light?';
+      : (chapter.completion?.question ??
+        'The star chart is yours. One decision remains: what will you do with the observatory’s light?');
   const action = progress.ending
     ? 'Read your discoveries'
     : next

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
-import { chapter } from '@/content/merewood';
 import { endingText } from '@/lib/progress';
-import type { Progress } from '@/lib/types';
+import { levelEncounter } from '@/lib/difficulty';
+import type { Chapter, Progress } from '@/lib/types';
 import { Muted, Narrative, Tag } from '../ui/typography';
 
 function JournalEntry({
@@ -22,13 +22,22 @@ function JournalEntry({
   );
 }
 
-export default function JournalContent({ progress }: { progress: Progress }) {
+export default function JournalContent({
+  chapter,
+  progress,
+}: {
+  chapter: Chapter;
+  progress: Progress;
+}) {
   return (
     <>
       <Narrative>A record of places opened, ideas understood, and things worth keeping.</Narrative>
       {progress.done.length ? (
         chapter.encounters
           .filter((e) => progress.done.includes(e.id))
+          .map((original) =>
+            levelEncounter(original, progress.levels[original.id] ?? 'foundations'),
+          )
           .map((e) => (
             <JournalEntry key={e.id} label={`${e.skill} · ${e.reward}`} title={e.title}>
               {e.lesson}
@@ -43,13 +52,16 @@ export default function JournalContent({ progress }: { progress: Progress }) {
         <>
           <JournalEntry
             label="Chapter complete"
-            title={progress.ending === 'beacon' ? 'A beacon on the mere' : 'A refuge in the wood'}
+            title={
+              chapter.completion?.choices.find((c) => c.id === progress.ending)?.title ??
+              (progress.ending === 'beacon' ? 'A beacon on the mere' : 'A refuge in the wood')
+            }
           >
-            {endingText(progress.ending)}
+            {endingText(progress.ending, chapter)}
           </JournalEntry>
           <Muted>
-            This is the end of the first playable chapter. You can revisit your discoveries on the
-            scene, or start a fresh journey in Settings.
+            Your chapter is complete. Visit the world atlas for another adventure, revisit your
+            discoveries, or start a fresh journey in Settings.
           </Muted>
         </>
       )}

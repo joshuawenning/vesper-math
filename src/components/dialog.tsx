@@ -59,7 +59,7 @@ export default function Dialog({
         onDismiss();
       }}
     >
-      <div className="relative border-b border-[#29382c22] px-[23px] pt-6 pb-[18px] tablet:px-8 tablet:pt-[29px] tablet:pb-[19px]">
+      <div className="sticky top-0 z-10 bg-paper border-b border-[#29382c22] px-[23px] pt-6 pb-[18px] tablet:px-8 tablet:pt-[29px] tablet:pb-[19px]">
         <Eyebrow tone="brown">{label}</Eyebrow>
         <h2
           id="dialog-title"

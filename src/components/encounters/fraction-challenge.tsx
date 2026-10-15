@@ -44,24 +44,27 @@ export default function FractionChallenge({
             <Button
               variant="secondary"
               disabled={fill === 0}
-              aria-label="Remove one quarter"
+              aria-label={challenge.denominator === 4 ? 'Remove one quarter' : 'Remove one measure'}
               onClick={() => onChange(fill - 1)}
             >
-              − ¼
+              − 1/{challenge.denominator}
             </Button>
             <Button
               variant="secondary"
               disabled={fill === challenge.denominator}
-              aria-label="Add one quarter"
+              aria-label={challenge.denominator === 4 ? 'Add one quarter' : 'Add one measure'}
               onClick={() => onChange(fill + 1)}
             >
-              + ¼
+              + 1/{challenge.denominator}
             </Button>
           </Actions>
         </div>
       </div>
       {support === 'guided' && (
-        <Meter>Four equal parts make one whole. The gold line marks ¾.</Meter>
+        <Meter>
+          {challenge.denominator} equal parts make one whole. The gold line marks {challenge.target}
+          /{challenge.denominator}.
+        </Meter>
       )}
     </Toolbox>
   );

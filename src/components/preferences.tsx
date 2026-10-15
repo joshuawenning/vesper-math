@@ -1,6 +1,8 @@
 'use client';
 import { useRef, useState } from 'react';
 import { chapter } from '@/content/merewood';
+import { skillLevels } from '@/content/worlds';
+import { cleanLevel } from '@/lib/progress';
 import { normalizeProgress } from '@/lib/progress';
 import type { Progress } from '@/lib/types';
 import Button from './ui/button';
@@ -23,7 +25,7 @@ export default function Preferences({
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement('a');
     anchor.href = url;
-    anchor.download = 'vesper-journey.json';
+    anchor.download = 'vesper-math-journey.json';
     anchor.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     setNotice('Your journey has been exported. Import this file when playing at another address.');
@@ -31,10 +33,10 @@ export default function Preferences({
   async function importSave(file?: File) {
     if (!file) return;
     try {
-      if (file.size > 65536) throw new Error('This file is too large to be a Vesper save.');
+      if (file.size > 65536) throw new Error('This file is too large to be a Vesper Math save.');
       const raw: unknown = JSON.parse(await file.text());
       if (!raw || typeof raw !== 'object' || !('done' in raw) || !Array.isArray(raw.done))
-        throw new Error('Choose a Vesper journey JSON file.');
+        throw new Error('Choose a Vesper Math journey JSON file.');
       onChange(normalizeProgress(raw, chapter));
       setNotice('Journey imported. Your discoveries and preferences have been restored.');
     } catch (error) {
@@ -44,6 +46,21 @@ export default function Preferences({
   }
   return (
     <>
+      <PreferenceSelect
+        label="Math skill level"
+        value={progress.skill}
+        onChange={(e) => onChange({ ...progress, skill: cleanLevel(e.target.value) })}
+      >
+        {skillLevels.map((level) => (
+          <option key={level.id} value={level.id}>
+            {level.label}
+          </option>
+        ))}
+      </PreferenceSelect>
+      <Muted>
+        {skillLevels.find((level) => level.id === progress.skill)?.description} Your choice changes
+        new encounters and Elian’s quizzes. Earlier discoveries keep their original record.
+      </Muted>
       <PreferenceSelect
         label="Storytelling"
         value={progress.reading}
@@ -86,7 +103,7 @@ export default function Preferences({
               ref={input}
               type="file"
               accept=".json,application/json"
-              aria-label="Import a Vesper journey"
+              aria-label="Import a Vesper Math journey"
               onChange={(e) => void importSave(e.target.files?.[0])}
             />
           </div>

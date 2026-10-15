@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 import Icon from './icon';
+import CharacterPortrait from './profile/character-portrait';
+import { getPersona } from '@/content/personas';
 import type { DialogView, IconName, Progress } from '@/lib/types';
 
 function NavButton({
@@ -43,12 +45,9 @@ export default function GameHeader({
       <div className="flex items-center gap-[14px] py-[15px] text-gold tablet:py-0">
         <Icon name="star" className="h-[43px] w-7 tablet:w-[37px]" />
         <div>
-          <div className="font-story text-[31px] font-semibold tracking-[2px] tablet:text-[37px] tablet:tracking-[3px]">
-            Vesper
+          <div className="whitespace-nowrap font-story text-[31px] font-semibold tracking-[2px] tablet:text-[37px] tablet:tracking-[3px]">
+            Vesper Math
           </div>
-          <small className="block text-[6px] tracking-[3.2px] text-[#a9b3a5] tablet:text-[8px]">
-            A JOURNEY OF UNDERSTANDING
-          </small>
         </div>
       </div>
       <nav
@@ -67,17 +66,24 @@ export default function GameHeader({
           </NavButton>
         ))}
       </nav>
-      <div className="ml-auto flex items-center gap-3 text-xs tablet:ml-0">
-        <div className="grid size-[35px] place-items-center rounded-full border border-[#9f8b57] bg-[#34433b] text-gold">
-          <Icon name="star" />
-        </div>
-        <div className="hidden desktop:block">
-          Wayfarer
+      <button
+        type="button"
+        aria-label="Your character profile"
+        className="ml-auto flex items-center gap-3 text-left text-xs tablet:ml-0"
+        onClick={() => open({ kind: 'profile' })}
+      >
+        <CharacterPortrait
+          persona={progress.profile.persona}
+          className="size-[38px] overflow-hidden rounded-full border border-[#9f8b57]"
+        />
+        <span className="hidden desktop:block">
+          {progress.profile.name || 'Wayfarer'}
           <small className="mt-[3px] block text-[10px] text-muted">
-            {progress.ending ? 'Keeper of the mere' : 'Chapter I · The awakening'}
+            {getPersona(progress.profile.persona).name} ·{' '}
+            {progress.ending ? 'Chapter complete' : 'On the road'}
           </small>
-        </div>
-      </div>
+        </span>
+      </button>
     </header>
   );
 }

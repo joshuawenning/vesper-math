@@ -1,4 +1,4 @@
-import type { Ending } from '@/lib/types';
+import type { Chapter, Ending } from '@/lib/types';
 import { endingText } from '@/lib/progress';
 import Icon from '../icon';
 import Button from '../ui/button';
@@ -18,15 +18,27 @@ const choices: { ending: Ending; title: string; description: string }[] = [
   },
 ];
 
-export function EndingChoice({ onEnding }: { onEnding: (ending: Ending) => void }) {
+export function EndingChoice({
+  chapter,
+  onEnding,
+}: {
+  chapter: Chapter;
+  onEnding: (ending: Ending) => void;
+}) {
   return (
     <>
       <Narrative>
-        The chart reveals safe paths through the mere. Elian looks toward the darkening shore. “The
-        observatory is awake. What shall its light become?”
+        {chapter.completion?.question ??
+          'The chart reveals safe paths through the mere. Elian looks toward the darkening shore. “The observatory is awake. What shall its light become?”'}
       </Narrative>
       <div className="grid gap-2.5">
-        {choices.map((choice) => (
+        {(
+          chapter.completion?.choices.map((c) => ({
+            ending: c.id,
+            title: c.title,
+            description: c.description,
+          })) ?? choices
+        ).map((choice) => (
           <button
             key={choice.ending}
             className="border border-[#7e886b80] bg-transparent px-[15px] py-3 text-left font-story text-xl leading-[1.4] text-[#384a3b] hover:bg-[#c4c6ad55]"
@@ -45,22 +57,21 @@ export function EndingChoice({ onEnding }: { onEnding: (ending: Ending) => void 
 }
 
 export function ChapterComplete({
+  chapter,
   ending,
   onJournal,
 }: {
+  chapter: Chapter;
   ending: Ending | null;
   onJournal: () => void;
 }) {
   return (
     <>
-      <Narrative>{endingText(ending)}</Narrative>
+      <Narrative>{endingText(ending, chapter)}</Narrative>
       <Reward>
-        <Icon name="star" /> &nbsp; Keeper of the mere
+        <Icon name="star" /> &nbsp; Keeper of the path
       </Reward>
-      <Muted>
-        Three discoveries. A crossing restored. An ancient keeper at peace. Your first chapter is
-        complete.
-      </Muted>
+      <Muted>Your discoveries are yours to keep. Another path is waiting in the world atlas.</Muted>
       <Button onClick={onJournal}>
         Open your journal
         <Icon name="book" />

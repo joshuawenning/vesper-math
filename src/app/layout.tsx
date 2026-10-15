@@ -11,9 +11,9 @@ const literary = Cormorant_Garamond({
 const ui = DM_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-ui' });
 
 export const metadata: Metadata = {
-  title: 'Vesper · The Flooded Observatory',
+  title: 'Vesper Math · The Flooded Observatory',
   description:
-    'An illustrated adventure where curiosity opens the way. Explore the Flooded Observatory through arithmetic, fractions, and discovery.',
+    'A personal, illustrated math adventure with three worlds to explore, a private on-device tutor, and room to learn at your own pace.',
 };
 export const viewport: Viewport = { themeColor: '#172323' };
 

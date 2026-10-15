@@ -1,8 +1,13 @@
+import { calculate, approximatelyEqual } from './math';
 import type { Challenge } from './types';
 
 export type Answer = { selected?: number[]; fill?: number; route?: string; value?: string };
 export function validateAnswer(challenge: Challenge, answer: Answer): boolean {
   switch (challenge.kind) {
+    case 'number': {
+      const value = calculate(answer.value ?? '');
+      return value !== null && approximatelyEqual(value, challenge.answer);
+    }
     case 'sum': {
       const selected = answer.selected ?? [];
       return (
@@ -28,13 +33,15 @@ export function validateAnswer(challenge: Challenge, answer: Answer): boolean {
 }
 
 export function answerFeedback(challenge: Challenge, answer: Answer): string {
+  if (challenge.kind === 'number')
+    return 'That does not quite fit yet. Try working through one step at a time, or ask Elian for a hint. Fractions such as 1/2 are welcome.';
   if (challenge.kind === 'sum') {
     const selected = answer.selected ?? [];
     return `You have ${selected.length} planks spanning ${selected.reduce((a, b) => a + b, 0)} ${challenge.unit}. The supports need exactly ${challenge.count} planks and a total of ${challenge.target} ${challenge.unit}.`;
   }
   if (challenge.kind === 'fraction') {
     const fill = answer.fill ?? challenge.start;
-    return `The water is at ${fill}/${challenge.denominator}. ${fill < challenge.target ? 'Add' : 'Remove'} quarter-measures to reach ${challenge.target}/${challenge.denominator}.`;
+    return `The water is at ${fill}/${challenge.denominator}. ${fill < challenge.target ? 'Add' : 'Remove'} equal measures to reach ${challenge.target}/${challenge.denominator}.`;
   }
   const route = challenge.routes.find((r) => r.id === answer.route);
   if (!answer.value?.trim() || !route || !Number.isFinite(Number(answer.value)))

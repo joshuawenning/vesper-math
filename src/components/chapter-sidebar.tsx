@@ -1,10 +1,9 @@
-import { chapter } from '@/content/merewood';
 import { encounterStatus } from '@/lib/progress';
-import type { Progress } from '@/lib/types';
+import type { Chapter, Progress } from '@/lib/types';
 import { CompanionCard } from './adventure/companion-card';
 import { Eyebrow } from './ui/typography';
 
-function ChapterProgress({ progress }: { progress: Progress }) {
+function ChapterProgress({ progress, chapter }: { progress: Progress; chapter: Chapter }) {
   return (
     <>
       <div
@@ -62,27 +61,27 @@ function ChapterProgress({ progress }: { progress: Progress }) {
 }
 
 export default function ChapterSidebar({
+  chapter,
   progress,
   onCompanion,
 }: {
+  chapter: Chapter;
   progress: Progress;
   onCompanion: () => void;
 }) {
   return (
     <aside className="hidden pt-[5px] tablet:block">
       <Eyebrow className="flex items-center gap-2 before:h-px before:w-[23px] before:bg-gold">
-        Chapter one
+        Chapter {chapter.number ?? 1}
       </Eyebrow>
       <h2 className="mt-[14px] mb-3 font-story text-[28px] font-medium leading-[1.1]">
-        The light
-        <br />
-        across the mere
+        {chapter.heading ?? 'The light across the mere'}
       </h2>
       <p className="my-4 font-story text-base leading-[1.5] text-[#9eada2]">
         A forgotten place.
         <br />A small beginning.
       </p>
-      <ChapterProgress progress={progress} />
+      <ChapterProgress chapter={chapter} progress={progress} />
       <CompanionCard
         complete={progress.done.length === chapter.encounters.length}
         onSpeak={onCompanion}
