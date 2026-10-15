@@ -4,6 +4,7 @@ import { topics, tutorReply, type TutorSession } from '@/lib/tutor';
 import { skillLevels } from '@/content/worlds';
 import type { Progress } from '@/lib/types';
 import Button from '../ui/button';
+import ReadAloud from '../accessibility/read-aloud';
 import { Muted } from '../ui/typography';
 
 interface Message {
@@ -94,6 +95,11 @@ export default function TutorChat({
           </div>
         ))}
       </div>
+      <ReadAloud
+        text={messages.filter((m) => m.role === 'elian').at(-1)?.text ?? ''}
+        settings={progress.speech}
+        label="Read Elian’s reply aloud"
+      />
       <div className="mb-4 flex flex-wrap gap-2">
         {topics.map((topic) => (
           <button

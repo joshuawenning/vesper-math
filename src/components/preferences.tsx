@@ -6,6 +6,7 @@ import { cleanLevel } from '@/lib/progress';
 import { normalizeProgress } from '@/lib/progress';
 import type { Progress } from '@/lib/types';
 import Button from './ui/button';
+import SpeechPreferences from './accessibility/speech-preferences';
 import PreferenceSelect from './ui/preference-select';
 import { Muted } from './ui/typography';
 
@@ -72,6 +73,10 @@ export default function Preferences({
           Text also follows your browser’s zoom and font settings. Animations respect your device’s
           reduced-motion preference.
         </Muted>
+        <SpeechPreferences
+          value={progress.speech}
+          onChange={(speech) => onChange({ ...progress, speech })}
+        />
         <details className="my-4 text-sm leading-relaxed">
           <summary className="cursor-pointer py-3">Keyboard controls</summary>
           <p>

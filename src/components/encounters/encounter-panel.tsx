@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import type { Encounter, Progress } from '@/lib/types';
 import { validateAnswer, answerFeedback, type Answer } from '@/lib/challenges';
+import ReadAloud from '../accessibility/read-aloud';
 import SumChallenge from './sum-challenge';
 import FractionChallenge from './fraction-challenge';
 import DivisionChallenge from './division-challenge';
@@ -49,6 +50,10 @@ export default function EncounterPanel({
         else setFeedback(answerFeedback(c, answer));
       }}
     >
+      <ReadAloud
+        settings={progress.speech}
+        text={`${encounter.title}. ${encounter[progress.reading]}. ${c.kind === 'number' ? c.question : c.kind === 'sum' ? `Choose ${c.count} planks totaling ${c.target} ${c.unit}. Available lengths: ${c.planks.join(', ')}.` : c.kind === 'fraction' ? `The cistern starts at ${c.start}/${c.denominator}. Reach ${c.target}/${c.denominator} by adding or removing measures.` : `${c.total} sparks. ${c.routes.find((r) => r.id === answer.route)?.label}. ${c.routes.find((r) => r.id === answer.route)?.question}`}${hint > 0 ? ` Hint: ${encounter.hint[hint - 1]}` : ''}`}
+      />
       <Narrative>{encounter[progress.reading]}</Narrative>
       {c.kind === 'number' && (
         <NumberChallenge

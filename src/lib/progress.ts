@@ -15,6 +15,7 @@ export const initialProgress: Progress = {
   ...emptyJourney(),
   theme: 'dark',
   textSize: 'standard',
+  speech: { enabled: false, voice: '', rate: 1 },
   reading: 'rich',
   support: 'guided',
   skill: 'foundations',
@@ -52,6 +53,7 @@ function normalizeJourney(value: unknown, ids: readonly string[]): Journey {
 }
 export function normalizeProgress(value: unknown, _legacyChapter?: Chapter): Progress {
   const raw = object(value),
+    speech = object(raw.speech),
     profile = object(raw.profile),
     practice = object(raw.practice);
   const worldId = getWorld(typeof raw.worldId === 'string' ? raw.worldId : '')?.playable
@@ -118,6 +120,11 @@ export function normalizeProgress(value: unknown, _legacyChapter?: Chapter): Pro
     history: history.slice(-128),
     theme: raw.theme === 'light' ? 'light' : 'dark',
     textSize: raw.textSize === 'large' ? 'large' : 'standard',
+    speech: {
+      enabled: speech.enabled === true,
+      voice: typeof speech.voice === 'string' ? speech.voice.slice(0, 256) : '',
+      rate: speech.rate === 0.8 || speech.rate === 1.15 ? speech.rate : 1,
+    },
     reading: raw.reading === 'plain' ? 'plain' : 'rich',
     support: raw.support === 'light' ? 'light' : 'guided',
     skill: cleanLevel(raw.skill),

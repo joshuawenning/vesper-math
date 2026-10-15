@@ -104,6 +104,7 @@ export type Theme = 'dark' | 'light';
 export interface Progress extends Journey {
   theme: Theme;
   textSize: 'standard' | 'large';
+  speech: { enabled: boolean; voice: string; rate: number };
   reading: Reading;
   support: Support;
   skill: SkillLevel;

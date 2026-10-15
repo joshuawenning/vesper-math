@@ -60,7 +60,9 @@
   }
 
   /* iOS focuses controls smaller than 16px by zooming the page. Keep user zoom available. */
-  input, select, textarea {
+  input,
+  select,
+  textarea {
     font-size: max(1rem, 16px);
   }
   button {
