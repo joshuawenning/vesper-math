@@ -68,7 +68,18 @@ export default function Preferences({
           <option value="standard">Standard</option>
           <option value="large">Larger · 125%</option>
         </PreferenceSelect>
-        <Muted>Text also follows your browser’s zoom and font settings.</Muted>
+        <Muted>
+          Text also follows your browser’s zoom and font settings. Animations respect your device’s
+          reduced-motion preference.
+        </Muted>
+        <details className="my-4 text-sm leading-relaxed">
+          <summary className="cursor-pointer py-3">Keyboard controls</summary>
+          <p>
+            Use Tab and Shift+Tab to move between controls, Enter or Space to activate a button, and
+            Escape to close a window. Focus stays inside an open window and returns to where you
+            opened it. The first Tab on the page offers “Skip to adventure.”
+          </p>
+        </details>
       </fieldset>
       <PreferenceSelect
         label="Math skill level"

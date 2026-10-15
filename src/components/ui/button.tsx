@@ -21,7 +21,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`${variants[variant]} disabled:opacity-45 ${className}`}
+      className={`min-h-11 leading-[1.5] ${variants[variant]} disabled:opacity-45 ${className}`}
       {...props}
     />
   );

@@ -72,6 +72,7 @@ export default function TutorChat({
       <div
         ref={log}
         role="log"
+        tabIndex={0}
         aria-label="Conversation with Elian"
         aria-live="polite"
         aria-relevant="additions"

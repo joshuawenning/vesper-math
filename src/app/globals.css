@@ -66,9 +66,17 @@
     cursor: default;
   }
 
-  :is(button, a, input, select):focus-visible {
-    outline: 2px solid #d6b570;
-    outline-offset: 4px;
+  :is(button, a, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px #192625;
+  }
+  dialog {
+    color-scheme: light;
+    scroll-padding-block: 9rem 2rem;
+  }
+  :is(button, a, input, select, textarea, summary) {
+    scroll-margin-block: 9rem 2rem;
   }
 
   @media (prefers-reduced-motion: reduce) {

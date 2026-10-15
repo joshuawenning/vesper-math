@@ -98,6 +98,7 @@ export default function EncounterPanel({
         </Button>
         <Button
           variant="secondary"
+          disabled={hint === encounter.hint.length}
           onClick={() => setHint((n) => Math.min(encounter.hint.length, n + 1))}
         >
           {hint === encounter.hint.length
