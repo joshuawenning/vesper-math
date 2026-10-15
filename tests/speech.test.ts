@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { spokenMath } from '../src/lib/speech';
+import { spokenMath, narrationVoices, narrationVoiceLabel } from '../src/lib/speech';
 import { normalizeProgress } from '../src/lib/progress';
 
 test('speech makes fractions and mathematical symbols speakable without evaluating text', () => {
@@ -19,4 +19,30 @@ test('old and imported saves safely default accessibility settings', () => {
   assert.equal(save.speech.rate, 1);
   assert.equal(save.speech.voice.length, 256);
   assert.equal(normalizeProgress(JSON.parse(JSON.stringify(save))).speech.enabled, true);
+});
+
+test('narration voices exclude novelty and remote voices, deduplicate accents, and prefer US English', () => {
+  const voice = (name: string, lang = 'en-US', localService = true) => ({
+    name,
+    lang,
+    voiceURI: name,
+    localService,
+  });
+  const voices = narrationVoices([
+    voice('Boing'),
+    voice('Bahh'),
+    voice('Zarvox'),
+    voice('Fred'),
+    voice('Daniel', 'en-GB'),
+    voice('Karen', 'en-AU'),
+    voice('Samantha'),
+    voice('Cloud', 'en-US', false),
+    voice('Thomas', 'fr-FR'),
+  ]);
+  assert.deepEqual(
+    voices.map((v) => v.name),
+    ['Samantha', 'Daniel', 'Karen'],
+  );
+  assert.equal(narrationVoiceLabel(voices[0]), 'United States · Samantha');
+  assert.deepEqual(narrationVoices([voice('Bad News')]), []);
 });

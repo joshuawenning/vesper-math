@@ -1,4 +1,5 @@
 'use client';
+import { narrationVoiceLabel } from '@/lib/speech';
 import type { Progress } from '@/lib/types';
 import PreferenceSelect from '../ui/preference-select';
 import Button from '../ui/button';
@@ -33,7 +34,7 @@ export default function SpeechPreferences({
             <option value="">Default on-device voice</option>
             {speech.voices.map((v) => (
               <option key={v.voiceURI} value={v.voiceURI}>
-                {v.name} ({v.lang})
+                {narrationVoiceLabel(v)}
               </option>
             ))}
           </PreferenceSelect>
@@ -70,8 +71,9 @@ export default function SpeechPreferences({
         </>
       )}
       <Muted>
-        Reading starts only when you press a read button. Only on-device English voices are listed.
-        No audio is sent to a server by Vesper Math. Your device supplies the available voices.
+        Reading starts only when you press a read button. Only natural on-device English narrators
+        are listed, with one voice per available accent. No audio is sent to a server by Vesper
+        Math. Your device supplies the available voices.
       </Muted>
     </>
   );

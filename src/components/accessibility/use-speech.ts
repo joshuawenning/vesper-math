@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import type { Progress } from '@/lib/types';
-import { spokenMath } from '@/lib/speech';
+import { spokenMath, narrationVoices } from '@/lib/speech';
 
 export function useSpeech(settings: Progress['speech']) {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -22,8 +22,7 @@ export function useSpeech(settings: Progress['speech']) {
     if (!('speechSynthesis' in window)) return;
     setAvailable(true);
     const synth = window.speechSynthesis;
-    const update = () =>
-      setVoices(synth.getVoices().filter((v) => v.localService && /^en(?:-|_)/i.test(v.lang)));
+    const update = () => setVoices(narrationVoices(synth.getVoices()));
     update();
     synth.addEventListener('voiceschanged', update);
     return () => {
