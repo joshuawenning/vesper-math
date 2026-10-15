@@ -15,7 +15,9 @@ export function CompanionCard({ complete, onSpeak }: { complete: boolean; onSpea
         sizes="208px"
       />
       <Eyebrow small>Your companion</Eyebrow>
-      <h3 className="mt-2.5 font-story text-[1.375rem] font-medium">Elian, the cartographer</h3>
+      <h3 className="mt-2.5 font-story text-[1.375rem] font-medium leading-[1.15]">
+        Elian, the cartographer
+      </h3>
       <p className="my-[9px] font-story text-[0.9375rem] italic leading-[1.5] text-subtle">
         “
         {complete
@@ -45,7 +47,7 @@ export function MobileCompanionCard({ onSpeak }: { onSpeak: () => void }) {
         sizes="53px"
       />
       <span>
-        <strong className="block font-story text-[1.3125rem] font-medium text-body">
+        <strong className="block font-story text-[1.3125rem] font-medium leading-[1.15] text-body">
           Elian, the cartographer
         </strong>
         <small className="mt-1 block text-[0.75rem] text-subtle">Speak with your companion</small>

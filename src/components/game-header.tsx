@@ -48,7 +48,7 @@ export default function GameHeader({
       >
         <Icon name="star" className="h-[43px] w-7 tablet:w-[37px]" />
         <div>
-          <div className="whitespace-nowrap font-story text-[clamp(1.5rem,5vw,2.3125rem)] font-semibold tracking-[2px]">
+          <div className="whitespace-nowrap font-story text-[clamp(1.5rem,5vw,2.3125rem)] font-semibold">
             Vesper Math
           </div>
         </div>
