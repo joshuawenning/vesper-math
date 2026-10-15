@@ -112,3 +112,9 @@ export async function loadChapter(id: string): Promise<Chapter> {
       throw new Error('This world is still beyond the veil.');
   }
 }
+
+export function nextPlayableWorld(id: string) {
+  const playable = worlds.filter((world) => world.playable);
+  const index = playable.findIndex((world) => world.id === id);
+  return index < 0 ? undefined : playable[index + 1];
+}

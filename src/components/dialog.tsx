@@ -74,7 +74,7 @@ export default function Dialog({
   useEffect(() => {
     ref.current?.scrollTo({ top: 0 });
     ref.current?.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
-  }, [title]);
+  }, [title, label]);
 
   return (
     <dialog

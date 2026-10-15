@@ -1,3 +1,4 @@
+import JourneyContinuation from './journey-continuation';
 import type { ReactNode } from 'react';
 import { endingText } from '@/lib/progress';
 import { levelEncounter } from '@/lib/difficulty';
@@ -25,13 +26,26 @@ function JournalEntry({
 export default function JournalContent({
   chapter,
   progress,
+  onWorld,
+  onFinale,
+  onAtlas,
 }: {
   chapter: Chapter;
   progress: Progress;
+  onWorld: (id: string) => Promise<void>;
+  onFinale: () => void;
+  onAtlas: () => void;
 }) {
   return (
     <>
       <Narrative>A record of places opened, ideas understood, and things worth keeping.</Narrative>
+      <JourneyContinuation
+        chapter={chapter}
+        progress={progress}
+        onWorld={onWorld}
+        onFinale={onFinale}
+        onAtlas={onAtlas}
+      />
       {progress.done.length ? (
         chapter.encounters
           .filter((e) => progress.done.includes(e.id))

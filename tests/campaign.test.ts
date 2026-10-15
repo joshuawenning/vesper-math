@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { nextPlayableWorld } from '../src/content/worlds';
 import { chapter as merewood } from '../src/content/merewood';
 import { chapter as foundry } from '../src/content/foundry';
 import { chapter as coast } from '../src/content/coast';
@@ -98,4 +99,16 @@ test('original encounters scale without changing earlier recorded discoveries', 
     }),
     true,
   );
+});
+
+test('chapter continuation follows playable worlds and stops before veiled worlds', () => {
+  assert.equal(nextPlayableWorld(merewood.id)?.id, foundry.id);
+  assert.equal(nextPlayableWorld(foundry.id)?.id, coast.id);
+  assert.equal(nextPlayableWorld(coast.id), undefined);
+  assert.equal(nextPlayableWorld('invented'), undefined);
+  let p = normalizeProgress({ done: ['bridge', 'cistern', 'guardian'], ending: 'beacon' });
+  p = switchWorld(p, nextPlayableWorld(merewood.id)!.id);
+  assert.equal(p.worldId, foundry.id);
+  assert.equal(p.journeys[merewood.id].ending, 'beacon');
+  assert.deepEqual(p.done, []);
 });

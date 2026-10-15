@@ -199,7 +199,15 @@ export default function GameDialog({
       );
       break;
     case 'journal':
-      content = <JournalContent chapter={chapter} progress={progress} />;
+      content = (
+        <JournalContent
+          chapter={chapter}
+          progress={progress}
+          onWorld={onWorld}
+          onFinale={() => onNavigate({ kind: 'finale' })}
+          onAtlas={() => onNavigate({ kind: 'map' })}
+        />
+      );
       break;
     case 'finale':
       content = <EndingChoice chapter={chapter} onEnding={onEnding} />;
@@ -209,6 +217,9 @@ export default function GameDialog({
         <ChapterComplete
           chapter={chapter}
           ending={progress.ending}
+          progress={progress}
+          onWorld={onWorld}
+          onAtlas={() => onNavigate({ kind: 'map' })}
           onJournal={() => onNavigate({ kind: 'journal' })}
         />
       );
