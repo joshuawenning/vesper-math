@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { existsSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { nextPlayableWorld } from '../src/content/worlds';
 import { chapter as merewood } from '../src/content/merewood';
@@ -111,4 +112,16 @@ test('chapter continuation follows playable worlds and stops before veiled world
   assert.equal(p.worldId, foundry.id);
   assert.equal(p.journeys[merewood.id].ending, 'beacon');
   assert.deepEqual(p.done, []);
+});
+
+test('Foundry and Coast encounters each have a distinct shipped story illustration', () => {
+  const art = [foundry, coast].flatMap((chapter) =>
+    chapter.encounters.map((encounter) => encounter.artwork.src),
+  );
+  assert.equal(new Set(art).size, 6);
+  for (const src of art) {
+    assert.ok(existsSync(new URL(`../public${src}`, import.meta.url)), src);
+    assert.notEqual(src, foundry.scene?.src);
+    assert.notEqual(src, coast.scene?.src);
+  }
 });

@@ -29,8 +29,8 @@ export const chapter: Chapter = {
         'The lift settles level with the workshop door. Elian sketches the old balancing arms.',
       reward: 'Copper balance seal',
       artwork: {
-        src: '/art/foundry.webp',
-        alt: 'The illustrated mountain foundry, full of tools, paths, and lantern light.',
+        src: '/art/counterweight.webp',
+        alt: 'A copper lift suspended beside a mountain workshop, with a brass balancing arm and hanging stone counterweights.',
       },
       hint: [
         'Find the difference between the two sides.',
@@ -78,8 +78,8 @@ export const chapter: Chapter = {
         'A deep musical note travels through the mountain. The great wheel turns for the first time in years.',
       reward: 'Brass tuning key',
       artwork: {
-        src: '/art/foundry.webp',
-        alt: 'The illustrated mountain foundry, full of tools, paths, and lantern light.',
+        src: '/art/brass-chorus.webp',
+        alt: 'An elderly dwarf gear keeper arranges brass gear teeth at a workbench as a great wheel glows behind her.',
       },
       hint: ['Equal groups can be multiplied.', 'Add 3 four times.', '4 \u00d7 3 = 12.'],
       lesson: '4 \u00d7 3 = 12.',
@@ -122,8 +122,8 @@ export const chapter: Chapter = {
         'The final stone rests in place. Warm light spreads across the foundry floor, and the work bells answer.',
       reward: 'Maker\u2019s compass',
       artwork: {
-        src: '/art/foundry.webp',
-        alt: 'The illustrated mountain foundry, full of tools, paths, and lantern light.',
+        src: '/art/makers-mosaic.webp',
+        alt: 'A teal, ochre, and ivory foundry floor mosaic with a loose final tile and a brass maker’s compass.',
       },
       hint: [
         'Perimeter is the distance around the edge.',
