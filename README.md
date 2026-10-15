@@ -1,6 +1,6 @@
-# Vesper
+# Vesper Math
 
-An illustrated math adventure, built with Next.js 16 App Router, React 19, TypeScript, and Tailwind CSS 4. Exploration comes first; the opening chapter covers addition and measurement, fractions and equivalence, and division with two guardian tactics.
+> Vesper Math is an illustrated math adventure, built with Next.js. Exploration comes first; the opening chapter covers addition and measurement, fractions and equivalence, and division with two guardian tactics.
 
 ## Run
 
@@ -18,8 +18,6 @@ npm run build
 npm start
 ```
 
-If a local Homebrew libvips installation causes sharp to build from source, install with `SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm ci`. This is not needed on Vercel or standard GitHub runners.
-
 ## Validation
 
 ```sh
@@ -30,15 +28,6 @@ npm run build
 ```
 
 GitHub Actions runs all three checks on pushes and pull requests. The lockfile pins the tested dependency tree.
-
-## Publish with Vercel
-
-1. Import this repository at <https://vercel.com/new>.
-2. Select the intended account or team and the **Next.js** framework preset.
-3. Keep the repository root as the root directory. Default install and build commands work; no environment variables are needed.
-4. Deploy. Vercel can then deploy each push to `main` and create previews for pull requests.
-
-This project uses native Next.js image optimization and does not use `output: export`. No Sites hosting manifest or credentials are included.
 
 ## Project structure
 
@@ -88,7 +77,7 @@ All included scenes are original AI-generated illustrations from the built-in im
 
 ## References
 
-- [Next.js installation and App Router](https://nextjs.org/docs/app/getting-started/installation)
 - [Next.js image optimization](https://nextjs.org/docs/app/getting-started/images)
+- [Next.js installation and App Router](https://nextjs.org/docs/app/getting-started/installation)
 - [Next.js lazy loading](https://nextjs.org/docs/app/guides/lazy-loading)
 - [Vercel GitHub deployments](https://vercel.com/docs/git/vercel-for-github)
