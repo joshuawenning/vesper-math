@@ -3,6 +3,8 @@ import { narrationVoiceLabel } from '@/lib/speech';
 import type { Progress } from '@/lib/types';
 import PreferenceSelect from '../ui/preference-select';
 import Button from '../ui/button';
+import PreferenceChoices from '../ui/preference-choices';
+import PreferenceSwitch from '../ui/preference-switch';
 import { Muted } from '../ui/typography';
 import { useSpeech } from './use-speech';
 
@@ -16,14 +18,12 @@ export default function SpeechPreferences({
   const speech = useSpeech(value);
   return (
     <>
-      <PreferenceSelect
+      <PreferenceSwitch
         label="Read-aloud controls"
-        value={value.enabled ? 'on' : 'off'}
-        onChange={(e) => onChange({ ...value, enabled: e.target.value === 'on' })}
-      >
-        <option value="off">Off</option>
-        <option value="on">On</option>
-      </PreferenceSelect>
+        description="Show a speaker beside problems and Elian’s replies."
+        checked={value.enabled}
+        onChange={(enabled) => onChange({ ...value, enabled })}
+      />
       {value.enabled && (
         <>
           <PreferenceSelect
@@ -38,15 +38,16 @@ export default function SpeechPreferences({
               </option>
             ))}
           </PreferenceSelect>
-          <PreferenceSelect
+          <PreferenceChoices
             label="Reading pace"
-            value={String(value.rate)}
-            onChange={(e) => onChange({ ...value, rate: Number(e.target.value) })}
-          >
-            <option value="0.8">Slower</option>
-            <option value="1">Natural</option>
-            <option value="1.15">A little faster</option>
-          </PreferenceSelect>
+            value={value.rate}
+            onChange={(rate) => onChange({ ...value, rate })}
+            options={[
+              { value: 0.8, label: 'Slower' },
+              { value: 1, label: 'Natural' },
+              { value: 1.15, label: 'A little faster' },
+            ]}
+          />
           <Button
             variant="secondary"
             disabled={!speech.ready}

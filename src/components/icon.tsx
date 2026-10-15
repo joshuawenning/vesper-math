@@ -8,6 +8,27 @@ export default function Icon({
   className?: string;
 }) {
   const shapes = {
+    sun: (
+      <>
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+      </>
+    ),
+    hive: (
+      <path d="m8 3 4-2 4 2 1 4 3 3 1 5-2 6H5l-2-6 1-5 3-3Zm-1 4h10M4 11h16M3 15h18M9 21v-3a3 3 0 0 1 6 0v3" />
+    ),
+    snail: (
+      <>
+        <circle cx="10" cy="11" r="7" />
+        <path d="M10 8a3 3 0 1 1-3 3M3 18c0 3 7 4 13 3 4-1 5-4 4-7m0 0-3-4m3 4 3-3M4 21h18" />
+      </>
+    ),
+    seed: (
+      <path d="M12 21C-2 15 3 3 12 3s14 12 0 18Zm0-15v15M8 9l4 3 4-3m-7 5 3 2 3-2M9 3 8 1m7 2 1-2" />
+    ),
+    orchard: (
+      <path d="M12 22V10m0 8-5-4m5 1 5-4M7 14C0 15 0 7 5 6 3 0 12 0 12 5c4-7 12-2 8 3 6 5-1 10-5 7M7 22h10" />
+    ),
     droplet: <path d="M12 2C10 6 4 10 4 15a8 8 0 0 0 16 0c0-5-6-9-8-13ZM8 15c0 3 2 4 4 4" />,
     scarab: (
       <>

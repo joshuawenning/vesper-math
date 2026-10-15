@@ -2,12 +2,13 @@
 import { useRef, useState } from 'react';
 import { chapter } from '@/content/merewood';
 import { skillLevels } from '@/content/worlds';
-import { cleanLevel } from '@/lib/progress';
 import { normalizeProgress } from '@/lib/progress';
 import type { Progress } from '@/lib/types';
 import Icon from './icon';
 import SpeechPreferences from './accessibility/speech-preferences';
-import PreferenceSelect from './ui/preference-select';
+import PreferenceChoices from './ui/preference-choices';
+import PreferenceSwitch from './ui/preference-switch';
+import TextSizeControl from './accessibility/text-size-control';
 import { Muted } from './ui/typography';
 
 export default function Preferences({
@@ -49,28 +50,21 @@ export default function Preferences({
   }
   return (
     <>
-      <PreferenceSelect
+      <PreferenceChoices
         label="Appearance"
         value={progress.theme}
-        onChange={(e) =>
-          onChange({ ...progress, theme: e.target.value === 'light' ? 'light' : 'dark' })
-        }
-      >
-        <option value="dark">Dark · After dusk</option>
-        <option value="light">Light · By daylight</option>
-      </PreferenceSelect>
-      <fieldset className="my-6 border-y border-[#909c8350] py-2">
+        onChange={(theme) => onChange({ ...progress, theme })}
+        options={[
+          { value: 'dark', label: 'After dusk', icon: 'moon' },
+          { value: 'light', label: 'By daylight', icon: 'sun' },
+        ]}
+      />
+      <fieldset className="my-6 min-w-0 border-y border-[#909c8350] py-2">
         <legend className="px-2 font-story text-2xl">Accessibility</legend>
-        <PreferenceSelect
-          label="Text size"
+        <TextSizeControl
           value={progress.textSize}
-          onChange={(e) =>
-            onChange({ ...progress, textSize: e.target.value === 'large' ? 'large' : 'standard' })
-          }
-        >
-          <option value="standard">Standard</option>
-          <option value="large">Larger · 125%</option>
-        </PreferenceSelect>
+          onChange={(textSize) => onChange({ ...progress, textSize })}
+        />
         <Muted>
           Text also follows your browser’s zoom and font settings. Animations respect your device’s
           reduced-motion preference.
@@ -88,41 +82,35 @@ export default function Preferences({
           </p>
         </details>
       </fieldset>
-      <PreferenceSelect
+      <PreferenceChoices
         label="Math skill level"
         value={progress.skill}
-        onChange={(e) => onChange({ ...progress, skill: cleanLevel(e.target.value) })}
-      >
-        {skillLevels.map((level) => (
-          <option key={level.id} value={level.id}>
-            {level.label}
-          </option>
-        ))}
-      </PreferenceSelect>
+        onChange={(skill) => onChange({ ...progress, skill })}
+        options={skillLevels.map((level) => ({
+          value: level.id,
+          label: level.label,
+          description: level.description,
+        }))}
+      />
       <Muted>
-        {skillLevels.find((level) => level.id === progress.skill)?.description} Your choice changes
-        new encounters and Elian’s quizzes. Earlier discoveries keep their original record.
+        Your choice changes new encounters and Elian’s quizzes. Earlier discoveries keep their
+        original record.
       </Muted>
-      <PreferenceSelect
+      <PreferenceChoices
         label="Storytelling"
         value={progress.reading}
-        onChange={(e) =>
-          onChange({ ...progress, reading: e.target.value === 'plain' ? 'plain' : 'rich' })
-        }
-      >
-        <option value="rich">Rich & literary</option>
-        <option value="plain">Plain & concise</option>
-      </PreferenceSelect>
-      <PreferenceSelect
-        label="Learning support"
-        value={progress.support}
-        onChange={(e) =>
-          onChange({ ...progress, support: e.target.value === 'light' ? 'light' : 'guided' })
-        }
-      >
-        <option value="guided">Show visual guidance</option>
-        <option value="light">Let me explore first</option>
-      </PreferenceSelect>
+        onChange={(reading) => onChange({ ...progress, reading })}
+        options={[
+          { value: 'rich', label: 'Rich & literary' },
+          { value: 'plain', label: 'Plain & concise' },
+        ]}
+      />
+      <PreferenceSwitch
+        label="Visual guidance"
+        description="Show visual support while you explore. Hints are always available."
+        checked={progress.support === 'guided'}
+        onChange={(checked) => onChange({ ...progress, support: checked ? 'guided' : 'light' })}
+      />
       <Muted>
         The math stays the same when you change the storytelling. You can change these preferences
         at any time.
