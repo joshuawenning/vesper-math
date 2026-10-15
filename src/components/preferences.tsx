@@ -5,7 +5,7 @@ import { skillLevels } from '@/content/worlds';
 import { cleanLevel } from '@/lib/progress';
 import { normalizeProgress } from '@/lib/progress';
 import type { Progress } from '@/lib/types';
-import Button from './ui/button';
+import Icon from './icon';
 import SpeechPreferences from './accessibility/speech-preferences';
 import PreferenceSelect from './ui/preference-select';
 import { Muted } from './ui/typography';
@@ -14,10 +14,12 @@ export default function Preferences({
   progress,
   onChange,
   transfer = false,
+  onRestart,
 }: {
   progress: Progress;
   onChange: (value: Progress) => void;
   transfer?: boolean;
+  onRestart?: () => void;
 }) {
   const input = useRef<HTMLInputElement>(null);
   const [notice, setNotice] = useState('');
@@ -131,22 +133,41 @@ export default function Preferences({
             Progress is stored in this browser at this web address. Export a copy to move your
             journey to another device or hosting address.
           </Muted>
-          <div className="mt-5 flex flex-wrap gap-2.5">
-            <Button variant="secondary" onClick={exportSave}>
-              Export journey
-            </Button>
-            <Button variant="secondary" onClick={() => input.current?.click()}>
-              Import journey…
-            </Button>
-            <input
-              className="hidden"
-              ref={input}
-              type="file"
-              accept=".json,application/json"
-              aria-label="Import a Vesper Math journey"
-              onChange={(e) => void importSave(e.target.files?.[0])}
-            />
+          <div className="mt-5 grid grid-cols-3 gap-2" aria-label="Manage your journey">
+            <button
+              type="button"
+              aria-label="Export journey"
+              className="flex min-w-0 flex-col items-center justify-center gap-2 border border-[#7e886b80] px-2 py-3 text-xs text-[#384a3b] hover:bg-[#c4c6ad55] tablet:flex-row"
+              onClick={exportSave}
+            >
+              <Icon name="download" /> <span>Export</span>
+            </button>
+            <button
+              type="button"
+              aria-label="Import journey…"
+              className="flex min-w-0 flex-col items-center justify-center gap-2 border border-[#7e886b80] px-2 py-3 text-xs text-[#384a3b] hover:bg-[#c4c6ad55] tablet:flex-row"
+              onClick={() => input.current?.click()}
+            >
+              <Icon name="upload" /> <span>Import</span>
+            </button>
+            <button
+              type="button"
+              aria-label="Start a fresh journey…"
+              className="flex min-w-0 flex-col items-center justify-center gap-2 border border-[#7e886b80] px-2 py-3 text-xs text-[#384a3b] hover:bg-[#c4c6ad55] tablet:flex-row"
+              onClick={onRestart}
+              disabled={!onRestart}
+            >
+              <Icon name="restart" /> <span>Start fresh</span>
+            </button>
           </div>
+          <input
+            className="hidden"
+            ref={input}
+            type="file"
+            accept=".json,application/json"
+            aria-label="Import a Vesper Math journey"
+            onChange={(e) => void importSave(e.target.files?.[0])}
+          />
           <p role="status" className="my-3 text-xs leading-[1.5] text-[#465e46]">
             {notice}
           </p>

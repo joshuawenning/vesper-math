@@ -130,12 +130,12 @@ export default function GameDialog({
       break;
     case 'settings':
       content = (
-        <>
-          <Preferences progress={progress} onChange={onChange} transfer />
-          <Button variant="secondary" onClick={() => onNavigate({ kind: 'restart' })}>
-            Start a fresh journey…
-          </Button>
-        </>
+        <Preferences
+          progress={progress}
+          onChange={onChange}
+          transfer
+          onRestart={() => onNavigate({ kind: 'restart' })}
+        />
       );
       break;
     case 'restart':

@@ -8,6 +8,9 @@ export default function Icon({
   className?: string;
 }) {
   const shapes = {
+    download: <path d="M12 3v12m-5-5 5 5 5-5M3 15v6h18v-6" />,
+    upload: <path d="M12 15V3m-5 5 5-5 5 5M3 15v6h18v-6" />,
+    restart: <path d="M4 9a8 8 0 1 1 0 7M4 3v6h6" />,
     speaker: (
       <>
         <path d="m11 4-6 5H2v6h3l6 5Z" />
