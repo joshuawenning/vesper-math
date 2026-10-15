@@ -8,6 +8,13 @@ export default function Icon({
   className?: string;
 }) {
   const shapes = {
+    speaker: (
+      <>
+        <path d="m11 4-6 5H2v6h3l6 5Z" />
+        <path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" />
+      </>
+    ),
+    stop: <rect x="6" y="6" width="12" height="12" rx="1" />,
     star: (
       <>
         <path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5Z" />

@@ -37,6 +37,7 @@ export default function TutorChat({
   const session = useRef<TutorSession>({ question: null, count: 0 });
   const log = useRef<HTMLDivElement>(null);
   const sequence = useRef(0);
+  const composer = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     if (log.current) log.current.scrollTop = log.current.scrollHeight;
   }, [messages]);
@@ -61,6 +62,7 @@ export default function TutorChat({
       ].slice(-24),
     );
     setInput('');
+    composer.current?.focus({ preventScroll: true });
     if (result.assessment !== undefined)
       onChange({
         ...progress,
@@ -70,6 +72,7 @@ export default function TutorChat({
         },
       });
   }
+  const latestReply = messages.filter((m) => m.role === 'elian').at(-1)?.id;
   return (
     <>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-[0.75rem] text-[#43533e]">
@@ -90,9 +93,19 @@ export default function TutorChat({
             key={message.id}
             className={`border px-4 py-3 ${message.role === 'elian' ? 'border-[#909c8340] bg-[#f4edda]' : 'ml-7 border-[#53674a50] bg-[#dce3cf]'}`}
           >
-            <strong className="mb-1 block text-[0.75rem] uppercase tracking-[1px] text-[#43533e]">
-              {message.role === 'elian' ? 'Elian' : name}
-            </strong>
+            <div className="mb-1 flex items-center justify-between gap-2">
+              <strong className="block text-[0.75rem] uppercase tracking-[1px] text-[#43533e]">
+                {message.role === 'elian' ? 'Elian' : name}
+              </strong>
+              {message.id === latestReply && (
+                <ReadAloud
+                  text={message.text}
+                  settings={progress.speech}
+                  label="Read Elian’s reply aloud"
+                  compact
+                />
+              )}
+            </div>
             <p
               className={`whitespace-pre-line leading-[1.5] ${message.role === 'elian' ? 'font-story text-[1.1875rem]' : 'text-[0.8125rem]'}`}
             >
@@ -101,44 +114,53 @@ export default function TutorChat({
           </div>
         ))}
       </div>
-      <ReadAloud
-        text={messages.filter((m) => m.role === 'elian').at(-1)?.text ?? ''}
-        settings={progress.speech}
-        label="Read Elian’s reply aloud"
-      />
-      <div className="mb-4 flex flex-wrap gap-2" aria-label="Continue the conversation">
-        {suggestions.map((prompt) => (
-          <Button key={prompt} variant="secondary" onClick={() => send(prompt)}>
-            {prompt}
-          </Button>
-        ))}
-      </div>
-      <details className="mb-4">
-        <summary className="cursor-pointer py-3 text-sm">Explore math topics</summary>
-        <div className="mb-4 flex flex-wrap gap-2">
-          {topics.map((topic) => (
-            <button
-              type="button"
-              key={topic}
-              className="min-h-11 border border-[#909c8360] px-2.5 py-1.5 text-[0.75rem] capitalize hover:bg-[#dce3cf]"
-              onClick={() => send(`Explain ${topic}`)}
-            >
-              {topic}
-            </button>
-          ))}
-        </div>
-      </details>
       <form
         onSubmit={(event) => {
           event.preventDefault();
           send(input);
         }}
       >
+        <label className="mb-3 block text-sm text-[#43533e]">
+          A little inspiration
+          <select
+            aria-label="Conversation ideas"
+            value=""
+            onChange={(event) => setInput(event.target.value)}
+            className="mt-1 block min-h-11 w-full border-0 border-b border-[#6b795e] bg-transparent py-2 pr-2 text-base text-ink"
+          >
+            <option value="" disabled>
+              Choose an idea to make your own…
+            </option>
+            <optgroup label="Keep talking">
+              {suggestions
+                .filter((p) => p !== 'Quiz me')
+                .map((prompt) => (
+                  <option key={prompt} value={prompt}>
+                    {prompt}
+                  </option>
+                ))}
+            </optgroup>
+            <optgroup label="Explore a topic">
+              {topics
+                .filter((topic) => !suggestions.includes(`Explain ${topic}`))
+                .map((topic) => (
+                  <option key={topic} value={`Explain ${topic}`}>
+                    {topic.charAt(0).toUpperCase() + topic.slice(1)}
+                  </option>
+                ))}
+            </optgroup>
+            <optgroup label="Practice together">
+              <option value="Quiz me">Invite Elian to quiz you</option>
+              {question && <option value="Hint">Ask for a hint</option>}
+            </optgroup>
+          </select>
+        </label>
         <label className="sr-only" htmlFor="elian-message">
           Message Elian
         </label>
         <textarea
           id="elian-message"
+          ref={composer}
           className="block min-h-[76px] w-full resize-y border border-[#6b795e] bg-[#f8f2df] px-3 py-2.5 text-base leading-[1.5]"
           value={input}
           maxLength={400}
@@ -152,14 +174,6 @@ export default function TutorChat({
           <Button type="submit" disabled={!input.trim()}>
             Send to Elian
           </Button>
-          <Button variant="secondary" onClick={() => send('Quiz me')}>
-            Quiz me
-          </Button>
-          {question && (
-            <Button variant="secondary" onClick={() => send('Hint')}>
-              A hint
-            </Button>
-          )}
           <span className="ml-auto text-[0.75rem] text-[#43533e]">{input.length}/400</span>
         </div>
       </form>

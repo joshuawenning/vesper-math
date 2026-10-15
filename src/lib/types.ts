@@ -26,6 +26,8 @@ export type IconName =
   | 'orbit'
   | 'flame'
   | 'waves'
+  | 'speaker'
+  | 'stop'
   | 'star'
   | 'moon'
   | 'bridge'
