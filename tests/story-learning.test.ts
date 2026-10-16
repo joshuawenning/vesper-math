@@ -4,7 +4,7 @@ import { worlds, loadChapter } from '../src/content/worlds';
 import { chapter } from '../src/content/merewood';
 import { storySteps } from '../src/content/story-lessons';
 import { levelEncounter } from '../src/lib/difficulty';
-import { normalizeProgress, restartCurrentJourney, switchWorld } from '../src/lib/progress';
+import { normalizeProgress, freshJourney, switchWorld } from '../src/lib/progress';
 import { applyStudyAction, storyLearning } from '../src/lib/story-learning';
 import { validateAnswer } from '../src/lib/challenges';
 
@@ -244,41 +244,67 @@ test('division practice accepts equivalent expressions without a false penalty',
   assert.equal(validateAnswer(guardian, { route: 'pulse', value: '5' }), false);
 });
 
-test('Start Fresh resets Resolve and current chapter learning while retaining other worlds and preferences', () => {
+test('Start Fresh clears every world, profile, preference, and learning record across save reloads', () => {
   const other = worlds[1];
-  let p = normalizeProgress({
+  const old = normalizeProgress({
     resolve: 19,
-    theme: 'light',
+    theme: 'dark',
     skill: 'developing',
-    profile: { name: 'Mira' },
+    textSize: 'large',
+    speech: { enabled: true, voice: 'Samantha', rate: 0.8 },
+    reading: 'plain',
+    support: 'light',
+    profile: { name: 'Mira', persona: 'warden-male' },
     done: ['bridge'],
     journeys: { [other.id]: { done: [other.encounters[0]] } },
     study: {
       [`${chapter.id}:cistern`]: { level: 'developing', completed: 1, reviewing: true },
       [`${other.id}:${other.encounters[1]}`]: { level: 'stretch', completed: 1, reviewing: true },
     },
+    training: {
+      sequence: 1,
+      attempts: 2,
+      solved: 1,
+      pending: {
+        id: 1,
+        mode: 'arithmetic',
+        operation: 'add',
+        a: 2,
+        b: 3,
+        solved: true,
+        tried: [4, 5],
+      },
+    },
+    practice: { attempts: 4, correct: 3 },
   });
-  const original = p;
-  p = restartCurrentJourney(p);
-  assert.equal(p.resolve, 7);
-  assert.deepEqual(p.done, []);
-  assert.deepEqual(p.levels, {});
-  assert.equal(p.ending, null);
-  assert.equal(p.started, false);
-  assert.equal(p.study[`${chapter.id}:cistern`], undefined);
-  assert.deepEqual(
-    p.study[`${other.id}:${other.encounters[1]}`],
-    original.study[`${other.id}:${other.encounters[1]}`],
-  );
-  assert.equal(
-    p.history.some((r) => r.worldId === chapter.id),
-    false,
-  );
-  assert.deepEqual(p.journeys[other.id], original.journeys[other.id]);
-  assert.equal(p.theme, 'light');
-  assert.equal(p.skill, 'developing');
-  assert.equal(p.profile.name, 'Mira');
-  assert.equal(normalizeProgress(JSON.parse(JSON.stringify(p))).resolve, 7);
-  assert.equal(restartCurrentJourney({ ...original, resolve: 0 }).resolve, 7);
-  assert.equal(original.resolve, 19);
+  const reset = freshJourney();
+  const reloaded = normalizeProgress(JSON.parse(JSON.stringify(reset)));
+  assert.deepEqual(reloaded, normalizeProgress({}));
+  assert.equal(reloaded.resolve, 7);
+  assert.equal(reloaded.profile.name, '');
+  assert.equal(reloaded.started, false);
+  assert.deepEqual(reloaded.training, { sequence: 0, attempts: 0, solved: 0, pending: null });
+  assert.deepEqual(reloaded.practice, { attempts: 0, correct: 0 });
+  assert.deepEqual(reloaded.study, {});
+  assert.deepEqual(reloaded.history, []);
+  for (const journey of Object.values(reloaded.journeys)) {
+    assert.deepEqual(journey.done, []);
+    assert.equal(journey.started, false);
+    assert.equal(journey.ending, null);
+  }
+  assert.equal(old.profile.name, 'Mira');
+  assert.equal(old.resolve, 19);
+  assert.equal(old.journeys[other.id].done.length, 1);
+});
+
+test('fresh journeys do not share mutable state with each other or the defaults', () => {
+  const first = freshJourney();
+  const second = freshJourney();
+  first.profile.name = 'Changed';
+  first.speech.enabled = true;
+  first.training.solved = 5;
+  first.done.push('bridge');
+  first.journeys[chapter.id].done.push('bridge');
+  assert.deepEqual(second, normalizeProgress({}));
+  assert.deepEqual(freshJourney(), normalizeProgress({}));
 });

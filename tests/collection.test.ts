@@ -10,7 +10,7 @@ import { treasureArt } from '../src/content/treasures';
 import { worlds, loadChapter } from '../src/content/worlds';
 import { levelEncounter } from '../src/lib/difficulty';
 import CollectibleCard from '../src/components/journal/collectible-card';
-import { initialProgress, normalizeProgress, restartCurrentJourney } from '../src/lib/progress';
+import { initialProgress, normalizeProgress, freshJourney } from '../src/lib/progress';
 
 test('each earned item has its own shipped illustration and an accessible story disclosure', async () => {
   const paths = new Set<string>();
@@ -52,7 +52,7 @@ test('Resolve starts and resets at seven while existing balances are retained', 
   assert.equal(initialProgress.resolve, 7);
   assert.equal(normalizeProgress({}).resolve, 7);
   assert.equal(normalizeProgress({ resolve: 14 }).resolve, 14);
-  assert.equal(restartCurrentJourney(normalizeProgress({ resolve: 1 })).resolve, 7);
+  assert.equal(freshJourney().resolve, 7);
 });
 
 test('all four new Elian locations ship their own artwork', () => {

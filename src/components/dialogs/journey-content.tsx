@@ -49,8 +49,9 @@ export function RestartContent({
   return (
     <>
       <Narrative>
-        Starting again clears this chapter’s discoveries and challenges, and resets Resolve to 7.
-        Your character, preferences, and other worlds will stay.
+        Start a new journey from the beginning. This clears your character, all worlds’ discoveries,
+        collected items, training and quiz history, and preferences. Resolve returns to 7, and
+        you’ll choose your character and preferences again.
       </Narrative>
       <Actions>
         <Button onClick={onRestart}>Start fresh</Button>

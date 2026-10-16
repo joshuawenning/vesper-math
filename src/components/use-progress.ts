@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { initialProgress, normalizeProgress, SAVE_KEY } from '@/lib/progress';
+import { freshJourney, initialProgress, normalizeProgress, SAVE_KEY } from '@/lib/progress';
 import { observeAppearance } from '@/lib/theme';
 import type { Progress } from '@/lib/types';
 
@@ -57,6 +57,8 @@ function useStoredProgress() {
 const ProgressContext = createContext<
   | (ReturnType<typeof useStoredProgress> & {
       chatOpen: boolean;
+      journeyVersion: number;
+      startFresh: () => void;
       openChat: () => void;
       closeChat: () => void;
     })
@@ -66,12 +68,20 @@ const ProgressContext = createContext<
 export function ProgressProvider({ children }: { children: ReactNode }) {
   const state = useStoredProgress();
   const [chatOpen, setChatOpen] = useState(false);
+  const [journeyVersion, setJourneyVersion] = useState(0);
   return createElement(
     ProgressContext.Provider,
     {
       value: {
         ...state,
         chatOpen,
+        journeyVersion,
+        startFresh: () => {
+          window.speechSynthesis?.cancel();
+          setChatOpen(false);
+          setJourneyVersion((version) => version + 1);
+          state.setProgress(freshJourney());
+        },
         openChat: () => setChatOpen(true),
         closeChat: () => setChatOpen(false),
       },

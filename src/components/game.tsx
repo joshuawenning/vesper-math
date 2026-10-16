@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { chapter as initialChapter } from '@/content/merewood';
 import { loadChapter, getWorld } from '@/content/worlds';
-import { encounterStatus, restartCurrentJourney, switchWorld } from '@/lib/progress';
+import { encounterStatus, switchWorld } from '@/lib/progress';
 import { applyStudyAction, storyLearning, type StudyAction } from '@/lib/story-learning';
 import TrainingInvitation from './training/training-invitation';
 import type { DialogView } from '@/lib/types';
@@ -24,7 +24,7 @@ import AdventureFooter from './adventure/adventure-footer';
 const GameDialog = dynamic(() => import('./game-dialog'));
 
 export default function Game({ scene }: { scene: ReactNode }) {
-  const { progress, setProgress, loaded, storageOK, openChat } = useProgress();
+  const { progress, setProgress, loaded, storageOK, openChat, startFresh } = useProgress();
   const router = useRouter();
   const resumed = useRef(false);
   const [view, setView] = useState<DialogView | null>(null);
@@ -130,8 +130,9 @@ export default function Game({ scene }: { scene: ReactNode }) {
       setView({ kind: 'discovery', id });
   }
   function restart() {
-    setProgress(restartCurrentJourney);
+    startFresh();
     close();
+    router.replace('/begin');
   }
   return (
     <WorldAtmosphere worldId={progress.worldId}>

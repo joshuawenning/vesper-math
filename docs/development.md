@@ -32,7 +32,7 @@ Resolve starts at 7, caps at 20, and pauses story actions at zero. A correct sto
 
 ## Saves and privacy
 
-`vesper-save-v1` stores a local character, settings, independent world journeys, learning steps, and practice totals. `normalizeProgress` validates imported and older saves. Keep the key stable and add migration coverage when changing the format. Start Fresh resets the current world and Resolve while retaining other worlds and the player’s preferences.
+`vesper-save-v1` stores a local character, settings, independent world journeys, learning steps, and practice totals. `normalizeProgress` validates imported and older saves. Keep the key stable and add migration coverage when changing the format. Start Fresh replaces the entire save with first-visit defaults, clears the in-memory chat and quiz session, and returns to `/begin`. It resets all worlds, character, preferences, training, collected items, learning steps, and quiz history; Resolve returns to 7.
 
 Storage belongs to an origin: a different port, domain, browser, or device has a separate journey. Export/import moves progress between them; it is not account synchronization. There is no authenticated or tamper-proof player account.
 

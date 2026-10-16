@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import { useProgress } from '../use-progress';
 import { artwork } from '@/content/artwork';
 const TutorChat = dynamic(() => import('./tutor-chat'));
-export default function ElianChat() {
+function ChatPanel() {
   const pathname = usePathname();
   const { progress, setProgress, chatOpen, openChat, closeChat } = useProgress();
   const [visited, setVisited] = useState(false);
@@ -89,4 +89,10 @@ export default function ElianChat() {
       </section>
     </>
   );
+}
+
+/** A new journey also starts a new in-memory conversation and quiz session. */
+export default function ElianChat() {
+  const { journeyVersion } = useProgress();
+  return <ChatPanel key={journeyVersion} />;
 }

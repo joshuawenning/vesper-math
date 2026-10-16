@@ -184,17 +184,9 @@ export function switchWorld(progress: Progress, id: string): Progress {
   };
   return { ...progress, ...(journeys[id] ?? emptyJourney()), journeys, worldId: id };
 }
-export function restartCurrentJourney(progress: Progress): Progress {
-  return {
-    ...progress,
-    ...emptyJourney(),
-    resolve: initialProgress.resolve,
-    study: Object.fromEntries(
-      Object.entries(progress.study).filter(([key]) => !key.startsWith(`${progress.worldId}:`)),
-    ),
-    history: progress.history.filter((record) => record.worldId !== progress.worldId),
-    journeys: { ...progress.journeys, [progress.worldId]: emptyJourney() },
-  };
+/** A full new journey, with independent nested state and the same defaults as a first visit. */
+export function freshJourney(): Progress {
+  return normalizeProgress(initialProgress);
 }
 export function recordDiscovery(progress: Progress, id: string, chapter: Chapter): Progress {
   if (
