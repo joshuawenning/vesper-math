@@ -151,7 +151,13 @@ function Setup() {
           </form>
         ) : (
           <>
-            <Preferences key={step} progress={progress} onChange={setProgress} section={step} />
+            <Preferences
+              key={step}
+              progress={progress}
+              onChange={setProgress}
+              section={step}
+              notifyOnSave={false}
+            />
             <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-[#909c8350] pt-5">
               <Button
                 variant="secondary"

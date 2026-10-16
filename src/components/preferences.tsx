@@ -18,11 +18,13 @@ export default function Preferences({
   transfer = false,
   onRestart,
   section = 'all',
+  notifyOnSave = true,
 }: {
   progress: Progress;
   onChange: (value: Progress) => void;
   transfer?: boolean;
   section?: 'all' | 'skill' | 'experience';
+  notifyOnSave?: boolean;
   onRestart?: () => void;
 }) {
   const input = useRef<HTMLInputElement>(null);
@@ -39,9 +41,9 @@ export default function Preferences({
   // Acknowledge the exact write, rather than assuming the previous save status still applies.
   useEffect(() => {
     if (!pendingSettings || saveResult?.progress !== pendingSettings) return;
-    setSettingsNotice({ ok: saveResult.ok });
+    if (!saveResult.ok || notifyOnSave) setSettingsNotice({ ok: saveResult.ok });
     setPendingSettings(null);
-  }, [pendingSettings, saveResult]);
+  }, [pendingSettings, saveResult, notifyOnSave]);
 
   useEffect(() => {
     if (!settingsNotice) return;
@@ -157,10 +159,6 @@ export default function Preferences({
               changeSettings({ ...progress, support: checked ? 'guided' : 'light' })
             }
           />
-          <Muted>
-            The math stays the same when you change the storytelling. You can change these
-            preferences at any time.
-          </Muted>
         </>
       )}
       {transfer && (
