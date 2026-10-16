@@ -5,6 +5,7 @@ import type {
   TrainingProblem,
   TrainingProgress,
 } from './types';
+import { TRAINING_REWARD } from './resolve';
 import { calculate, approximatelyEqual } from './math';
 
 export const emptyTraining = (): TrainingProgress => ({
@@ -65,6 +66,7 @@ export type TrainingAction =
   | { kind: 'submit'; id: number; value: string };
 export function applyTrainingAction(progress: Progress, action: TrainingAction): Progress {
   if (action.kind === 'roll') {
+    if (progress.training.pending && !progress.training.pending.solved) return progress;
     if (
       !trainingModes.some((m) => m.id === action.mode) ||
       !['add', 'subtract', 'multiply'].includes(action.operation)
@@ -107,7 +109,7 @@ export function applyTrainingAction(progress: Progress, action: TrainingAction):
   if (!solved && pending.tried.length >= 32) return progress;
   return {
     ...progress,
-    resolve: Math.min(20, progress.resolve + (solved ? 3 : 0)),
+    resolve: Math.min(20, progress.resolve + (solved ? TRAINING_REWARD : 0)),
     training: {
       ...progress.training,
       attempts: Math.min(1e6, progress.training.attempts + 1),

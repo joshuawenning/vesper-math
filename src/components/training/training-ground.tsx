@@ -11,10 +11,6 @@ import {
   trainingModes,
   type TrainingAction,
 } from '@/lib/training';
-import PreferenceChoices from '../ui/preference-choices';
-import ResolveMeter from '../profile/resolve-meter';
-import { Muted, Narrative } from '../ui/typography';
-import { Actions, Feedback } from '../ui/panels';
 import Button from '../ui/button';
 import Icon from '../icon';
 import ReadAloud from '../accessibility/read-aloud';
@@ -25,22 +21,25 @@ export default function TrainingGround({
   progress,
   onAction,
   onResume,
+  onModeChange,
 }: {
   progress: Progress;
   onAction: (action: TrainingAction) => void;
   onResume: () => void;
+  onModeChange?: (mode: TrainingMode) => void;
 }) {
   const saved = progress.training.pending;
   const [mode, setMode] = useState<TrainingMode>(saved?.mode ?? 'arithmetic');
   const [operation, setOperation] = useState<TrainingOperation>(
-    saved && saved.mode !== 'tables' ? saved.operation : 'add',
+    saved?.mode === 'tables' ? 'add' : (saved?.operation ?? 'add'),
   );
   const [table, setTable] = useState(saved?.mode === 'tables' ? saved.a : 3);
   const [value, setValue] = useState('');
   const [feedback, setFeedback] = useState('');
   const [help, setHelp] = useState(false);
-  const answer = useRef<HTMLInputElement>(null);
-  const result = useRef<HTMLHeadingElement>(null);
+  const input = useRef<HTMLInputElement>(null);
+  const next = useRef<HTMLButtonElement>(null);
+  const locked = Boolean(saved && !saved.solved);
   const problem =
     saved?.mode === mode &&
     (mode !== 'tables' || saved.a === table) &&
@@ -53,202 +52,201 @@ export default function TrainingGround({
     setHelp(false);
   }, [problem?.id]);
   useEffect(() => {
-    if (!problem) return;
-    if (problem.solved) result.current?.focus({ preventScroll: true });
-    else answer.current?.focus({ preventScroll: true });
+    if (problem?.solved) next.current?.focus({ preventScroll: true });
+    else if (problem) input.current?.focus({ preventScroll: true });
   }, [problem?.id, problem?.solved]);
-  function roll(index?: 0 | 1) {
+  useEffect(() => {
+    onModeChange?.(mode);
+  }, [mode]);
+  function begin() {
     const sides = mode === 'tables' ? 12 : 20;
-    const rolls: [number, number] = [rollDie(sides), rollDie(sides)];
-    if (index !== undefined && problem)
-      rolls[index === 0 ? 1 : 0] = index === 0 ? problem.b : problem.a;
     onAction({
       kind: 'roll',
       mode,
       operation: mode === 'tables' ? 'multiply' : operation,
       table,
-      rolls,
+      rolls: [rollDie(sides), rollDie(sides)],
     });
   }
-  const greeting = progress.profile.name ? `${progress.profile.name}, a little` : 'A little';
   const prompt = problem ? `${problem.a} ${operationSymbol(problem.operation)} ${problem.b}` : '';
   return (
     <>
-      <Narrative>
-        “{greeting} practice makes the road feel shorter,” Elian says. “Let’s try an idea together
-        before we set out.”
-      </Narrative>
-      <ResolveMeter value={progress.resolve} context="training" />
-      <Muted>
-        Training restores 3 Resolve for each solved round, up to 20. Mistakes here cost nothing.
-        Take hints, try again, and build your confidence.
-      </Muted>
-      <PreferenceChoices
-        label="Choose your training"
-        value={mode}
-        onChange={(nextMode) => {
-          setMode(nextMode);
-          if (nextMode === 'arithmetic' && operation === 'multiply') setOperation('add');
-        }}
-        options={trainingModes.map((m) => ({
-          value: m.id,
-          label: m.label,
-          description: m.description,
-        }))}
-      />
-      {mode === 'tables' ? (
-        <fieldset className="my-5">
-          <legend className="mb-2 text-sm font-medium">Choose a times table</legend>
-          <div className="grid grid-cols-6 gap-2">
+      <fieldset disabled={locked} className="mb-5 disabled:opacity-70">
+        <legend className="mb-2 text-xs font-medium uppercase tracking-wider text-[#43533e]">
+          Practice
+        </legend>
+        <div className="grid grid-cols-3 gap-2">
+          {trainingModes.map((m) => (
+            <label key={m.id} className="relative cursor-pointer">
+              <input
+                type="radio"
+                name="training-mode"
+                value={m.id}
+                checked={mode === m.id}
+                onChange={() => {
+                  setMode(m.id);
+                  if (m.id === 'arithmetic' && operation === 'multiply') setOperation('add');
+                }}
+                className="peer sr-only"
+              />
+              <span className="flex min-h-12 items-center justify-center border border-[#6b795e] px-2 py-2 text-center text-xs peer-checked:bg-[#243d33] peer-checked:text-[#fff5dc] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#775a26]">
+                {m.label}
+              </span>
+            </label>
+          ))}
+        </div>
+        {mode === 'tables' ? (
+          <div className="mt-3 flex flex-wrap gap-1.5" role="group" aria-label="Times table">
             {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
-              <label key={n} className="relative cursor-pointer">
-                <input
-                  type="radio"
-                  name="times-table"
-                  value={n}
-                  checked={table === n}
-                  onChange={() => setTable(n)}
-                  className="peer sr-only"
-                />
-                <span className="flex min-h-11 items-center justify-center border border-[#6b795e] text-sm peer-checked:bg-[#243d33] peer-checked:text-[#fff5dc] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#775a26]">
-                  ×{n}
-                </span>
-              </label>
+              <button
+                type="button"
+                key={n}
+                onClick={() => setTable(n)}
+                aria-pressed={table === n}
+                className={`min-h-11 min-w-11 border px-2 text-sm ${table === n ? 'border-[#243d33] bg-[#243d33] text-[#fff5dc]' : 'border-[#909c83] text-[#43533e]'}`}
+              >
+                ×{n}
+              </button>
             ))}
           </div>
-        </fieldset>
-      ) : (
-        <PreferenceChoices
-          label="Operation"
-          value={operation}
-          onChange={setOperation}
-          options={[
-            { value: 'add', label: 'Addition +' },
-            { value: 'subtract', label: 'Subtraction −' },
-            ...(mode === 'dice' ? [{ value: 'multiply' as const, label: 'Multiply ×' }] : []),
-          ]}
-        />
+        ) : (
+          <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Operation">
+            {(
+              ['add', 'subtract', ...(mode === 'dice' ? ['multiply'] : [])] as TrainingOperation[]
+            ).map((op) => (
+              <button
+                key={op}
+                type="button"
+                onClick={() => setOperation(op)}
+                aria-pressed={operation === op}
+                className={`min-h-11 min-w-14 border px-3 text-lg ${operation === op ? 'border-[#243d33] bg-[#243d33] text-[#fff5dc]' : 'border-[#909c83] text-[#43533e]'}`}
+              >
+                {operationSymbol(op)}
+              </button>
+            ))}
+          </div>
+        )}
+      </fieldset>
+      {locked && (
+        <p className="mb-4 text-xs text-[#43533e]">
+          Finish this question before changing your practice.
+        </p>
       )}
       {!problem ? (
-        <Button onClick={() => roll()}>
-          {mode === 'dice' ? 'Roll the D20s' : 'Begin a practice round'}
-          <Icon name="dice" />
+        <Button onClick={begin}>
+          {mode === 'dice' ? 'Cast your first roll' : 'Begin practice'}
+          <Icon name="arrow" />
         </Button>
       ) : (
         <>
-          {mode === 'dice' && (
-            <D20Dice a={problem.a} b={problem.b} round={problem.id} onRoll={roll} />
-          )}
-          {mode === 'dice' && operation === 'subtract' && (
-            <Muted>For subtraction, we place the larger roll first.</Muted>
-          )}
-          <ReadAloud
-            settings={progress.speech}
-            text={`Elian’s training ground. What is ${prompt}? ${help ? trainingGuidance(problem) : ''} ${problem.solved ? trainingExplanation(problem) : ''}`}
-          />
+          {mode === 'dice' && <D20Dice a={problem.a} b={problem.b} round={problem.id} />}
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <p className="text-xs text-[#43533e]">Elian’s challenge · +1 Resolve</p>
+            <ReadAloud
+              compact
+              label="Read training question aloud"
+              settings={progress.speech}
+              text={`What is ${prompt}? ${help ? trainingGuidance(problem) : ''} ${problem.solved ? trainingExplanation(problem) : ''}`}
+            />
+          </div>
           {problem.solved ? (
-            <section role="status" className="my-5 border-l-2 border-[#775a26] pl-4">
-              <h3
-                ref={result}
-                tabIndex={-1}
-                className="font-story text-2xl focus:outline-none focus:shadow-none"
-              >
-                {
-                  ['Nicely reasoned.', 'There’s your footing.', 'A little clearer each time.'][
-                    problem.id % 3
-                  ]
-                }
-              </h3>
-              <p className="my-3 font-story text-xl">
+            <section role="status">
+              <h3 className="font-story text-3xl">
                 {prompt} = {trainingAnswer(problem)}
+              </h3>
+              <p className="mt-2 text-sm font-medium text-[#385a48]">
+                Well reasoned. +1 Resolve, up to 20.
               </p>
-              <p className="text-sm leading-relaxed">{trainingExplanation(problem)}</p>
-              <p className="mt-3 text-sm font-medium">+3 Resolve · up to 20</p>
+              <p className="my-4 text-sm leading-relaxed">{trainingExplanation(problem)}</p>
+              <Button ref={next} onClick={begin}>
+                Next question
+                <Icon name="arrow" />
+              </Button>
             </section>
           ) : (
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                const entered = calculate(value);
-                if (entered === null) {
-                  setFeedback('Enter a number or a short calculation first.');
+                const result = calculate(value);
+                if (result === null) {
+                  setFeedback('Enter a number or a short calculation.');
                   return;
                 }
-                if (!approximatelyEqual(entered, trainingAnswer(problem))) {
-                  setFeedback(`Not quite, and no Resolve lost. ${trainingGuidance(problem)}`);
-                  setHelp(true);
+                if (!approximatelyEqual(result, trainingAnswer(problem))) {
+                  setFeedback('Not quite. Your Resolve stays safe—try a smaller step.');
                 }
                 onAction({ kind: 'submit', id: problem.id, value });
               }}
             >
-              <label htmlFor="training-answer" className="mt-5 block font-story text-[2rem]">
+              <label
+                htmlFor="training-answer"
+                className="mb-4 block font-story text-[clamp(2rem,5vw,3rem)]"
+              >
                 {prompt} = ?
               </label>
-              <input
-                ref={answer}
-                id="training-answer"
-                value={value}
-                onChange={(event) => {
-                  setValue(event.target.value);
-                  setFeedback('');
-                }}
-                className="my-3 w-full border border-[#6b795e] bg-[#fff9e7] px-3 py-3 text-ink"
-                type="text"
-                inputMode="text"
-                autoComplete="off"
-                maxLength={160}
-                aria-describedby="training-format"
-              />
-              <p id="training-format" className="mb-4 text-xs text-[#43533e]">
-                Numbers, fractions, and short calculations are welcome.
-              </p>
-              {feedback && <Feedback>{feedback}</Feedback>}
-              <Actions>
-                <Button type="submit">
-                  Check with Elian
-                  <Icon name="check" />
+              <div className="flex items-stretch gap-2">
+                <input
+                  id="training-answer"
+                  ref={input}
+                  value={value}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                    setFeedback('');
+                  }}
+                  autoComplete="off"
+                  maxLength={160}
+                  inputMode="text"
+                  aria-label="Your training answer"
+                  className="min-w-0 flex-1 border border-[#6b795e] bg-[#fff9e7] px-3 py-3 text-xl text-ink"
+                />
+                <Button type="submit" aria-label="Check answer">
+                  <Icon name="arrow" />
                 </Button>
-                <Button
-                  variant="secondary"
-                  onClick={() => setHelp((shown) => !shown)}
+              </div>
+              <div className="mt-3 flex items-center justify-between gap-2">
+                <span className="text-xs text-[#43533e]">
+                  Enter to check · mistakes cost nothing
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setHelp((v) => !v)}
                   aria-expanded={help}
+                  aria-controls="training-hint"
+                  className="min-h-11 px-2 text-sm text-[#775a26] underline decoration-[#775a2660] underline-offset-4"
                 >
-                  {help ? 'Hide the visual aid' : 'Work through it with Elian'}
-                </Button>
-              </Actions>
+                  {help ? 'Hide hint' : 'Hint'}
+                </button>
+              </div>
+              {feedback && (
+                <p role="status" className="my-3 text-sm text-[#784732]">
+                  {feedback}
+                </p>
+              )}
             </form>
           )}
-          {help && (
-            <>
-              <p className="mt-4 text-sm leading-relaxed">{trainingGuidance(problem)}</p>
+          {help && !problem.solved && (
+            <div id="training-hint">
+              <p className="mt-3 text-sm leading-relaxed">{trainingGuidance(problem)}</p>
               <TrainingModel problem={problem} />
-            </>
+            </div>
           )}
-          <Button
-            variant="secondary"
-            className="mt-4 inline-flex items-center gap-2"
-            onClick={() => roll()}
-          >
-            {problem.solved
-              ? 'Another practice round'
-              : mode === 'dice'
-                ? 'Roll both dice again'
-                : 'Try a different question'}
-            <Icon name="dice" />
-          </Button>
         </>
       )}
-      <div className="mt-6 border-t border-[#909c8350] pt-5">
-        <p className="mb-3 text-sm text-[#43533e]">
-          {progress.training.solved} training rounds solved.{' '}
-          {progress.resolve > 0
-            ? 'Your next adventure is waiting.'
-            : 'Solve a training round to recover Resolve and reopen the trail.'}
+      <div className="mt-6 border-t border-[#909c8350] pt-4 text-xs leading-relaxed text-[#43533e]">
+        <p>
+          {progress.training.solved} rounds solved. Practice restores 1 Resolve per correct answer,
+          up to 20.
         </p>
-        <Button onClick={onResume} disabled={progress.resolve <= 0}>
-          Return to exploration
-          <Icon name="arrow" />
-        </Button>
+        <button
+          type="button"
+          onClick={onResume}
+          disabled={progress.resolve <= 0}
+          className="mt-2 min-h-11 py-2 text-sm text-[#775a26] underline underline-offset-4 disabled:opacity-40"
+        >
+          {progress.resolve <= 0
+            ? 'Solve a round to reopen the trail'
+            : 'Return to your adventure →'}
+        </button>
       </div>
     </>
   );

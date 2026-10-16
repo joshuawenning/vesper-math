@@ -1,12 +1,12 @@
 'use client';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { chapter as initialChapter } from '@/content/merewood';
 import { loadChapter, getWorld } from '@/content/worlds';
 import { encounterStatus, restartCurrentJourney, switchWorld } from '@/lib/progress';
 import { applyStudyAction, storyLearning, type StudyAction } from '@/lib/story-learning';
-import { applyTrainingAction, type TrainingAction } from '@/lib/training';
 import TrainingInvitation from './training/training-invitation';
 import type { DialogView } from '@/lib/types';
 import { useProgress } from './use-progress';
@@ -24,7 +24,9 @@ import AdventureFooter from './adventure/adventure-footer';
 const GameDialog = dynamic(() => import('./game-dialog'));
 
 export default function Game({ scene }: { scene: ReactNode }) {
-  const { progress, setProgress, loaded, storageOK } = useProgress();
+  const { progress, setProgress, loaded, storageOK, openChat } = useProgress();
+  const router = useRouter();
+  const resumed = useRef(false);
   const [view, setView] = useState<DialogView | null>(null);
   const [chapter, setChapter] = useState(initialChapter);
   const [worldError, setWorldError] = useState('');
@@ -60,13 +62,31 @@ export default function Game({ scene }: { scene: ReactNode }) {
   }
   const next = chapter.encounters.find((e) => !progress.done.includes(e.id));
   const close = () => setView(null);
-  const companion = () => setView({ kind: 'companion' });
+  const companion = openChat;
+  const trainHref = (id?: string) =>
+    id ? `/training?returnTo=${encodeURIComponent(id)}` : '/training';
+  useEffect(() => {
+    if (!loaded || resumed.current || chapter.id !== progress.worldId) return;
+    resumed.current = true;
+    const params = new URLSearchParams(window.location.search);
+    const panel = params.get('panel');
+    if (panel && ['map', 'journal', 'settings', 'profile'].includes(panel)) {
+      setView({ kind: panel as 'map' | 'journal' | 'settings' | 'profile' });
+      router.replace('/', { scroll: false });
+      return;
+    }
+    const id = params.get('resume');
+    if (id && chapter.encounters.some((e) => e.id === id)) {
+      openEncounter(id);
+      router.replace('/', { scroll: false });
+    }
+  }, [loaded, chapter.id, progress.worldId]);
 
   function openEncounter(id: string) {
     if (chapter.id !== progress.worldId) return;
     const status = encounterStatus(id, progress, chapter);
     if (status === 'current' && progress.resolve <= 0) {
-      setView({ kind: 'training', returnTo: id });
+      router.push(trainHref(id));
       return;
     }
     if (status !== 'locked') setProgress((p) => ({ ...p, started: true }));
@@ -77,7 +97,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
   }
   function continueJourney() {
     if (progress.resolve <= 0 && next) {
-      setView({ kind: 'training', returnTo: next.id });
+      router.push(trainHref(next.id));
       return;
     }
     if (progress.ending) setView({ kind: 'complete' });
@@ -87,7 +107,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
   }
   function start() {
     if (progress.resolve <= 0) {
-      setView({ kind: 'training', returnTo: next?.id });
+      router.push(trainHref(next?.id));
       return;
     }
     setProgress((p) => ({ ...p, started: true }));
@@ -96,7 +116,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
   }
   function study(id: string, action: StudyAction) {
     if (progress.resolve <= 0) {
-      setView({ kind: 'training', returnTo: id });
+      router.push(trainHref(id));
       return;
     }
     setProgress((p) => applyStudyAction(p, chapter, id, action));
@@ -108,9 +128,6 @@ export default function Game({ scene }: { scene: ReactNode }) {
       learning.reviewing
     )
       setView({ kind: 'discovery', id });
-  }
-  function train(action: TrainingAction) {
-    setProgress((p) => applyTrainingAction(p, action));
   }
   function restart() {
     setProgress(restartCurrentJourney);
@@ -141,10 +158,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
             </p>
           ) : (
             <>
-              <TrainingInvitation
-                progress={progress}
-                onTrain={() => setView({ kind: 'training' })}
-              />
+              <TrainingInvitation progress={progress} onTrain={() => router.push('/training')} />
               <ChapterScene
                 chapter={chapter}
                 artwork={
@@ -185,7 +199,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
           onContinue={continueJourney}
           onStart={start}
           onStudy={study}
-          onTraining={train}
+          onTrain={(id) => router.push(trainHref(id))}
           onRestart={restart}
         />
       )}

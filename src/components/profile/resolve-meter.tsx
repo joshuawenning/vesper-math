@@ -20,7 +20,7 @@ export default function ResolveMeter({
       />
       <p className="mt-2 text-xs leading-relaxed">
         {context === 'training'
-          ? 'Practice +3 · Mistakes cost nothing. Train to restore Resolve, up to 20.'
+          ? 'Practice +1 · Mistakes cost nothing. Train to restore Resolve, up to 20.'
           : 'Correct +2 · New mistake −1 · Reflection +1. At zero, train with Elian to reopen the trail.'}
       </p>
     </div>

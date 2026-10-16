@@ -5,11 +5,7 @@ import { artwork } from '@/content/artwork';
 import type { Artwork, Chapter, DialogView, Progress } from '@/lib/types';
 import Dialog from './dialog';
 import { storyLearning, type StudyAction } from '@/lib/story-learning';
-import type { TrainingAction } from '@/lib/training';
-import { trainingArt } from '@/content/training-art';
 import { levelEncounter } from '@/lib/difficulty';
-const TrainingGround = dynamic(() => import('./training/training-ground'));
-const TutorChat = dynamic(() => import('./tutor/tutor-chat'));
 const ProfileContent = dynamic(() => import('./profile/profile-content'));
 import Preferences from './preferences';
 import Button from './ui/button';
@@ -32,7 +28,7 @@ interface Props {
   onContinue: () => void;
   onStart: () => void;
   onStudy: (id: string, action: StudyAction) => void;
-  onTraining: (action: TrainingAction) => void;
+  onTrain: (id?: string) => void;
   onRestart: () => void;
 }
 
@@ -42,11 +38,6 @@ interface DialogDefinition {
   artwork: Artwork;
 }
 const definitions = {
-  training: {
-    title: 'The wayfarer’s training ground',
-    label: 'Find your footing with Elian',
-    artwork: trainingArt.arithmetic,
-  },
   welcome: {
     title: 'Your journey, your pace',
     label: 'Welcome to Vesper Math',
@@ -54,7 +45,6 @@ const definitions = {
   },
   settings: { title: 'Make yourself at home', label: 'Preferences', artwork: artwork.preferences },
   restart: { title: 'Begin again?', label: 'A new beginning', artwork: artwork.preferences },
-  companion: { title: 'A word with Elian', label: 'Elian · Cartographer', artwork: artwork.elian },
   profile: { title: 'Your wayfarer', label: 'A story of your own', artwork: artwork.preferences },
   locked: {
     title: 'A path yet to open',
@@ -91,7 +81,7 @@ export default function GameDialog({
   onContinue,
   onStart,
   onStudy,
-  onTraining,
+  onTrain,
   onRestart,
 }: Props) {
   const next = chapter.encounters.find((e) => !progress.done.includes(e.id));
@@ -120,27 +110,9 @@ export default function GameDialog({
       artwork: chapter.scene ?? artwork.observatory,
       label: `Chapter ${chapter.number ?? 1} · ${chapter.region}`,
     };
-  if (view.kind === 'training')
-    definition = {
-      ...definitions.training,
-      artwork: trainingArt[progress.training.pending?.mode ?? 'arithmetic'],
-    };
   let content: ReactNode;
 
   switch (view.kind) {
-    case 'training':
-      content = (
-        <TrainingGround
-          progress={progress}
-          onAction={onTraining}
-          onResume={() => {
-            if (progress.resolve <= 0) return;
-            if (view.returnTo) onEncounter(view.returnTo);
-            else onDismiss();
-          }}
-        />
-      );
-      break;
     case 'welcome':
       content = (
         <>
@@ -176,9 +148,6 @@ export default function GameDialog({
     case 'profile':
       content = <ProfileContent progress={progress} onChange={onChange} onDismiss={onDismiss} />;
       break;
-    case 'companion':
-      content = <TutorChat progress={progress} onChange={onChange} />;
-      break;
     case 'locked':
       content = (
         <>
@@ -198,7 +167,7 @@ export default function GameDialog({
             encounter={encounter}
             progress={progress}
             onStudy={onStudy}
-            onTrain={() => onNavigate({ kind: 'training', returnTo: encounter.id })}
+            onTrain={() => onTrain(encounter.id)}
           />
         );
       break;

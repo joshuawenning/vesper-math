@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
 import './globals.css';
+import { ProgressProvider } from '@/components/use-progress';
+import ElianChat from '@/components/tutor/elian-chat';
 
 const literary = Cormorant_Garamond({
   subsets: ['latin'],
@@ -34,7 +36,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to adventure
         </a>
-        {children}
+        <ProgressProvider>
+          {children}
+          <ElianChat />
+        </ProgressProvider>
       </body>
     </html>
   );

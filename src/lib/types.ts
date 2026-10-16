@@ -163,18 +163,9 @@ export interface Progress extends Journey {
   practice: { attempts: number; correct: number };
 }
 export type DialogView =
-  | { kind: 'training'; returnTo?: string }
   | {
       kind:
-        | 'welcome'
-        | 'settings'
-        | 'map'
-        | 'journal'
-        | 'companion'
-        | 'finale'
-        | 'complete'
-        | 'restart'
-        | 'profile';
+        'welcome' | 'settings' | 'map' | 'journal' | 'finale' | 'complete' | 'restart' | 'profile';
     }
   | { kind: 'encounter' | 'discovery' | 'locked'; id: string };
 export type ChapterStatus = 'done' | 'current' | 'locked';

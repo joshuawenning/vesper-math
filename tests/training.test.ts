@@ -43,10 +43,10 @@ test('zero Resolve blocks story actions, preserves progress, and training reopen
     rolls: [3, 4],
   });
   p = applyTrainingAction(p, { kind: 'submit', id: p.training.pending!.id, value: '7' });
-  assert.equal(p.resolve, 3);
+  assert.equal(p.resolve, 1);
   assert.equal(JSON.stringify(p.study), paused);
   p = applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '5' } });
-  assert.equal(p.resolve, 5);
+  assert.equal(p.resolve, 3);
   assert.equal(p.study[`${chapter.id}:bridge`].completed, 1);
 });
 
@@ -70,7 +70,7 @@ test('training verifies all D20 addition, subtraction, and multiplication result
           id: p.training.pending!.id,
           value: String(expected),
         });
-        assert.equal(p.resolve, 3);
+        assert.equal(p.resolve, 1);
         assert.equal(p.training.solved, 1);
       }
   }
@@ -184,8 +184,49 @@ test('training stays available at zero with a clear recovery path and accessible
   const html = renderToStaticMarkup(
     createElement(TrainingGround, { progress: p, onAction: () => {}, onResume: () => {} }),
   );
-  assert.ok(html.includes('Begin a practice round'));
-  assert.ok(html.includes('Solve a training round'));
-  assert.ok(html.includes('Mistakes here cost nothing'));
+  assert.ok(html.includes('Begin practice'));
+  assert.ok(html.includes('Solve a round'));
+  assert.ok(html.includes('Practice restores 1 Resolve'));
   assert.ok(html.includes('type="radio"'));
+});
+
+test('an unsolved practice roll cannot be replaced, including after exporting or changing modes', () => {
+  let p = applyTrainingAction(normalizeProgress({}), {
+    kind: 'roll',
+    mode: 'dice',
+    operation: 'add',
+    table: 3,
+    rolls: [6, 8],
+  });
+  for (const mode of ['arithmetic', 'tables', 'dice'] as const) {
+    const attempt = {
+      kind: 'roll' as const,
+      mode,
+      operation: 'multiply' as const,
+      table: 5,
+      rolls: [1, 2] as [number, number],
+    };
+    assert.equal(applyTrainingAction(p, attempt), p);
+    const restored = normalizeProgress(JSON.parse(JSON.stringify(p)));
+    assert.equal(applyTrainingAction(restored, attempt), restored);
+  }
+  const html = renderToStaticMarkup(
+    createElement(TrainingGround, { progress: p, onAction: () => {}, onResume: () => {} }),
+  );
+  assert.ok(html.includes('D20 showing 6'));
+  assert.ok(html.includes('D20 showing 8'));
+  assert.ok(!html.includes('Roll left'));
+  assert.ok(!html.includes('Roll both'));
+  assert.ok(!html.includes('Try a different question'));
+  assert.ok(html.includes('Hint'));
+  p = applyTrainingAction(p, { kind: 'submit', id: p.training.pending!.id, value: '14' });
+  assert.equal(p.resolve, 8);
+  const next = applyTrainingAction(p, {
+    kind: 'roll',
+    mode: 'tables',
+    operation: 'multiply',
+    table: 5,
+    rolls: [1, 2],
+  });
+  assert.notEqual(next.training.pending!.id, p.training.pending!.id);
 });

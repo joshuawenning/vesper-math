@@ -1,11 +1,10 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { topics, tutorReply, type TutorSession } from '@/lib/tutor';
+import { tutorReply, type TutorSession } from '@/lib/tutor';
 import { skillLevels } from '@/content/worlds';
 import type { Progress } from '@/lib/types';
 import Button from '../ui/button';
 import ReadAloud from '../accessibility/read-aloud';
-import { Muted } from '../ui/typography';
 
 interface Message {
   id: number;
@@ -27,11 +26,6 @@ export default function TutorChat({
       text: `Welcome, ${name}. Ask me about a math idea, type a calculation, or invite me to quiz you. What would you like to understand today? We can start with a small example and follow your curiosity.`,
     },
   ]);
-  const [suggestions, setSuggestions] = useState([
-    'Explain fractions',
-    'Explain division',
-    'Quiz me',
-  ]);
   const [input, setInput] = useState('');
   const [question, setQuestion] = useState(false);
   const session = useRef<TutorSession>({ question: null, count: 0 });
@@ -51,7 +45,6 @@ export default function TutorChat({
       session.current,
     );
     session.current = result.session;
-    setSuggestions(result.suggestions ?? []);
     setQuestion(Boolean(result.session.question));
     const id = ++sequence.current;
     setMessages((old) =>
@@ -74,8 +67,8 @@ export default function TutorChat({
   }
   const latestReply = messages.filter((m) => m.role === 'elian').at(-1)?.id;
   return (
-    <>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-[0.75rem] text-[#43533e]">
+    <div className="flex min-h-0 flex-1 flex-col">
+      <div className="mb-3 shrink-0 flex flex-wrap items-center justify-between gap-2 text-[0.75rem] text-[#43533e]">
         <span>On-device math guide · no messages leave this device</span>
         <span>{skillLevels.find((l) => l.id === progress.skill)?.label}</span>
       </div>
@@ -86,7 +79,7 @@ export default function TutorChat({
         aria-label="Conversation with Elian"
         aria-live="polite"
         aria-relevant="additions"
-        className="mb-4 max-h-[330px] space-y-3 overflow-y-auto overscroll-contain pr-1"
+        className="mb-3 min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain pr-1"
       >
         {messages.map((message) => (
           <div
@@ -115,46 +108,12 @@ export default function TutorChat({
         ))}
       </div>
       <form
+        className="shrink-0"
         onSubmit={(event) => {
           event.preventDefault();
           send(input);
         }}
       >
-        <label className="mb-3 block text-sm text-[#43533e]">
-          A little inspiration
-          <select
-            aria-label="Conversation ideas"
-            value=""
-            onChange={(event) => setInput(event.target.value)}
-            className="mt-1 block min-h-11 w-full border-0 border-b border-[#6b795e] bg-transparent py-2 pr-2 text-base text-ink"
-          >
-            <option value="" disabled>
-              Choose an idea to make your own…
-            </option>
-            <optgroup label="Keep talking">
-              {suggestions
-                .filter((p) => p !== 'Quiz me')
-                .map((prompt) => (
-                  <option key={prompt} value={prompt}>
-                    {prompt}
-                  </option>
-                ))}
-            </optgroup>
-            <optgroup label="Explore a topic">
-              {topics
-                .filter((topic) => !suggestions.includes(`Explain ${topic}`))
-                .map((topic) => (
-                  <option key={topic} value={`Explain ${topic}`}>
-                    {topic.charAt(0).toUpperCase() + topic.slice(1)}
-                  </option>
-                ))}
-            </optgroup>
-            <optgroup label="Practice together">
-              <option value="Quiz me">Invite Elian to quiz you</option>
-              {question && <option value="Hint">Ask for a hint</option>}
-            </optgroup>
-          </select>
-        </label>
         <label className="sr-only" htmlFor="elian-message">
           Message Elian
         </label>
@@ -177,11 +136,10 @@ export default function TutorChat({
           <span className="ml-auto text-[0.75rem] text-[#43533e]">{input.length}/400</span>
         </div>
       </form>
-      <Muted>
-        This is a focused local tutor, not an AI chat service. It handles supported topics, short
-        arithmetic expressions, and simple equations. Chat clears when this window closes; practice
-        totals remain in your profile.
-      </Muted>
-    </>
+      <p className="mt-3 text-xs leading-relaxed text-[#43533e]">
+        Explore concepts in the training library. This on-device guide supports math topics,
+        calculations, and quizzes.
+      </p>
+    </div>
   );
 }

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { ReactNode } from 'react';
 import Icon from './icon';
 import CharacterPortrait from './profile/character-portrait';
@@ -36,17 +37,16 @@ export default function GameHeader({
   const links: {
     title: string;
     icon: IconName;
-    kind: 'training' | 'map' | 'journal' | 'settings';
+    kind: 'map' | 'journal' | 'settings';
   }[] = [
-    { title: 'Training', icon: 'dice', kind: 'training' },
     { title: 'World map', icon: 'map', kind: 'map' },
     { title: 'Journal', icon: 'book', kind: 'journal' },
     { title: 'Settings', icon: 'gear', kind: 'settings' },
   ];
   return (
     <header className="mx-[18px] flex min-h-[75px] flex-wrap items-center justify-between border-b border-line tablet:mx-[25px] desktop:min-h-[89px] desktop:flex-nowrap desktop:gap-[25px] desktop:mx-[42px]">
-      <a
-        href="#adventure"
+      <Link
+        href="/#adventure"
         onClick={close}
         aria-label="Vesper Math — current adventure"
         className="flex items-center gap-[14px] py-[15px] text-gold tablet:py-0"
@@ -60,11 +60,18 @@ export default function GameHeader({
             Vesper Math
           </div>
         </div>
-      </a>
+      </Link>
       <nav
         className="order-3 grid w-full grid-cols-4 gap-x-3 gap-y-1 py-2 min-[480px]:flex min-[480px]:justify-around desktop:flex border-t border-line desktop:order-0 desktop:h-full desktop:w-auto desktop:justify-start desktop:gap-5 desktop:border-t-0 desktop:gap-[30px]"
         aria-label="Main"
       >
+        <Link
+          href="/training"
+          className="flex min-h-11 flex-col items-center justify-center gap-1 py-3 text-[0.75rem] text-subtle hover:text-gold min-[480px]:flex-row min-[480px]:gap-2"
+        >
+          <Icon name="dice" className="size-4 tablet:size-5" />
+          Training
+        </Link>
         {links.map((link) => (
           <NavButton key={link.kind} onClick={() => open({ kind: link.kind })} icon={link.icon}>
             {link.title}

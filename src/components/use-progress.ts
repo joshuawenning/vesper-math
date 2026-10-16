@@ -1,11 +1,18 @@
 'use client';
-import { useEffect, useState } from 'react';
+import {
+  createContext,
+  createElement,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from 'react';
 import { chapter } from '@/content/merewood';
 import { initialProgress, normalizeProgress, SAVE_KEY } from '@/lib/progress';
 import { observeAppearance } from '@/lib/theme';
 import type { Progress } from '@/lib/types';
 
-export function useProgress() {
+function useStoredProgress() {
   const [progress, setProgress] = useState<Progress>(initialProgress);
   const [loaded, setLoaded] = useState(false);
   const [storageOK, setStorageOK] = useState(true);
@@ -43,4 +50,35 @@ export function useProgress() {
   }, [progress.theme, loaded]);
 
   return { progress, setProgress, loaded, storageOK };
+}
+
+const ProgressContext = createContext<
+  | (ReturnType<typeof useStoredProgress> & {
+      chatOpen: boolean;
+      openChat: () => void;
+      closeChat: () => void;
+    })
+  | null
+>(null);
+
+export function ProgressProvider({ children }: { children: ReactNode }) {
+  const state = useStoredProgress();
+  const [chatOpen, setChatOpen] = useState(false);
+  return createElement(
+    ProgressContext.Provider,
+    {
+      value: {
+        ...state,
+        chatOpen,
+        openChat: () => setChatOpen(true),
+        closeChat: () => setChatOpen(false),
+      },
+    },
+    children,
+  );
+}
+export function useProgress() {
+  const state = useContext(ProgressContext);
+  if (!state) throw new Error('ProgressProvider is required');
+  return state;
 }

@@ -49,7 +49,7 @@ export function RestartContent({
   return (
     <>
       <Narrative>
-        Starting again clears this chapter’s discoveries and challenges, and resets Resolve to 10.
+        Starting again clears this chapter’s discoveries and challenges, and resets Resolve to 7.
         Your character, preferences, and other worlds will stay.
       </Narrative>
       <Actions>

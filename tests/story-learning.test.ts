@@ -149,7 +149,7 @@ test('a story requires three answers and reflection before claiming a discovery'
   let p = normalizeProgress({});
   p = applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '5' } });
   assert.deepEqual(p.done, []);
-  assert.equal(p.resolve, 12);
+  assert.equal(p.resolve, 9);
   assert.equal(storyLearning(p, 'bridge').reviewing, true);
   assert.equal(
     applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '5' } }),
@@ -169,7 +169,7 @@ test('a story requires three answers and reflection before claiming a discovery'
   p = applyStudyAction(p, chapter, 'bridge', { kind: 'continue', step: 2 });
   assert.deepEqual(p.done, ['bridge']);
   assert.equal(p.history.length, 1);
-  assert.equal(p.resolve, 16);
+  assert.equal(p.resolve, 13);
   assert.equal(
     applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '5' } }),
     p,
@@ -234,7 +234,7 @@ test('legacy saves retain discoveries without forcing three new challenges', () 
   assert.equal(p.resolve, 20);
   assert.deepEqual(p.study, {});
   assert.equal(normalizeProgress({ resolve: -99 }).resolve, 0);
-  assert.equal(normalizeProgress({ resolve: NaN }).resolve, 10);
+  assert.equal(normalizeProgress({ resolve: NaN }).resolve, 7);
 });
 
 test('division practice accepts equivalent expressions without a false penalty', () => {
@@ -260,7 +260,7 @@ test('Start Fresh resets Resolve and current chapter learning while retaining ot
   });
   const original = p;
   p = restartCurrentJourney(p);
-  assert.equal(p.resolve, 10);
+  assert.equal(p.resolve, 7);
   assert.deepEqual(p.done, []);
   assert.deepEqual(p.levels, {});
   assert.equal(p.ending, null);
@@ -278,7 +278,7 @@ test('Start Fresh resets Resolve and current chapter learning while retaining ot
   assert.equal(p.theme, 'light');
   assert.equal(p.skill, 'developing');
   assert.equal(p.profile.name, 'Mira');
-  assert.equal(normalizeProgress(JSON.parse(JSON.stringify(p))).resolve, 10);
-  assert.equal(restartCurrentJourney({ ...original, resolve: 0 }).resolve, 10);
+  assert.equal(normalizeProgress(JSON.parse(JSON.stringify(p))).resolve, 7);
+  assert.equal(restartCurrentJourney({ ...original, resolve: 0 }).resolve, 7);
   assert.equal(original.resolve, 19);
 });

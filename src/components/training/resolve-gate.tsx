@@ -22,7 +22,7 @@ export default function ResolveGate({ onTrain }: { onTrain: () => void }) {
       </Narrative>
       <Muted>
         Your Resolve is at zero. Your discoveries and this challenge are saved. Solve a round in the
-        training ground to restore 3 Resolve, then return here.
+        training ground to restore 1 Resolve, then return here.
       </Muted>
       <Button onClick={onTrain}>
         Train with Elian
