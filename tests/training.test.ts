@@ -186,7 +186,7 @@ test('training stays available at zero with a clear recovery path and accessible
   );
   assert.ok(html.includes('Begin practice'));
   assert.ok(html.includes('Solve a round'));
-  assert.ok(html.includes('Practice restores 1 Resolve'));
+  assert.match(html, /<button[^>]*disabled=""[^>]*>Solve a round to reopen the trail<\/button>/);
   assert.ok(html.includes('type="radio"'));
 });
 

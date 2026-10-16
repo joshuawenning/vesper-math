@@ -31,7 +31,7 @@ export function validateAnswer(challenge: Challenge, answer: Answer): boolean {
 
 export function answerFeedback(challenge: Challenge, answer: Answer): string {
   if (challenge.kind === 'number')
-    return 'That does not quite fit yet. Try working through one step at a time, or ask Elian for a hint. Fractions such as 1/2 are welcome.';
+    return 'That answer does not fit yet. Try another step, or open a hint.';
   if (challenge.kind === 'sum') {
     const selected = answer.selected ?? [];
     return `You have ${selected.length} planks spanning ${selected.reduce((a, b) => a + b, 0)} ${challenge.unit}. The supports need exactly ${challenge.count} planks and a total of ${challenge.target} ${challenge.unit}.`;

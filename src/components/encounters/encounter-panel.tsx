@@ -6,6 +6,7 @@ import { storyLearning, type StudyAction } from '@/lib/story-learning';
 import ChallengeStep from './challenge-step';
 import ResolveGate from '../training/resolve-gate';
 import ResolveMeter from '../profile/resolve-meter';
+import ResolveNotice from '../profile/resolve-notice';
 import ReadAloud from '../accessibility/read-aloud';
 import Icon from '../icon';
 import Button from '../ui/button';
@@ -30,9 +31,16 @@ export default function EncounterPanel({
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
   }, [index, learning.reviewing]);
-  if (progress.resolve <= 0) return <ResolveGate onTrain={onTrain} />;
+  if (progress.resolve <= 0)
+    return (
+      <>
+        <ResolveNotice value={progress.resolve} />
+        <ResolveGate onTrain={onTrain} />
+      </>
+    );
   return (
     <>
+      <ResolveNotice value={progress.resolve} />
       <ResolveMeter value={progress.resolve} />
       <ol
         aria-label="Story challenges"
@@ -63,14 +71,14 @@ export default function EncounterPanel({
       {learning.reviewing ? (
         <div role="status">
           <div className="mb-3 flex items-center justify-between gap-2">
-            <p className="text-sm font-semibold text-[#384a3b]">
-              Well reasoned · +2 Resolve (up to 20)
+            <p className="flex items-center gap-2 text-sm font-semibold text-[#384a3b]">
+              <Icon name="check" className="size-5" /> Correct
             </p>
             <ReadAloud
               compact
               label="Read explanation aloud"
               settings={progress.speech}
-              text={`Well reasoned. ${step.lesson}. Resolve restored by 2, up to 20.`}
+              text={`Correct. ${step.lesson}`}
             />
           </div>
           <Narrative>{step.lesson}</Narrative>

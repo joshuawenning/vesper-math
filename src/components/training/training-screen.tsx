@@ -12,6 +12,7 @@ import TrainingLibrary from './training-library';
 import WorldAtmosphere from '../adventure/world-atmosphere';
 import GameHeader from '../game-header';
 import ResolveMeter from '../profile/resolve-meter';
+import ResolveNotice from '../profile/resolve-notice';
 
 export default function TrainingScreen({ returnTo }: { returnTo?: string }) {
   const { progress, setProgress, loaded, openChat } = useProgress();
@@ -81,6 +82,7 @@ export default function TrainingScreen({ returnTo }: { returnTo?: string }) {
           <section className="min-w-0 border border-[#b49e70] bg-paper p-5 text-ink tablet:p-7">
             {loaded ? (
               <>
+                <ResolveNotice value={progress.resolve} />
                 <ResolveMeter value={progress.resolve} context="training" />
                 {section === 'library' ? (
                   <TrainingLibrary progress={progress} onChat={openChat} />

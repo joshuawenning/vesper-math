@@ -22,9 +22,6 @@ export default function D20Dice({ a, b, round }: { a: number; b: number; round: 
           </svg>
         ))}
       </div>
-      <figcaption className="mt-2 text-center text-xs text-[#43533e]">
-        The dice are set. Solve this roll to unlock the next.
-      </figcaption>
     </figure>
   );
 }

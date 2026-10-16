@@ -38,23 +38,6 @@ export function trainingGuidance(p: TrainingProblem): string {
     return `Find the distance from ${p.b} up to ${p.a}. You can count up in small jumps. Check by adding your answer to ${p.b}.`;
   return `${p.a} × ${p.b} means ${p.a} equal groups of ${p.b}. Add ${p.b} repeatedly, or split the ${p.a} groups into smaller batches.`;
 }
-export function trainingExplanation(p: TrainingProblem): string {
-  const answer = trainingAnswer(p);
-  if (p.operation === 'add') {
-    const tens = Math.floor(p.b / 10) * 10,
-      ones = p.b % 10;
-    return tens
-      ? `Split ${p.b} into ${tens} and ${ones}: ${p.a} + ${tens} = ${p.a + tens}, then add ${ones} to reach ${answer}.`
-      : `Count forward ${p.b} from ${p.a}: ${p.a} + ${p.b} = ${answer}. Addition joins the two quantities.`;
-  }
-  if (p.operation === 'subtract')
-    return `${p.b} + ${answer} = ${p.a}, so ${p.a} − ${p.b} = ${answer}. The difference is the distance between the two numbers.`;
-  const half = Math.floor(p.a / 2),
-    rest = p.a - half;
-  return p.a === 1
-    ? `One group of ${p.b} contains ${p.b}. Multiplying by 1 leaves the quantity unchanged.`
-    : `Split ${p.a} groups into ${half} and ${rest}: ${half} × ${p.b} = ${half * p.b}; ${rest} × ${p.b} = ${rest * p.b}. Add them: ${half * p.b} + ${rest * p.b} = ${answer}.`;
-}
 export type TrainingAction =
   | {
       kind: 'roll';

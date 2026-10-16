@@ -6,7 +6,6 @@ import {
   operationSymbol,
   rollDie,
   trainingAnswer,
-  trainingExplanation,
   trainingGuidance,
   trainingModes,
   type TrainingAction,
@@ -141,23 +140,28 @@ export default function TrainingGround({
         <>
           {mode === 'dice' && <D20Dice a={problem.a} b={problem.b} round={problem.id} />}
           <div className="mb-3 flex items-center justify-between gap-2">
-            <p className="text-xs text-[#43533e]">Elian’s challenge · +1 Resolve</p>
+            <p className="text-xs text-[#43533e]">Elian’s challenge</p>
             <ReadAloud
               compact
               label="Read training question aloud"
               settings={progress.speech}
-              text={`What is ${prompt}? ${help ? trainingGuidance(problem) : ''} ${problem.solved ? trainingExplanation(problem) : ''}`}
+              text={
+                problem.solved
+                  ? `Correct. ${prompt} equals ${trainingAnswer(problem)}.`
+                  : `What is ${prompt}? ${help ? trainingGuidance(problem) : ''}`
+              }
             />
           </div>
           {problem.solved ? (
             <section role="status">
-              <h3 className="font-story text-3xl">
-                {prompt} = {trainingAnswer(problem)}
-              </h3>
-              <p className="mt-2 text-sm font-medium text-[#385a48]">
-                Well reasoned. +1 Resolve, up to 20.
-              </p>
-              <p className="my-4 text-sm leading-relaxed">{trainingExplanation(problem)}</p>
+              <div className="mb-4 border-l-2 border-[#385a48] bg-[#dce3cf] p-4 text-[#243d33]">
+                <p className="mb-2 flex items-center gap-2 text-sm font-medium">
+                  <Icon name="check" className="size-5" /> Correct
+                </p>
+                <h3 className="font-story text-3xl">
+                  {prompt} = {trainingAnswer(problem)}
+                </h3>
+              </div>
               <Button ref={next} onClick={begin}>
                 Next question
                 <Icon name="arrow" />
@@ -169,11 +173,14 @@ export default function TrainingGround({
                 event.preventDefault();
                 const result = calculate(value);
                 if (result === null) {
-                  setFeedback('Enter a number or a short calculation.');
+                  setFeedback('Enter a number, fraction, or short calculation.');
+                  input.current?.focus({ preventScroll: true });
                   return;
                 }
                 if (!approximatelyEqual(result, trainingAnswer(problem))) {
-                  setFeedback('Not quite. Your Resolve stays safe—try a smaller step.');
+                  setFeedback('Not quite. Try again, or open a hint.');
+                  input.current?.focus({ preventScroll: true });
+                  input.current?.select();
                 }
                 onAction({ kind: 'submit', id: problem.id, value });
               }}
@@ -197,16 +204,24 @@ export default function TrainingGround({
                   maxLength={160}
                   inputMode="text"
                   aria-label="Your training answer"
-                  className="min-w-0 flex-1 border border-[#6b795e] bg-[#fff9e7] px-3 py-3 text-xl text-ink"
+                  aria-invalid={Boolean(feedback)}
+                  aria-describedby={feedback ? 'training-feedback' : undefined}
+                  className={`min-w-0 flex-1 border bg-[#fff9e7] px-3 py-3 text-xl text-ink ${feedback ? 'border-[#8c4a36] ring-1 ring-[#8c4a36]' : 'border-[#6b795e]'}`}
                 />
-                <Button type="submit" aria-label="Check answer">
-                  <Icon name="arrow" />
+                <Button type="submit" aria-label={feedback ? 'Try again' : 'Check answer'}>
+                  <Icon name={feedback ? 'restart' : 'arrow'} />
                 </Button>
               </div>
-              <div className="mt-3 flex items-center justify-between gap-2">
-                <span className="text-xs text-[#43533e]">
-                  Enter to check · mistakes cost nothing
-                </span>
+              {feedback && (
+                <p
+                  id="training-feedback"
+                  role="status"
+                  className="mt-3 border-l-2 border-[#8c4a36] bg-[#ead9c7] px-3 py-2 text-sm font-medium text-[#683d2d]"
+                >
+                  {feedback}
+                </p>
+              )}
+              <div className="mt-2 flex justify-end">
                 <button
                   type="button"
                   onClick={() => setHelp((v) => !v)}
@@ -217,11 +232,6 @@ export default function TrainingGround({
                   {help ? 'Hide hint' : 'Hint'}
                 </button>
               </div>
-              {feedback && (
-                <p role="status" className="my-3 text-sm text-[#784732]">
-                  {feedback}
-                </p>
-              )}
             </form>
           )}
           {help && !problem.solved && (
@@ -233,10 +243,7 @@ export default function TrainingGround({
         </>
       )}
       <div className="mt-6 border-t border-[#909c8350] pt-4 text-xs leading-relaxed text-[#43533e]">
-        <p>
-          {progress.training.solved} rounds solved. Practice restores 1 Resolve per correct answer,
-          up to 20.
-        </p>
+        <p>{progress.training.solved} rounds solved.</p>
         <button
           type="button"
           onClick={onResume}

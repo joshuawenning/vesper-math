@@ -11,6 +11,7 @@ export default function DivisionChallenge({
   onRoute,
   onValue,
   narration,
+  invalid = false,
 }: {
   challenge: Extract<Challenge, { kind: 'division' }>;
   route: string;
@@ -19,6 +20,7 @@ export default function DivisionChallenge({
   onRoute: (route: string) => void;
   onValue: (value: string) => void;
   narration?: ReactNode;
+  invalid?: boolean;
 }) {
   const tactic = challenge.routes.find((r) => r.id === route) ?? challenge.routes[0];
   return (
@@ -58,14 +60,15 @@ export default function DivisionChallenge({
       </div>
       <input
         id="answer"
-        className="mt-[9px] mr-2 w-[90px] border border-[#89977f] bg-[#fff9e7] p-2.5 font-story text-[1.5625rem] text-[#253a2c]"
+        className={`mt-[9px] mr-2 w-[90px] border bg-[#fff9e7] p-2.5 font-story text-[1.5625rem] text-[#253a2c] ${invalid ? 'border-[#8c4a36] ring-1 ring-[#8c4a36]' : 'border-[#89977f]'}`}
         type="number"
         min="0"
         step="1"
         inputMode="numeric"
         value={value}
         onChange={(event) => onValue(event.target.value)}
-        aria-describedby="equation"
+        aria-invalid={invalid}
+        aria-describedby={invalid ? 'equation story-feedback' : 'equation'}
       />
       <span id="equation">
         {support === 'guided' ? `${challenge.total} ÷ ${tactic.groups} = ?` : 'sparks per group'}

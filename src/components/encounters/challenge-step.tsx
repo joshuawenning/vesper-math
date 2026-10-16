@@ -16,6 +16,12 @@ import { Actions, Feedback } from '../ui/panels';
 
 const answerFormatHint = 'Use a number, decimal, or fraction such as 1/2. No units needed.';
 
+function focusAnswer(form: HTMLFormElement) {
+  const input = form.querySelector<HTMLInputElement>('input');
+  input?.focus({ preventScroll: true });
+  input?.select();
+}
+
 export default function ChallengeStep({
   encounter,
   step,
@@ -85,15 +91,13 @@ export default function ChallengeStep({
       onSubmit={(event) => {
         event.preventDefault();
         if (!hasAnswer(answer, c.kind)) {
-          setFeedback(
-            'Enter an answer first. A number, decimal, fraction, or short calculation is welcome. Resolve is unchanged.',
-          );
+          setFeedback('Enter an answer first, or open a hint for guidance.');
+          focusAnswer(event.currentTarget);
           return;
         }
         if (!validateAnswer(c, answer)) {
-          setFeedback(
-            `${answerFeedback(c, answer)} ${principle} A new incorrect answer costs 1 Resolve; the same answer is never charged twice.`,
-          );
+          setFeedback(answerFeedback(c, answer));
+          focusAnswer(event.currentTarget);
         }
         onStudy(encounter.id, { kind: 'submit', step: index, answer });
       }}
@@ -107,6 +111,7 @@ export default function ChallengeStep({
         <NumberChallenge
           narration={narration}
           answerHintId={hint > 0 ? 'story-answer-format' : undefined}
+          invalid={Boolean(feedback)}
           challenge={c}
           value={answer.value ?? ''}
           onChange={(value) => update({ value })}
@@ -131,6 +136,7 @@ export default function ChallengeStep({
       )}
       {c.kind === 'division' && (
         <DivisionChallenge
+          invalid={Boolean(feedback)}
           narration={narration}
           challenge={c}
           route={answer.route ?? c.routes[0].id}
@@ -140,7 +146,14 @@ export default function ChallengeStep({
           onValue={(value) => update({ value })}
         />
       )}
-      {feedback && <Feedback>{feedback}</Feedback>}
+      {feedback && (
+        <div id="story-feedback">
+          <Feedback>
+            <strong className="mb-1 block">Try again</strong>
+            {feedback}
+          </Feedback>
+        </div>
+      )}
       {hint > 0 && (
         <div
           id="story-hint"
