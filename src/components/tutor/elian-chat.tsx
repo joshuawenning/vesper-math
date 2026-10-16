@@ -1,11 +1,13 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { useProgress } from '../use-progress';
 import { artwork } from '@/content/artwork';
 const TutorChat = dynamic(() => import('./tutor-chat'));
 export default function ElianChat() {
+  const pathname = usePathname();
   const { progress, setProgress, chatOpen, openChat, closeChat } = useProgress();
   const [visited, setVisited] = useState(false);
   const panel = useRef<HTMLElement>(null);
@@ -22,6 +24,7 @@ export default function ElianChat() {
     window.speechSynthesis?.cancel();
     trigger.current?.focus({ preventScroll: true });
   }
+  if (pathname === '/' || pathname === '/begin') return null;
   return (
     <>
       {!chatOpen && (

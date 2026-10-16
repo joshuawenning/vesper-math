@@ -72,13 +72,13 @@ export default function Game({ scene }: { scene: ReactNode }) {
     const panel = params.get('panel');
     if (panel && ['map', 'journal', 'settings', 'profile'].includes(panel)) {
       setView({ kind: panel as 'map' | 'journal' | 'settings' | 'profile' });
-      router.replace('/', { scroll: false });
+      router.replace('/adventure', { scroll: false });
       return;
     }
     const id = params.get('resume');
     if (id && chapter.encounters.some((e) => e.id === id)) {
       openEncounter(id);
-      router.replace('/', { scroll: false });
+      router.replace('/adventure', { scroll: false });
     }
   }, [loaded, chapter.id, progress.worldId]);
 

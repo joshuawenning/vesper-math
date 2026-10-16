@@ -47,7 +47,7 @@ export default function GameHeader({
   return (
     <header className="mx-[18px] flex min-h-[75px] flex-wrap items-center justify-between border-b border-line tablet:mx-[25px] desktop:min-h-[89px] desktop:flex-nowrap desktop:gap-[25px] desktop:mx-[42px]">
       <Link
-        href="/#adventure"
+        href="/adventure#adventure"
         onClick={close}
         aria-label="Vesper Math — current adventure"
         className="flex items-center gap-[14px] py-[15px] text-gold tablet:py-0"

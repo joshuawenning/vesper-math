@@ -13,7 +13,7 @@ const literary = Cormorant_Garamond({
 const ui = DM_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-ui' });
 
 export const metadata: Metadata = {
-  title: 'Vesper Math · The Flooded Observatory',
+  title: 'Vesper Math · Follow your curiosity',
   description:
     'A personal, illustrated math adventure with seven worlds to explore, a private on-device tutor, and room to learn at your own pace.',
 };

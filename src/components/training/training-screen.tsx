@@ -23,13 +23,13 @@ export default function TrainingScreen({ returnTo }: { returnTo?: string }) {
   const resume = () => {
     if (progress.resolve <= 0) return;
     const valid = returnTo && getWorld(progress.worldId)?.encounters.some((id) => id === returnTo);
-    router.push(valid ? `/?resume=${encodeURIComponent(returnTo!)}` : '/');
+    router.push(valid ? `/adventure?resume=${encodeURIComponent(returnTo!)}` : '/adventure');
   };
   return (
     <WorldAtmosphere worldId={progress.worldId}>
       <GameHeader
         progress={progress}
-        open={(view) => router.push(`/?panel=${view.kind}`)}
+        open={(view) => router.push(`/adventure?panel=${view.kind}`)}
         close={() => {}}
       />
       <main
