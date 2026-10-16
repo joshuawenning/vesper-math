@@ -2,7 +2,7 @@
 import { narrationVoiceLabel } from '@/lib/speech';
 import type { Progress } from '@/lib/types';
 import PreferenceSelect from '../ui/preference-select';
-import Button from '../ui/button';
+import Icon from '../icon';
 import PreferenceChoices from '../ui/preference-choices';
 import PreferenceSwitch from '../ui/preference-switch';
 import { Muted } from '../ui/typography';
@@ -26,18 +26,36 @@ export default function SpeechPreferences({
       />
       {value.enabled && (
         <>
-          <PreferenceSelect
-            label="Spoken voice"
-            value={speech.voices.some((v) => v.voiceURI === value.voice) ? value.voice : ''}
-            onChange={(e) => onChange({ ...value, voice: e.target.value })}
-          >
-            <option value="">Default on-device voice</option>
-            {speech.voices.map((v) => (
-              <option key={v.voiceURI} value={v.voiceURI}>
-                {narrationVoiceLabel(v)}
-              </option>
-            ))}
-          </PreferenceSelect>
+          <div className="flex items-end gap-2 [&>label]:min-w-0 [&>label]:flex-1">
+            <PreferenceSelect
+              label="Spoken voice"
+              value={speech.voices.some((v) => v.voiceURI === value.voice) ? value.voice : ''}
+              onChange={(e) => onChange({ ...value, voice: e.target.value })}
+            >
+              <option value="">Default on-device voice</option>
+              {speech.voices.map((v) => (
+                <option key={v.voiceURI} value={v.voiceURI}>
+                  {narrationVoiceLabel(v)}
+                </option>
+              ))}
+            </PreferenceSelect>
+            <button
+              type="button"
+              className="mb-[18px] grid size-11 shrink-0 place-items-center rounded-full text-[#43533e] hover:bg-[#dce3cf] disabled:opacity-40"
+              aria-label={speech.speaking ? 'Stop reading' : 'Preview voice'}
+              title={speech.speaking ? 'Stop reading' : 'Preview voice'}
+              disabled={!speech.ready}
+              onClick={() =>
+                speech.speaking
+                  ? speech.stop()
+                  : speech.speak(
+                      'Welcome to Vesper Math. Three quarters minus one quarter equals one half. Take your time; we can explore this together.',
+                    )
+              }
+            >
+              <Icon name={speech.speaking ? 'stop' : 'speaker'} className="size-5" />
+            </button>
+          </div>
           <PreferenceChoices
             label="Reading pace"
             value={value.rate}
@@ -48,19 +66,6 @@ export default function SpeechPreferences({
               { value: 1.15, label: 'A little faster' },
             ]}
           />
-          <Button
-            variant="secondary"
-            disabled={!speech.ready}
-            onClick={() =>
-              speech.speaking
-                ? speech.stop()
-                : speech.speak(
-                    'Welcome to Vesper Math. Three quarters minus one quarter equals one half. Take your time; we can explore this together.',
-                  )
-            }
-          >
-            {speech.speaking ? 'Stop reading' : 'Preview voice'}
-          </Button>
           <p role="status" className="my-3 text-sm text-[#43533e]">
             {speech.notice ||
               (!speech.available
