@@ -48,7 +48,7 @@ export default function EncounterPanel({
           </li>
         ))}
       </ol>
-      <Narrative>{encounter[progress.reading]}</Narrative>
+      {index === 0 && !learning.reviewing && <Narrative>{encounter[progress.reading]}</Narrative>}
       <h3
         ref={heading}
         tabIndex={-1}

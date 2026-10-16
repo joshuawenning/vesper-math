@@ -17,9 +17,9 @@ export const chapter: Chapter = {
       subtitle: 'Make a way across the water',
       reward: 'Wayfarer’s clasp',
       icon: 'bridge',
-      rich: 'The river has carried away the bridge’s wooden span. Three sound timbers must fit the 12-foot gap exactly. The old supports will hold only three.',
+      rich: 'The river has carried away the bridge’s wooden span. Elian kneels beside the old supports and unrolls her measuring cord. Before you build, she helps you test the spare timbers.',
       plain:
-        'The bridge has a 12-foot gap. Choose exactly three planks whose lengths add up to 12 feet.',
+        'The bridge is broken. Elian helps you measure some spare planks before you choose wood for the crossing.',
       hint: [
         'Choose three lengths. Their total needs to be 12 feet.',
         'Try starting with the 5-foot plank. You need two more that total 7.',
@@ -47,9 +47,9 @@ export const chapter: Chapter = {
       subtitle: 'Wake the sleeping mechanism',
       reward: 'Moonwater vial',
       icon: 'moon',
-      rich: 'Silver water gathers in a stone cistern. A worn inscription reads: “At three parts of four, the heavens turn.” One quarter already rests within.',
+      rich: 'Silver water gathers in a stone cistern beneath the sleeping brass rings. Elian sets a small bowl beside it. “Let us understand the measure before we wake the heavens.”',
       plain:
-        'The cistern must be ¾ full. It is already ¼ full. Add or remove quarter-measures until it reaches the mark.',
+        'A stone tank holds silver water. Practice measuring equal parts with Elian before you fill the tank.',
       hint: [
         'Each measure fills one of four equal parts.',
         'Start at ¼ and count up to ¾. How many quarter-measures did you add?',
@@ -76,9 +76,9 @@ export const chapter: Chapter = {
       subtitle: 'Quiet an ancient guardian',
       reward: 'The lost star chart',
       icon: 'owl',
-      rich: 'A stone owl unfolds its wings above the chart chamber. Eighteen sparks bind it to an old command. Release them in equal groups, and the keeper may rest.',
+      rich: 'A stone owl unfolds its wings above the chart chamber. Sparks bind it to an old command. Elian gathers a few wandering lights so you can practice sharing their magic.',
       plain:
-        'A stone owl guards the star chart. It has 18 sparks of magic. Divide them into equal groups to calm it.',
+        'A stone owl guards the star chart. Elian helps you practice making equal groups before you calm its magic.',
       hint: [
         'Division splits a total into equal groups. Nothing should be left over.',
         'For three pulses, ask: 3 × what = 18? For six crystals, ask: 6 × what = 18?',

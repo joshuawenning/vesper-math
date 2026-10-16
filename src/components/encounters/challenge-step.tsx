@@ -87,7 +87,7 @@ export default function ChallengeStep({
     >
       <ReadAloud
         settings={progress.speech}
-        text={`${encounter.title}. ${encounter[progress.reading]}. Challenge ${index + 1} of 3. ${index === 0 ? `Elian’s starting point: ${step.hint[0]}.` : ''} ${c.kind === 'number' ? c.question : c.kind === 'sum' ? `Choose ${c.count} planks totaling ${c.target} ${c.unit}. Available lengths: ${c.planks.join(', ')}.` : c.kind === 'fraction' ? `The cistern starts at ${c.start}/${c.denominator}. Reach ${c.target}/${c.denominator} by adding or removing measures.` : `${c.total} sparks. ${c.routes.find((r) => r.id === answer.route)?.label}. ${c.routes.find((r) => r.id === answer.route)?.question}`}${
+        text={`${encounter.title}. ${index === 0 ? encounter[progress.reading] : ''} Challenge ${index + 1} of 3. ${index === 0 ? `Elian’s starting point: ${step.hint[0]}.` : ''} ${c.kind === 'number' ? c.question : c.kind === 'sum' ? `Choose ${c.count} planks totaling ${c.target} ${c.unit}. Available lengths: ${c.planks.join(', ')}.` : c.kind === 'fraction' ? `The cistern starts at ${c.start}/${c.denominator}. Reach ${c.target}/${c.denominator} by adding or removing measures.` : `${c.total} sparks. ${c.routes.find((r) => r.id === answer.route)?.label}. ${c.routes.find((r) => r.id === answer.route)?.question}`}${
           hint > 0 ? ` Hint: ${step.hint[hint - 1]}. Why this works: ${principle}` : ''
         }`}
       />

@@ -12,6 +12,10 @@ export default function SumChallenge({
 }) {
   return (
     <Toolbox>
+      <p className="mb-4 font-story text-xl leading-[1.5]">
+        The crossing has a {challenge.target}-foot gap. Choose exactly {challenge.count} timbers
+        whose lengths add up to {challenge.target} feet.
+      </p>
       <div className="flex flex-wrap justify-center gap-[9px]">
         {challenge.planks.map((length) => (
           <button

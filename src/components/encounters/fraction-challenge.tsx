@@ -15,6 +15,10 @@ export default function FractionChallenge({
 }) {
   return (
     <Toolbox>
+      <p className="mb-4 font-story text-xl leading-[1.5]">
+        The cistern is {challenge.start}/{challenge.denominator} full. Reach {challenge.target}/
+        {challenge.denominator} using measures of 1/{challenge.denominator}.
+      </p>
       <div className="flex flex-col items-center justify-center gap-[25px] min-[480px]:flex-row">
         <div
           className="relative flex h-40 w-[95px] shrink-0 flex-col-reverse overflow-hidden rounded-[4px_4px_28px_28px] border-2 border-[#6b8074] bg-[#eee8d5]"
