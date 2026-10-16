@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { artwork } from '@/content/artwork';
 import type { Artwork, Chapter, DialogView, Progress } from '@/lib/types';
 import Dialog from './dialog';
+import { storyLearning, type StudyAction } from '@/lib/story-learning';
 import { levelEncounter } from '@/lib/difficulty';
 const TutorChat = dynamic(() => import('./tutor/tutor-chat'));
 const ProfileContent = dynamic(() => import('./profile/profile-content'));
@@ -27,7 +28,7 @@ interface Props {
   onEncounter: (id: string) => void;
   onContinue: () => void;
   onStart: () => void;
-  onComplete: (id: string) => void;
+  onStudy: (id: string, action: StudyAction) => void;
   onRestart: () => void;
 }
 
@@ -80,7 +81,7 @@ export default function GameDialog({
   onEncounter,
   onContinue,
   onStart,
-  onComplete,
+  onStudy,
   onRestart,
 }: Props) {
   const next = chapter.encounters.find((e) => !progress.done.includes(e.id));
@@ -90,7 +91,7 @@ export default function GameDialog({
         original,
         progress.done.includes(original.id)
           ? (progress.levels[original.id] ?? 'foundations')
-          : progress.skill,
+          : storyLearning(progress, original.id).level,
       )
     : undefined;
   let definition =
@@ -168,7 +169,7 @@ export default function GameDialog({
             key={encounter.id}
             encounter={encounter}
             progress={progress}
-            onComplete={onComplete}
+            onStudy={onStudy}
           />
         );
       break;

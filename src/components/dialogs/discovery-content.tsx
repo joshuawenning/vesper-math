@@ -23,7 +23,7 @@ export default function DiscoveryContent({
       <Reward>
         <Icon name={encounter.icon} /> &nbsp; {encounter.reward}
       </Reward>
-      <Muted>Added to your journal. Hints and retries never reduce your rewards.</Muted>
+      <Muted>Added to your journal. Your discovery and its reward are yours to keep.</Muted>
       <Actions>
         <Button onClick={onNext}>
           {action}

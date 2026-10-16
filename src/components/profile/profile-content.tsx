@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { cleanName, personas } from '@/content/personas';
 import { getWorld, skillLevels } from '@/content/worlds';
 import type { PersonaId, Progress } from '@/lib/types';
+import ResolveMeter from './resolve-meter';
 import CharacterPortrait from './character-portrait';
 import Button from '../ui/button';
 import { Eyebrow, Muted, Narrative, Tag } from '../ui/typography';
@@ -74,6 +75,7 @@ export default function ProfileContent({
           </Button>
         </Actions>
       </form>
+      <ResolveMeter value={progress.resolve} />
       <div className="mt-7 border-t border-[#909c8350] pt-5">
         <Eyebrow tone="brown">Your chronicle</Eyebrow>
         <div className="my-4 grid grid-cols-3 gap-2 text-center">

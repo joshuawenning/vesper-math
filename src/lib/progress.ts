@@ -6,6 +6,7 @@ import type {
   JourneyRecord,
   Progress,
   SkillLevel,
+  StoryLearning,
 } from './types';
 import { firstWorldId, getWorld, worlds } from '@/content/worlds';
 import { cleanName, defaultPersona, personas } from '@/content/personas';
@@ -13,6 +14,8 @@ export const SAVE_KEY = 'vesper-save-v1';
 export const emptyJourney = (): Journey => ({ done: [], started: false, ending: null, levels: {} });
 export const initialProgress: Progress = {
   ...emptyJourney(),
+  resolve: 10,
+  study: {},
   theme: 'system',
   textSize: 'standard',
   speech: { enabled: false, voice: '', rate: 1 },
@@ -110,8 +113,40 @@ export function normalizeProgress(value: unknown, _legacyChapter?: Chapter): Pro
     typeof practice.correct === 'number' && Number.isSafeInteger(practice.correct)
       ? Math.max(0, Math.min(attempts, practice.correct))
       : 0;
+  const study: Record<string, StoryLearning> = {};
+  const savedStudy = object(raw.study);
+  for (const region of worlds) {
+    for (const encounterId of region.encounters) {
+      const key = `${region.id}:${encounterId}`;
+      const entry = object(savedStudy[key]);
+      if (!Object.keys(entry).length) continue;
+      const completed =
+        typeof entry.completed === 'number' && Number.isInteger(entry.completed)
+          ? Math.max(0, Math.min(3, entry.completed))
+          : 0;
+      study[key] = {
+        level: cleanLevel(entry.level),
+        completed,
+        reviewing:
+          completed > 0 &&
+          (entry.reviewing === true ||
+            (completed === 3 && !journeys[region.id]?.done.includes(encounterId))),
+        attempted: Array.isArray(entry.attempted)
+          ? entry.attempted
+              .filter((a): a is string => typeof a === 'string' && a.length <= 240)
+              .slice(0, 32)
+          : [],
+        recovered: entry.recovered === true,
+      };
+    }
+  }
   return {
     ...journey,
+    resolve:
+      typeof raw.resolve === 'number' && Number.isInteger(raw.resolve)
+        ? Math.max(0, Math.min(20, raw.resolve))
+        : 10,
+    study,
     worldId,
     journeys,
     history: history.slice(-128),
@@ -156,10 +191,18 @@ export function recordDiscovery(progress: Progress, id: string, chapter: Chapter
     ...progress,
     done: [...progress.done, id],
     ending: progress.done.length + 1 === chapter.encounters.length ? 'beacon' : null,
-    levels: { ...progress.levels, [id]: progress.skill },
+    levels: {
+      ...progress.levels,
+      [id]: progress.study[`${chapter.id}:${id}`]?.level ?? progress.skill,
+    },
     history: [
       ...progress.history,
-      { worldId: chapter.id, encounterId: id, level: progress.skill, at: Date.now() },
+      {
+        worldId: chapter.id,
+        encounterId: id,
+        level: progress.study[`${chapter.id}:${id}`]?.level ?? progress.skill,
+        at: Date.now(),
+      },
     ].slice(-128),
   };
 }

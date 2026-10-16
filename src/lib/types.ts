@@ -121,7 +121,16 @@ export interface JourneyRecord {
   at: number | null;
 }
 export type Theme = 'dark' | 'light' | 'system';
+export interface StoryLearning {
+  level: SkillLevel;
+  completed: number;
+  reviewing: boolean;
+  attempted: string[];
+  recovered: boolean;
+}
 export interface Progress extends Journey {
+  resolve: number;
+  study: Record<string, StoryLearning>;
   theme: Theme;
   textSize: 'standard' | 'large';
   speech: { enabled: boolean; voice: string; rate: number };

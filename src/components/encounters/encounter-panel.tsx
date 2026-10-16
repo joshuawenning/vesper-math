@@ -1,140 +1,89 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 import type { Encounter, Progress } from '@/lib/types';
-import { validateAnswer, answerFeedback, type Answer } from '@/lib/challenges';
-import { lessons } from '@/content/tutor-lessons';
+import { storySteps } from '@/content/story-lessons';
+import { storyLearning, type StudyAction } from '@/lib/story-learning';
+import ChallengeStep from './challenge-step';
+import ResolveMeter from '../profile/resolve-meter';
 import ReadAloud from '../accessibility/read-aloud';
-import SumChallenge from './sum-challenge';
-import FractionChallenge from './fraction-challenge';
-import DivisionChallenge from './division-challenge';
 import Icon from '../icon';
-import NumberChallenge from './number-challenge';
 import Button from '../ui/button';
 import { Narrative } from '../ui/typography';
-import { Actions, Feedback } from '../ui/panels';
 
 export default function EncounterPanel({
   encounter,
   progress,
-  onComplete,
+  onStudy,
 }: {
   encounter: Encounter;
   progress: Progress;
-  onComplete: (id: string) => void;
+  onStudy: (id: string, action: StudyAction) => void;
 }) {
-  const c = encounter.challenge;
-  const principle =
-    c.kind === 'sum'
-      ? 'Addition combines lengths measured in the same unit. Add each selected length once, then compare that sum with the gap. A total that is shorter or longer will not fit; equal totals describe the same distance.'
-      : c.kind === 'fraction'
-        ? lessons.fractions.why
-        : c.kind === 'division'
-          ? 'Division splits a total into equal groups. Multiplication checks your division: the number of groups times the amount in each group must equal the total.'
-          : /solve|x =|x \+|× x/i.test(c.question)
-            ? lessons.variables.why
-            : /%|percent/.test(c.question)
-              ? lessons.percentages.why
-              : /area|perimeter/.test(c.question)
-                ? lessons.geometry.why
-                : /meter|centimeter|kilometer/.test(c.question)
-                  ? lessons.measurement.why
-                  : lessons.arithmetic.why;
-  const [answer, setAnswer] = useState<Answer>(() => ({
-    selected: [],
-    fill: c.kind === 'fraction' ? c.start : 0,
-    route: c.kind === 'division' ? c.routes[0].id : '',
-    value: '',
-  }));
-  const [hint, setHint] = useState(0);
-  const [feedback, setFeedback] = useState('');
-  function update(patch: Partial<Answer>) {
-    setAnswer((a) => ({ ...a, ...patch }));
-    setFeedback('');
-  }
-  const action =
-    c.kind === 'number'
-      ? 'Put your idea to work'
-      : c.kind === 'sum'
-        ? 'Lay the crossing'
-        : c.kind === 'fraction'
-          ? 'Turn the mechanism'
-          : (c.routes.find((r) => r.id === answer.route)?.action ?? 'Cast the spell');
+  const learning = storyLearning(progress, encounter.id);
+  const index = Math.min(2, learning.reviewing ? learning.completed - 1 : learning.completed);
+  const steps = storySteps(encounter, learning.level);
+  const step = steps[index];
+  const heading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    heading.current?.focus({ preventScroll: true });
+  }, [index, learning.reviewing]);
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (validateAnswer(c, answer)) onComplete(encounter.id);
-        else setFeedback(answerFeedback(c, answer));
-      }}
-    >
-      <ReadAloud
-        settings={progress.speech}
-        text={`${encounter.title}. ${encounter[progress.reading]}. ${c.kind === 'number' ? c.question : c.kind === 'sum' ? `Choose ${c.count} planks totaling ${c.target} ${c.unit}. Available lengths: ${c.planks.join(', ')}.` : c.kind === 'fraction' ? `The cistern starts at ${c.start}/${c.denominator}. Reach ${c.target}/${c.denominator} by adding or removing measures.` : `${c.total} sparks. ${c.routes.find((r) => r.id === answer.route)?.label}. ${c.routes.find((r) => r.id === answer.route)?.question}`}${
-          hint > 0 ? ` Hint: ${encounter.hint[hint - 1]}. Why this works: ${principle}` : ''
-        }`}
-      />
+    <>
+      <ResolveMeter value={progress.resolve} />
+      <ol
+        aria-label="Story challenges"
+        className="my-5 grid grid-cols-3 gap-2 text-xs leading-relaxed"
+      >
+        {steps.map((item, i) => (
+          <li
+            key={item.title}
+            aria-current={i === index ? 'step' : undefined}
+            className={`border-b-2 pb-2 ${i === index ? 'border-[#775a26] text-[#384a3b] font-semibold' : 'border-[#909c8350] text-[#43533e]'}`}
+          >
+            <span className="block">
+              {i < learning.completed ? '✓ ' : ''}
+              {i + 1} of 3
+            </span>
+            {item.title}
+          </li>
+        ))}
+      </ol>
       <Narrative>{encounter[progress.reading]}</Narrative>
-      {c.kind === 'number' && (
-        <NumberChallenge
-          challenge={c}
-          value={answer.value ?? ''}
-          onChange={(value) => update({ value })}
-        />
-      )}
-      {c.kind === 'sum' && (
-        <SumChallenge
-          challenge={c}
-          selected={answer.selected ?? []}
-          onChange={(selected) => update({ selected })}
-        />
-      )}
-      {c.kind === 'fraction' && (
-        <FractionChallenge
-          challenge={c}
-          fill={answer.fill ?? c.start}
-          support={progress.support}
-          onChange={(fill) => update({ fill })}
-        />
-      )}
-      {c.kind === 'division' && (
-        <DivisionChallenge
-          challenge={c}
-          route={answer.route ?? c.routes[0].id}
-          value={answer.value ?? ''}
-          support={progress.support}
-          onRoute={(route) => update({ route, value: '' })}
-          onValue={(value) => update({ value })}
-        />
-      )}
-      {feedback && <Feedback>{feedback}</Feedback>}
-      {hint > 0 && (
-        <div
-          className="mt-[17px] border-l-2 border-[#ac9963] pl-[14px] font-story text-[1.125rem] italic leading-[1.5]"
-          aria-live="polite"
-        >
-          {encounter.hint[hint - 1]}
-          <p className="mt-3 font-sans text-sm not-italic leading-relaxed">
-            Why this works: {principle}
+      <h3
+        ref={heading}
+        tabIndex={-1}
+        className="mb-4 font-story text-2xl focus:outline-none focus:shadow-none"
+      >
+        {step.title}
+      </h3>
+      {learning.reviewing ? (
+        <div role="status">
+          <ReadAloud
+            settings={progress.speech}
+            text={`Well reasoned. ${step.lesson}. Resolve restored by 2, up to 20.`}
+          />
+          <p className="mb-3 text-sm font-semibold text-[#384a3b]">
+            Well reasoned · +2 Resolve (up to 20)
           </p>
+          <Narrative>{step.lesson}</Narrative>
+          <p className="mb-5 text-sm text-[#43533e]">
+            Take a moment to follow the reasoning before you continue.
+          </p>
+          <Button onClick={() => onStudy(encounter.id, { kind: 'continue', step: index })}>
+            {index === 2 ? 'Claim your discovery' : 'Try the next challenge'}
+            <Icon name="arrow" />
+          </Button>
         </div>
+      ) : (
+        <ChallengeStep
+          key={`${index}-${learning.level}`}
+          encounter={encounter}
+          step={step}
+          index={index}
+          progress={progress}
+          onStudy={onStudy}
+        />
       )}
-      <Actions>
-        <Button type="submit">
-          {action}
-          <Icon name="arrow" />
-        </Button>
-        <Button
-          variant="secondary"
-          disabled={hint === encounter.hint.length}
-          onClick={() => setHint((n) => Math.min(encounter.hint.length, n + 1))}
-        >
-          {hint === encounter.hint.length
-            ? 'Hint shown'
-            : hint > 0
-              ? 'Another hint'
-              : 'Ask Elian for a hint'}
-        </Button>
-      </Actions>
-    </form>
+    </>
   );
 }

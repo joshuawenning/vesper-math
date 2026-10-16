@@ -21,12 +21,9 @@ export function validateAnswer(challenge: Challenge, answer: Answer): boolean {
       return Number.isInteger(answer.fill) && answer.fill === challenge.target;
     case 'division': {
       const route = challenge.routes.find((r) => r.id === answer.route);
-      const value = answer.value?.trim();
+      const value = calculate(answer.value ?? '');
       return Boolean(
-        route &&
-        value &&
-        Number.isFinite(Number(value)) &&
-        Number(value) * route.groups === challenge.total,
+        route && value !== null && approximatelyEqual(value * route.groups, challenge.total),
       );
     }
   }
@@ -44,7 +41,7 @@ export function answerFeedback(challenge: Challenge, answer: Answer): string {
     return `The water is at ${fill}/${challenge.denominator}. ${fill < challenge.target ? 'Add' : 'Remove'} equal measures to reach ${challenge.target}/${challenge.denominator}.`;
   }
   const route = challenge.routes.find((r) => r.id === answer.route);
-  if (!answer.value?.trim() || !route || !Number.isFinite(Number(answer.value)))
+  if (calculate(answer.value ?? '') === null || !route)
     return 'Choose the number of sparks in each group before casting.';
-  return `${Number(answer.value)} × ${route.groups} = ${Number(answer.value) * route.groups} sparks. The ward holds ${challenge.total}. Adjust the size of each group and try again.`;
+  return `${calculate(answer.value ?? '')!} × ${route.groups} = ${calculate(answer.value ?? '')! * route.groups} sparks. The ward holds ${challenge.total}. Adjust the size of each group and try again.`;
 }

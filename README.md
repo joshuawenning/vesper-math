@@ -129,3 +129,11 @@ Elian currently runs entirely on-device. See [the free-LLM options and integrati
 Appearance, learning level, storytelling, and reading pace use visible native radio groups. Read-aloud and visual guidance use keyboard-accessible switches. Text size has A−/A+ controls for the existing standard and 125% settings. Only the longer voice list remains a dropdown. All preferences retain the existing save format.
 
 The earlier portraits, companion, first three world landscapes and their discovery art have been repainted with visible pen contours and watercolor/gouache texture while preserving their concepts. Journal and preference artwork use the same treatment. The six-person portrait atlas retains its layout and persona IDs, so existing characters continue to select the same portrait.
+
+### Story learning and Resolve
+
+Every story now has three challenges at each math level: preparation, the original interactive encounter, and a transfer problem. Each correct answer pauses on a worked explanation. Claiming the discovery requires all three answers and the final explanation; existing discoveries remain complete.
+
+`src/content/story-lessons.ts` supplies authored preparation and transfer questions, with concept hints and worked solutions. When adding a story, add its three skill-level pairs there as well as the chapter data. `src/lib/story-learning.ts` owns the guarded transitions and scoring; the React components render this saved state.
+
+Resolve starts at 10 and stays between 0 and 20. A newly solved challenge restores 2, a distinct incorrect answer costs 1, and opening Elian’s explanation after a mistake restores 1 once per challenge. Empty or invalid text is not penalized, equivalent repeated wrong answers are not charged twice, and completed challenges cannot be farmed. Zero Resolve never blocks learning or removes discoveries. Earlier save files default to 10 Resolve. In-progress challenge level, completed steps, explanation review, and scoring state round-trip with journey exports.
