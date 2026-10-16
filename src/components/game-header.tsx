@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import Icon from './icon';
+import BrandMark from './brand-mark';
 import CharacterPortrait from './profile/character-portrait';
 import { getPersona } from '@/content/personas';
 import type { DialogView, IconName, Progress } from '@/lib/types';
@@ -51,10 +52,7 @@ export default function GameHeader({
         aria-label="Vesper Math — current adventure"
         className="flex items-center gap-[14px] py-[15px] text-gold tablet:py-0"
       >
-        <Icon
-          name="star"
-          className="h-[43px] w-7 motion-safe:animate-spin motion-safe:[animation-duration:90s] tablet:w-[37px]"
-        />
+        <BrandMark />
         <div>
           <div className="whitespace-nowrap font-story text-[clamp(1.5rem,5vw,2.3125rem)] font-semibold">
             Vesper Math
