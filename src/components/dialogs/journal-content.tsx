@@ -1,7 +1,7 @@
+import JournalCollection from '../journal/journal-collection';
 import JourneyContinuation from './journey-continuation';
 import type { ReactNode } from 'react';
 import { endingText } from '@/lib/progress';
-import { levelEncounter } from '@/lib/difficulty';
 import type { Chapter, Progress } from '@/lib/types';
 import { Muted, Narrative, Tag } from '../ui/typography';
 
@@ -43,17 +43,8 @@ export default function JournalContent({
         onWorld={onWorld}
         onAtlas={onAtlas}
       />
-      {progress.done.length ? (
-        chapter.encounters
-          .filter((e) => progress.done.includes(e.id))
-          .map((original) =>
-            levelEncounter(original, progress.levels[original.id] ?? 'foundations'),
-          )
-          .map((e) => (
-            <JournalEntry key={e.id} label={`${e.skill} · ${e.reward}`} title={e.title}>
-              {e.lesson}
-            </JournalEntry>
-          ))
+      {progress.history.length ? (
+        <JournalCollection chapter={chapter} progress={progress} />
       ) : (
         <Muted>
           Your pages are waiting. Explore {chapter.encounters[0].title} to make your first

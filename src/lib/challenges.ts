@@ -45,3 +45,12 @@ export function answerFeedback(challenge: Challenge, answer: Answer): string {
     return 'Choose the number of sparks in each group before casting.';
   return `${calculate(answer.value ?? '')!} × ${route.groups} = ${calculate(answer.value ?? '')! * route.groups} sparks. The ward holds ${challenge.total}. Adjust the size of each group and try again.`;
 }
+
+export function describeChallenge(challenge: Challenge): string {
+  if (challenge.kind === 'number') return challenge.question;
+  if (challenge.kind === 'sum')
+    return `Choose exactly ${challenge.count} timbers whose lengths total ${challenge.target} ${challenge.unit}.`;
+  if (challenge.kind === 'fraction')
+    return `Fill the cistern from ${challenge.start}/${challenge.denominator} to ${challenge.target}/${challenge.denominator} in equal measures.`;
+  return `Share ${challenge.total} sparks equally: ${challenge.routes.map((r) => `${r.groups} groups`).join(' or ')}. How many sparks belong in each group?`;
+}
