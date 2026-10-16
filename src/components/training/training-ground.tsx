@@ -224,7 +224,11 @@ export default function TrainingGround({
               <TrainingModel problem={problem} />
             </>
           )}
-          <Button variant="secondary" className="mt-4" onClick={() => roll()}>
+          <Button
+            variant="secondary"
+            className="mt-4 inline-flex items-center gap-2"
+            onClick={() => roll()}
+          >
             {problem.solved
               ? 'Another practice round'
               : mode === 'dice'
