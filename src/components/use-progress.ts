@@ -15,6 +15,7 @@ function useStoredProgress() {
   const [progress, setProgress] = useState<Progress>(initialProgress);
   const [loaded, setLoaded] = useState(false);
   const [storageOK, setStorageOK] = useState(true);
+  const [saveResult, setSaveResult] = useState<{ progress: Progress; ok: boolean } | null>(null);
 
   useEffect(() => {
     try {
@@ -32,8 +33,10 @@ function useStoredProgress() {
     try {
       localStorage.setItem(SAVE_KEY, JSON.stringify(progress));
       setStorageOK(true);
+      setSaveResult({ progress, ok: true });
     } catch {
       setStorageOK(false);
+      setSaveResult({ progress, ok: false });
     }
   }, [progress, loaded]);
 
@@ -48,7 +51,7 @@ function useStoredProgress() {
     );
   }, [progress.theme, loaded]);
 
-  return { progress, setProgress, loaded, storageOK };
+  return { progress, setProgress, loaded, storageOK, saveResult };
 }
 
 const ProgressContext = createContext<

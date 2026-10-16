@@ -1,9 +1,11 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { skillLevels } from '@/content/worlds';
 import { normalizeProgress } from '@/lib/progress';
 import type { Progress } from '@/lib/types';
 import Icon from './icon';
+import { useProgress } from './use-progress';
+import StatusNotice from './ui/status-notice';
 import SpeechPreferences from './accessibility/speech-preferences';
 import PreferenceChoices from './ui/preference-choices';
 import PreferenceSwitch from './ui/preference-switch';
@@ -23,6 +25,27 @@ export default function Preferences({
 }) {
   const input = useRef<HTMLInputElement>(null);
   const [notice, setNotice] = useState('');
+  const { saveResult } = useProgress();
+  const [pendingSettings, setPendingSettings] = useState<Progress | null>(null);
+  const [settingsNotice, setSettingsNotice] = useState<{ ok: boolean } | null>(null);
+
+  function changeSettings(value: Progress) {
+    setPendingSettings(value);
+    onChange(value);
+  }
+
+  // Acknowledge the exact write, rather than assuming the previous save status still applies.
+  useEffect(() => {
+    if (!pendingSettings || saveResult?.progress !== pendingSettings) return;
+    setSettingsNotice({ ok: saveResult.ok });
+    setPendingSettings(null);
+  }, [pendingSettings, saveResult]);
+
+  useEffect(() => {
+    if (!settingsNotice) return;
+    const timer = window.setTimeout(() => setSettingsNotice(null), settingsNotice.ok ? 2800 : 6000);
+    return () => window.clearTimeout(timer);
+  }, [settingsNotice]);
   function exportSave() {
     const blob = new Blob([JSON.stringify(progress, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -49,10 +72,16 @@ export default function Preferences({
   }
   return (
     <>
+      <StatusNotice warning={settingsNotice?.ok === false}>
+        {settingsNotice &&
+          (settingsNotice.ok
+            ? 'Settings saved'
+            : 'Couldn’t save settings. Changes apply only for this session.')}
+      </StatusNotice>
       <PreferenceChoices
         label="Appearance"
         value={progress.theme}
-        onChange={(theme) => onChange({ ...progress, theme })}
+        onChange={(theme) => changeSettings({ ...progress, theme })}
         options={[
           { value: 'system', label: 'System', icon: 'monitor' },
           { value: 'light', label: 'Light', icon: 'sun' },
@@ -63,7 +92,7 @@ export default function Preferences({
         <legend className="px-2 font-story text-2xl">Accessibility</legend>
         <TextSizeControl
           value={progress.textSize}
-          onChange={(textSize) => onChange({ ...progress, textSize })}
+          onChange={(textSize) => changeSettings({ ...progress, textSize })}
         />
         <Muted>
           Text also follows your browser’s zoom and font settings. Animations respect your device’s
@@ -71,7 +100,7 @@ export default function Preferences({
         </Muted>
         <SpeechPreferences
           value={progress.speech}
-          onChange={(speech) => onChange({ ...progress, speech })}
+          onChange={(speech) => changeSettings({ ...progress, speech })}
         />
         <details className="my-4 text-sm leading-relaxed">
           <summary className="cursor-pointer py-3">Keyboard controls</summary>
@@ -85,7 +114,7 @@ export default function Preferences({
       <PreferenceChoices
         label="Math skill level"
         value={progress.skill}
-        onChange={(skill) => onChange({ ...progress, skill })}
+        onChange={(skill) => changeSettings({ ...progress, skill })}
         options={skillLevels.map((level) => ({
           value: level.id,
           label: level.label,
@@ -99,7 +128,7 @@ export default function Preferences({
       <PreferenceChoices
         label="Storytelling"
         value={progress.reading}
-        onChange={(reading) => onChange({ ...progress, reading })}
+        onChange={(reading) => changeSettings({ ...progress, reading })}
         options={[
           { value: 'rich', label: 'Rich & literary' },
           { value: 'plain', label: 'Plain & concise' },
@@ -109,7 +138,9 @@ export default function Preferences({
         label="Visual guidance"
         description="Show visual support while you explore. Hints are always available."
         checked={progress.support === 'guided'}
-        onChange={(checked) => onChange({ ...progress, support: checked ? 'guided' : 'light' })}
+        onChange={(checked) =>
+          changeSettings({ ...progress, support: checked ? 'guided' : 'light' })
+        }
       />
       <Muted>
         The math stays the same when you change the storytelling. You can change these preferences
