@@ -15,6 +15,7 @@ export type Support = 'guided' | 'light';
 export type Ending = 'beacon' | 'refuge';
 export type IconName =
   | 'sun'
+  | 'monitor'
   | 'hive'
   | 'snail'
   | 'seed'
@@ -119,7 +120,7 @@ export interface JourneyRecord {
   level: SkillLevel;
   at: number | null;
 }
-export type Theme = 'dark' | 'light';
+export type Theme = 'dark' | 'light' | 'system';
 export interface Progress extends Journey {
   theme: Theme;
   textSize: 'standard' | 'large';

@@ -46,7 +46,7 @@ test('imports cannot forge unknown worlds, personas, skipped discoveries, or unb
     history: [{ worldId: 'invented', encounterId: 'guardian' }],
   });
   assert.equal(p.worldId, merewood.id);
-  assert.equal(p.theme, 'dark');
+  assert.equal(p.theme, 'system');
   assert.equal(p.profile.name.length, 24);
   assert.equal(p.profile.persona, 'ranger-female');
   assert.equal(p.practice.correct, 2);

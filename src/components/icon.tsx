@@ -8,6 +8,12 @@ export default function Icon({
   className?: string;
 }) {
   const shapes = {
+    monitor: (
+      <>
+        <rect x="3" y="3" width="18" height="13" rx="2" />
+        <path d="M12 16v5m-5 0h10" />
+      </>
+    ),
     sun: (
       <>
         <circle cx="12" cy="12" r="4" />

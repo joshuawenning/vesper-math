@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { chapter } from '@/content/merewood';
 import { initialProgress, normalizeProgress, SAVE_KEY } from '@/lib/progress';
+import { observeAppearance } from '@/lib/theme';
 import type { Progress } from '@/lib/types';
 
 export function useProgress() {
@@ -21,7 +22,6 @@ export function useProgress() {
 
   useEffect(() => {
     if (!loaded) return;
-    document.documentElement.dataset.theme = progress.theme;
     document.documentElement.dataset.textSize = progress.textSize;
     try {
       localStorage.setItem(SAVE_KEY, JSON.stringify(progress));
@@ -30,6 +30,17 @@ export function useProgress() {
       setStorageOK(false);
     }
   }, [progress, loaded]);
+
+  useEffect(() => {
+    if (!loaded) return;
+    return observeAppearance(
+      progress.theme,
+      window.matchMedia('(prefers-color-scheme: dark)'),
+      (theme) => {
+        document.documentElement.dataset.theme = theme;
+      },
+    );
+  }, [progress.theme, loaded]);
 
   return { progress, setProgress, loaded, storageOK };
 }

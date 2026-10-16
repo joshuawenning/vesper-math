@@ -55,8 +55,9 @@ export default function Preferences({
         value={progress.theme}
         onChange={(theme) => onChange({ ...progress, theme })}
         options={[
-          { value: 'dark', label: 'After dusk', icon: 'moon' },
-          { value: 'light', label: 'By daylight', icon: 'sun' },
+          { value: 'system', label: 'System', icon: 'monitor' },
+          { value: 'light', label: 'Light', icon: 'sun' },
+          { value: 'dark', label: 'Dark', icon: 'moon' },
         ]}
       />
       <fieldset className="my-6 min-w-0 border-y border-[#909c8350] py-2">
