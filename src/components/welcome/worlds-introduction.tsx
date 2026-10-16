@@ -39,12 +39,15 @@ export default function WorldsIntroduction() {
           </p>
           <h2
             id="journey-heading"
-            className="max-w-[16ch] font-story text-[clamp(2.6rem,4.4vw,4.25rem)] leading-[.9]"
+            className="font-story text-[clamp(2.6rem,4vw,4rem)] leading-[.9]"
           >
-            The next door opens <em className="block font-normal">with understanding.</em>
+            <span className="block">The next door</span>
+            <span className="block desktop:whitespace-nowrap">
+              opens <em className="font-normal">with understanding.</em>
+            </span>
           </h2>
         </div>
-        <p className="max-w-md text-sm leading-relaxed text-subtle">
+        <p className="max-w-[520px] text-lg leading-relaxed text-subtle">
           Start with addition and equal groups, or find your footing with fractions, geometry, and
           early algebra. There are other roads ahead. Some are still lost in the mist.
         </p>
@@ -77,7 +80,7 @@ export default function WorldsIntroduction() {
             </figure>
             <div className="mt-5 flex items-baseline gap-3">
               <span className="text-xs text-gold">0{index + 1}</span>
-              <h3 className="font-story text-2xl leading-tight">{title}</h3>
+              <h3 className="font-story text-2xl font-bold leading-tight">{title}</h3>
             </div>
             <p className="mt-2 text-sm leading-relaxed text-subtle">{description}</p>
           </li>

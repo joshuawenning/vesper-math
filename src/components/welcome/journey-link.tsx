@@ -16,9 +16,9 @@ export default function JourneyLink() {
     <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
       <Link
         href={returning ? '/adventure' : '/begin'}
-        className="inline-flex min-h-12 items-center justify-center gap-5 border border-[#b49e70] bg-[#ddc99a] px-6 py-3 text-sm font-medium text-[#192c25] hover:bg-[#eee0bd]"
+        className="inline-flex min-h-12 items-center justify-center gap-5 border border-[#b49e70] bg-[#ddc99a] px-6 py-3 text-sm font-bold text-[#192c25] hover:bg-[#eee0bd]"
       >
-        {returning ? 'Continue playing' : 'Play now'} <Icon name="arrow" />
+        {returning ? 'Continue exploring' : 'Start exploring'} <Icon name="arrow" />
       </Link>
     </div>
   );
