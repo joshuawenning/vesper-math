@@ -6,6 +6,10 @@ All shipped paintings follow [the art direction](art-direction.md). They were ge
 
 Content registries select paintings; components should not duplicate those paths. World metadata is in `src/content/worlds.ts`; each chapter supplies its story scenes. Shared images live in `artwork.ts`, training images in `training-art.ts`, and reward images in `treasures.ts`.
 
+### Welcome page
+
+The homepage uses two original viewpoints, separate from playable scenes: `merewood-arrival-painterly.webp` approaches a willow-lined mere with a distant light; `elian-waystation-painterly.webp` shows Elian with a map, lantern, and heron at a wayside shelter. Both are 1536px-wide WebP panoramas registered in `artwork.ts`, composed with quiet left-hand space for text. The hero crops toward the right on mobile; the footer puts its painting above the text at narrow widths. Keep the game’s observatory reveal out of the welcome hero.
+
 ### Worlds, stories, and shared scenes
 
 The subjects below are concise generation briefs. Combine them with the reusable brief in [art direction](art-direction.md), retaining the setting’s colors without increasing surface detail.
@@ -73,7 +77,7 @@ Keep these identities and positions when revising the painting so saved characte
 1. Identify the content registry entry, story concept, framing, and an existing style reference before generating.
 2. Inspect the output for anatomy, essential story objects, restrained detail, and consistency with neighboring paintings. Do not try to rescue an overly detailed rendering with a texture filter.
 3. Optimize the selected painting as WebP. Existing scenery is at most 1280px wide, Elian scenes 960px, character atlas 1536px, and reward studies 320px square. Preserve the aspect ratio unless a deliberate crop is needed. Keep useful margins for portraits and cards.
-4. Add the accessible description and update the relevant registry. World metadata and chapter scene references must agree. The first world is also statically imported by `src/app/page.tsx` for its initial image placeholder.
+4. Add the accessible description and update the relevant registry. World metadata and chapter scene references must agree. The first world is also statically imported by `src/app/adventure/page.tsx` for its initial image placeholder; the welcome hero imports its separate arrival painting.
 5. Check wide and narrow crops, modal illustrations, hidden discovery previews, and journal cards as applicable. Use `next/image` for responsive sizes; do not embed paintings in source or HTML.
 6. Run `npm test` and `npm run build`. The artwork inventory check catches missing or unreferenced public images. Delete superseded paintings and unused atlases in the same change; Git history preserves earlier revisions.
 

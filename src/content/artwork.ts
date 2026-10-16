@@ -1,6 +1,14 @@
 import type { Artwork } from '@/lib/types';
 
 export const artwork = {
+  merewoodArrival: {
+    src: '/art/merewood-arrival-painterly.webp',
+    alt: 'A loose watercolor of a winding path beneath a willow at the edge of the Merewood, with a distant light across the marsh.',
+  },
+  elianWaystation: {
+    src: '/art/elian-waystation-painterly.webp',
+    alt: 'Elian studies her map at a quiet wayside shelter, with a heron by the water and a brass lantern at her feet.',
+  },
   observatory: {
     src: '/art/observatory-painterly.webp',
     alt: 'A moonlit, hand-illustrated observatory above a flooded woodland, with a stone crossing, a silver cistern, and an owl guardian.',
