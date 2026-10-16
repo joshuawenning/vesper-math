@@ -84,7 +84,7 @@ export const chapter: Chapter = {
       reward: 'Cael’s orbital ring',
       artwork: {
         src: '/art/orrery-keeper-painterly.webp',
-        alt: 'A dark-haired male elf in an midnight robe turns a brass orrery while a tiny winged imp watches.',
+        alt: 'A dark-haired male elf in a midnight robe turns a brass orrery while a tiny winged imp watches.',
       },
       hint: [
         'Equal groups can be counted with multiplication.',

@@ -1,5 +1,7 @@
 import type { PersonaId } from '@/lib/types';
 
+export const personaPortraitAtlas = '/art/personas-painterly.webp';
+
 export const personas: {
   id: PersonaId;
   name: string;

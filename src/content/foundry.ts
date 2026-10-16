@@ -7,7 +7,7 @@ export const chapter: Chapter = {
   heading: 'The mountain remembers',
   scene: {
     src: '/art/foundry-painterly.webp',
-    alt: 'An loosely painted mountain foundry with brass wheels and warm furnaces.',
+    alt: 'A loosely painted mountain foundry with brass wheels and warm furnaces.',
   },
   subtitle: 'Every small part has its place.',
   intro: {

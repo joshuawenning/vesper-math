@@ -7,7 +7,7 @@ export const chapter: Chapter = {
   heading: 'Where the waters part',
   scene: {
     src: '/art/coast-painterly.webp',
-    alt: 'An loosely painted moonlit harbor with sailing ships and lanterns.',
+    alt: 'A loosely painted moonlit harbor with sailing ships and lanterns.',
   },
   subtitle: 'A careful measure can light the way.',
   intro: {

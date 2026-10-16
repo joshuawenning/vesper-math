@@ -85,7 +85,7 @@ export const chapter: Chapter = {
       reward: 'Ribbon of unhurried roads',
       artwork: {
         src: '/art/snails-bargain-painterly.webp',
-        alt: 'A wooden-masked male merchant in an wine-red coat measures ribbon beside a giant snail with a brass spiral shell.',
+        alt: 'A wooden-masked male merchant in a wine-red coat measures ribbon beside a giant snail with a brass spiral shell.',
       },
       hint: [
         'The total length is the sum of the separate lengths.',
