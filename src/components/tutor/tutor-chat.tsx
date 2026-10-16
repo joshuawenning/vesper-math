@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { tutorReply, type TutorSession } from '@/lib/tutor';
-import { skillLevels } from '@/content/worlds';
 import type { Progress } from '@/lib/types';
 import Button from '../ui/button';
 import ReadAloud from '../accessibility/read-aloud';
@@ -68,10 +67,6 @@ export default function TutorChat({
   const latestReply = messages.filter((m) => m.role === 'elian').at(-1)?.id;
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className="mb-3 shrink-0 flex flex-wrap items-center justify-between gap-2 text-[0.75rem] text-[#43533e]">
-        <span>On-device math guide · no messages leave this device</span>
-        <span>{skillLevels.find((l) => l.id === progress.skill)?.label}</span>
-      </div>
       <div
         ref={log}
         role="log"
@@ -137,8 +132,8 @@ export default function TutorChat({
         </div>
       </form>
       <p className="mt-3 text-xs leading-relaxed text-[#43533e]">
-        Explore concepts in the training library. This on-device guide supports math topics,
-        calculations, and quizzes.
+        This on-device guide supports math topics, calculations, and quizzes. No messages leave this
+        device.
       </p>
     </div>
   );

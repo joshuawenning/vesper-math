@@ -69,7 +69,7 @@ export default function ElianChat() {
             <h2 id="elian-chat-title" className="font-story text-2xl leading-tight">
               Elian
             </h2>
-            <p className="text-xs text-[#43533e]">Your cartographer & math companion</p>
+            <p className="text-xs text-[#43533e]">Your math companion</p>
           </div>
           <button
             type="button"
