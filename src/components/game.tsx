@@ -6,6 +6,8 @@ import { chapter as initialChapter } from '@/content/merewood';
 import { loadChapter, getWorld } from '@/content/worlds';
 import { encounterStatus, restartCurrentJourney, switchWorld } from '@/lib/progress';
 import { applyStudyAction, storyLearning, type StudyAction } from '@/lib/story-learning';
+import { applyTrainingAction, type TrainingAction } from '@/lib/training';
+import TrainingInvitation from './training/training-invitation';
 import type { DialogView } from '@/lib/types';
 import { useProgress } from './use-progress';
 import GameHeader from './game-header';
@@ -63,6 +65,10 @@ export default function Game({ scene }: { scene: ReactNode }) {
   function openEncounter(id: string) {
     if (chapter.id !== progress.worldId) return;
     const status = encounterStatus(id, progress, chapter);
+    if (status === 'current' && progress.resolve <= 0) {
+      setView({ kind: 'training', returnTo: id });
+      return;
+    }
     if (status !== 'locked') setProgress((p) => ({ ...p, started: true }));
     setView({
       kind: status === 'done' ? 'discovery' : status === 'locked' ? 'locked' : 'encounter',
@@ -70,17 +76,29 @@ export default function Game({ scene }: { scene: ReactNode }) {
     });
   }
   function continueJourney() {
+    if (progress.resolve <= 0 && next) {
+      setView({ kind: 'training', returnTo: next.id });
+      return;
+    }
     if (progress.ending) setView({ kind: 'complete' });
     else if (!next) setView({ kind: 'finale' });
     else if (!progress.started) setView({ kind: 'welcome' });
     else openEncounter(next.id);
   }
   function start() {
+    if (progress.resolve <= 0) {
+      setView({ kind: 'training', returnTo: next?.id });
+      return;
+    }
     setProgress((p) => ({ ...p, started: true }));
     if (next) setView({ kind: 'encounter', id: next.id });
     else continueJourney();
   }
   function study(id: string, action: StudyAction) {
+    if (progress.resolve <= 0) {
+      setView({ kind: 'training', returnTo: id });
+      return;
+    }
     setProgress((p) => applyStudyAction(p, chapter, id, action));
     const learning = storyLearning(progress, id);
     if (
@@ -90,6 +108,9 @@ export default function Game({ scene }: { scene: ReactNode }) {
       learning.reviewing
     )
       setView({ kind: 'discovery', id });
+  }
+  function train(action: TrainingAction) {
+    setProgress((p) => applyTrainingAction(p, action));
   }
   function restart() {
     setProgress(restartCurrentJourney);
@@ -120,6 +141,10 @@ export default function Game({ scene }: { scene: ReactNode }) {
             </p>
           ) : (
             <>
+              <TrainingInvitation
+                progress={progress}
+                onTrain={() => setView({ kind: 'training' })}
+              />
               <ChapterScene
                 chapter={chapter}
                 artwork={
@@ -160,6 +185,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
           onContinue={continueJourney}
           onStart={start}
           onStudy={study}
+          onTraining={train}
           onRestart={restart}
         />
       )}

@@ -76,6 +76,7 @@ export default function ProfileContent({
         </Actions>
       </form>
       <ResolveMeter value={progress.resolve} />
+      <Muted>{progress.training.solved} training rounds solved with Elian.</Muted>
       <div className="mt-7 border-t border-[#909c8350] pt-5">
         <Eyebrow tone="brown">Your chronicle</Eyebrow>
         <div className="my-4 grid grid-cols-3 gap-2 text-center">

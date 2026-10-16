@@ -33,7 +33,12 @@ export default function GameHeader({
   open: (view: DialogView) => void;
   close: () => void;
 }) {
-  const links: { title: string; icon: IconName; kind: 'map' | 'journal' | 'settings' }[] = [
+  const links: {
+    title: string;
+    icon: IconName;
+    kind: 'training' | 'map' | 'journal' | 'settings';
+  }[] = [
+    { title: 'Training', icon: 'dice', kind: 'training' },
     { title: 'World map', icon: 'map', kind: 'map' },
     { title: 'Journal', icon: 'book', kind: 'journal' },
     { title: 'Settings', icon: 'gear', kind: 'settings' },
@@ -57,7 +62,7 @@ export default function GameHeader({
         </div>
       </a>
       <nav
-        className="order-3 grid w-full grid-cols-3 gap-x-3 gap-y-1 py-2 min-[480px]:flex min-[480px]:justify-around desktop:flex border-t border-line desktop:order-0 desktop:h-full desktop:w-auto desktop:justify-start desktop:gap-5 desktop:border-t-0 desktop:gap-[30px]"
+        className="order-3 grid w-full grid-cols-4 gap-x-3 gap-y-1 py-2 min-[480px]:flex min-[480px]:justify-around desktop:flex border-t border-line desktop:order-0 desktop:h-full desktop:w-auto desktop:justify-start desktop:gap-5 desktop:border-t-0 desktop:gap-[30px]"
         aria-label="Main"
       >
         {links.map((link) => (

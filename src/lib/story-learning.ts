@@ -33,6 +33,7 @@ export function applyStudyAction(
 ): Progress {
   const original = chapter.encounters.find((e) => e.id === id);
   if (
+    progress.resolve <= 0 ||
     !original ||
     progress.worldId !== chapter.id ||
     progress.done.includes(id) ||

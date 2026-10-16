@@ -4,6 +4,7 @@ import type { Encounter, Progress } from '@/lib/types';
 import { storySteps } from '@/content/story-lessons';
 import { storyLearning, type StudyAction } from '@/lib/story-learning';
 import ChallengeStep from './challenge-step';
+import ResolveGate from '../training/resolve-gate';
 import ResolveMeter from '../profile/resolve-meter';
 import ReadAloud from '../accessibility/read-aloud';
 import Icon from '../icon';
@@ -14,10 +15,12 @@ export default function EncounterPanel({
   encounter,
   progress,
   onStudy,
+  onTrain,
 }: {
   encounter: Encounter;
   progress: Progress;
   onStudy: (id: string, action: StudyAction) => void;
+  onTrain: () => void;
 }) {
   const learning = storyLearning(progress, encounter.id);
   const index = Math.min(2, learning.reviewing ? learning.completed - 1 : learning.completed);
@@ -27,6 +30,7 @@ export default function EncounterPanel({
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
   }, [index, learning.reviewing]);
+  if (progress.resolve <= 0) return <ResolveGate onTrain={onTrain} />;
   return (
     <>
       <ResolveMeter value={progress.resolve} />

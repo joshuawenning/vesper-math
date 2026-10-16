@@ -32,7 +32,12 @@ test('each story displays its opening once and only the active challenge at all 
               },
             });
             const html = renderToStaticMarkup(
-              createElement(EncounterPanel, { encounter, progress, onStudy: () => {} }),
+              createElement(EncounterPanel, {
+                encounter,
+                progress,
+                onStudy: () => {},
+                onTrain: () => {},
+              }),
             );
             assert.equal(
               html.includes(escapeText(encounter[reading])),
@@ -66,7 +71,7 @@ test('the 63-foot crossing instructions appear only on its timber challenge', as
       study: { [`${chapter.id}:bridge`]: { level: 'stretch', completed: index } },
     });
     const html = renderToStaticMarkup(
-      createElement(EncounterPanel, { encounter, progress, onStudy: () => {} }),
+      createElement(EncounterPanel, { encounter, progress, onStudy: () => {}, onTrain: () => {} }),
     );
     const text = html.replace(/<!--.*?-->/g, '').replace(/<[^>]+>/g, ' ');
     assert.equal(text.includes('The crossing has a 63-foot gap.'), index === 1);

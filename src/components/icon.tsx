@@ -8,6 +8,11 @@ export default function Icon({
   className?: string;
 }) {
   const shapes = {
+    dice: (
+      <>
+        <path d="m12 2 9 5v10l-9 5-9-5V7Zm0 0L7 9l5 8 5-8ZM3 7l4 2-4 8m18-10-4 2 4 8M3 17h9l9 0M12 17v5M7 9h10" />
+      </>
+    ),
     monitor: (
       <>
         <rect x="3" y="3" width="18" height="13" rx="2" />

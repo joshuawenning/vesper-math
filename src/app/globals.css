@@ -1,6 +1,15 @@
 @import 'tailwindcss';
 
 @theme {
+  --animate-dice-settle: dice-settle 360ms ease-out;
+  @keyframes dice-settle {
+    from {
+      transform: translateY(-6px) rotate(-14deg);
+    }
+    to {
+      transform: translateY(0) rotate(0);
+    }
+  }
   --color-ink: #192625;
   --color-paper: #eee5d0;
   --color-gold: var(--accent);

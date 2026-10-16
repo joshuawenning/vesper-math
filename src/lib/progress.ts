@@ -9,12 +9,14 @@ import type {
   StoryLearning,
 } from './types';
 import { firstWorldId, getWorld, worlds } from '@/content/worlds';
+import { emptyTraining, normalizeTraining } from './training';
 import { cleanName, defaultPersona, personas } from '@/content/personas';
 export const SAVE_KEY = 'vesper-save-v1';
 export const emptyJourney = (): Journey => ({ done: [], started: false, ending: null, levels: {} });
 export const initialProgress: Progress = {
   ...emptyJourney(),
   resolve: 10,
+  training: emptyTraining(),
   study: {},
   theme: 'system',
   textSize: 'standard',
@@ -142,6 +144,7 @@ export function normalizeProgress(value: unknown, _legacyChapter?: Chapter): Pro
   }
   return {
     ...journey,
+    training: normalizeTraining(raw.training),
     resolve:
       typeof raw.resolve === 'number' && Number.isInteger(raw.resolve)
         ? Math.max(0, Math.min(20, raw.resolve))

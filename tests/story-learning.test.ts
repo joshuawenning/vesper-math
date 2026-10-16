@@ -176,26 +176,26 @@ test('a story requires three answers and reflection before claiming a discovery'
   );
 });
 
-test('Resolve penalizes unique valid wrong answers, allows one reflection recovery, and never blocks at zero', () => {
-  let p = normalizeProgress({ resolve: 1 });
+test('Resolve penalizes unique valid wrong answers and allows one reflection recovery before zero', () => {
+  let p = normalizeProgress({ resolve: 3 });
   assert.equal(
     applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '' } }),
     p,
   );
   p = applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '2' } });
-  assert.equal(p.resolve, 0);
+  assert.equal(p.resolve, 2);
   assert.equal(
     applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '4/2' } }),
     p,
   );
   p = normalizeProgress(JSON.parse(JSON.stringify(p)));
   p = applyStudyAction(p, chapter, 'bridge', { kind: 'reflect', step: 0 });
-  assert.equal(p.resolve, 1);
+  assert.equal(p.resolve, 3);
   assert.equal(applyStudyAction(p, chapter, 'bridge', { kind: 'reflect', step: 0 }), p);
   p = applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '3' } });
-  assert.equal(p.resolve, 0);
-  p = applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '5' } });
   assert.equal(p.resolve, 2);
+  p = applyStudyAction(p, chapter, 'bridge', { kind: 'submit', step: 0, answer: { value: '5' } });
+  assert.equal(p.resolve, 4);
   assert.equal(storyLearning(p, 'bridge').completed, 1);
 });
 

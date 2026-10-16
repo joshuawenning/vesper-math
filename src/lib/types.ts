@@ -16,6 +16,7 @@ export type Ending = 'beacon' | 'refuge';
 export type IconName =
   | 'sun'
   | 'monitor'
+  | 'dice'
   | 'hive'
   | 'snail'
   | 'seed'
@@ -128,7 +129,25 @@ export interface StoryLearning {
   attempted: string[];
   recovered: boolean;
 }
+export type TrainingMode = 'arithmetic' | 'tables' | 'dice';
+export type TrainingOperation = 'add' | 'subtract' | 'multiply';
+export interface TrainingProblem {
+  id: number;
+  mode: TrainingMode;
+  operation: TrainingOperation;
+  a: number;
+  b: number;
+  solved: boolean;
+  tried: number[];
+}
+export interface TrainingProgress {
+  sequence: number;
+  solved: number;
+  attempts: number;
+  pending: TrainingProblem | null;
+}
 export interface Progress extends Journey {
+  training: TrainingProgress;
   resolve: number;
   study: Record<string, StoryLearning>;
   theme: Theme;
@@ -144,6 +163,7 @@ export interface Progress extends Journey {
   practice: { attempts: number; correct: number };
 }
 export type DialogView =
+  | { kind: 'training'; returnTo?: string }
   | {
       kind:
         | 'welcome'
