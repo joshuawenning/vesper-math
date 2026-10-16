@@ -1,6 +1,5 @@
 'use client';
 import { useRef, useState } from 'react';
-import { chapter } from '@/content/merewood';
 import { skillLevels } from '@/content/worlds';
 import { normalizeProgress } from '@/lib/progress';
 import type { Progress } from '@/lib/types';
@@ -41,7 +40,7 @@ export default function Preferences({
       const raw: unknown = JSON.parse(await file.text());
       if (!raw || typeof raw !== 'object' || !('done' in raw) || !Array.isArray(raw.done))
         throw new Error('Choose a Vesper Math journey JSON file.');
-      onChange(normalizeProgress(raw, chapter));
+      onChange(normalizeProgress(raw));
       setNotice('Journey imported. Your discoveries and preferences have been restored.');
     } catch (error) {
       setNotice(error instanceof Error ? error.message : 'The save could not be imported.');

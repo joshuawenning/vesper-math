@@ -54,7 +54,7 @@ function normalizeJourney(value: unknown, ids: readonly string[]): Journey {
     levels: Object.fromEntries(done.map((id) => [id, cleanLevel(levels[id])])),
   };
 }
-export function normalizeProgress(value: unknown, _legacyChapter?: Chapter): Progress {
+export function normalizeProgress(value: unknown): Progress {
   const raw = object(value),
     speech = object(raw.speech),
     profile = object(raw.profile),

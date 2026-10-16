@@ -27,29 +27,28 @@ test('moonwater accepts the exact target and both guardian tactics are valid', (
   assert.equal(validateAnswer(guardian, { route: 'invented', value: '6' }), false);
 });
 test('legacy saves keep valid progress, preferences, and endings', () => {
-  const progress = normalizeProgress(
-    {
-      done: ['bridge', 'cistern', 'guardian'],
-      reading: 'plain',
-      support: 'light',
-      started: true,
-      ending: 'refuge',
-    },
-    chapter,
-  );
+  const progress = normalizeProgress({
+    done: ['bridge', 'cistern', 'guardian'],
+    reading: 'plain',
+    support: 'light',
+    started: true,
+    ending: 'refuge',
+  });
   assert.equal(progress.ending, 'refuge');
   assert.equal(progress.reading, 'plain');
   assert.equal(encounterStatus('guardian', progress, chapter), 'done');
 });
 test('corrupt and out-of-order saves cannot skip the path or set a premature ending', () => {
-  const progress = normalizeProgress(
-    { done: ['bridge', 'guardian', 'invented'], reading: '<script>', support: 5, ending: 'beacon' },
-    chapter,
-  );
+  const progress = normalizeProgress({
+    done: ['bridge', 'guardian', 'invented'],
+    reading: '<script>',
+    support: 5,
+    ending: 'beacon',
+  });
   assert.deepEqual(progress.done, ['bridge']);
   assert.equal(progress.ending, null);
   assert.equal(progress.reading, 'rich');
   assert.equal(encounterStatus('cistern', progress, chapter), 'current');
   assert.equal(encounterStatus('guardian', progress, chapter), 'locked');
-  assert.deepEqual(normalizeProgress(null, chapter).done, []);
+  assert.deepEqual(normalizeProgress(null).done, []);
 });

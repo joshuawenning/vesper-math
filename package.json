@@ -9,7 +9,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "node --import tsx --test tests/*.test.ts"
   },
   "dependencies": {
     "next": "16.4.1",

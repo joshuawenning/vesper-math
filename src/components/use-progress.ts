@@ -7,7 +7,6 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { chapter } from '@/content/merewood';
 import { initialProgress, normalizeProgress, SAVE_KEY } from '@/lib/progress';
 import { observeAppearance } from '@/lib/theme';
 import type { Progress } from '@/lib/types';
@@ -20,7 +19,7 @@ function useStoredProgress() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(SAVE_KEY);
-      if (raw) setProgress(normalizeProgress(JSON.parse(raw), chapter));
+      if (raw) setProgress(normalizeProgress(JSON.parse(raw)));
     } catch {
       setStorageOK(false);
     }
