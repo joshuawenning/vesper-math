@@ -46,7 +46,10 @@ export default function GameHeader({
         aria-label="Vesper Math — current adventure"
         className="flex items-center gap-[14px] py-[15px] text-gold tablet:py-0"
       >
-        <Icon name="star" className="h-[43px] w-7 tablet:w-[37px]" />
+        <Icon
+          name="star"
+          className="h-[43px] w-7 motion-safe:animate-spin motion-safe:[animation-duration:90s] tablet:w-[37px]"
+        />
         <div>
           <div className="whitespace-nowrap font-story text-[clamp(1.5rem,5vw,2.3125rem)] font-semibold">
             Vesper Math
