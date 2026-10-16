@@ -78,6 +78,15 @@
     outline-offset: 2px;
     box-shadow: 0 0 0 4px #192625;
   }
+  /* Keep pointer focus quiet, including the browser's default focus outline. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+  /* Reading destinations receive focus for screen readers, not as controls. */
+  :is(main, h2)[tabindex='-1']:focus {
+    outline: none;
+    box-shadow: none;
+  }
   dialog {
     color-scheme: light;
     scroll-padding-block: 9rem 2rem;
