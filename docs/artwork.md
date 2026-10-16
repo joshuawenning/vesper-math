@@ -8,7 +8,7 @@ Content registries select paintings; components should not duplicate those paths
 
 ### Welcome page
 
-The homepage uses two original viewpoints, separate from playable scenes: `merewood-arrival-painterly.webp` approaches a willow-lined mere with a distant light; `elian-waystation-painterly.webp` shows Elian with a map, lantern, and heron at a wayside shelter. Both are 1536px-wide WebP panoramas registered in `artwork.ts`, composed with quiet left-hand space for text. The hero crops toward the right on mobile; the footer puts its painting above the text at narrow widths. Keep the game’s observatory reveal out of the welcome hero.
+The homepage uses two original viewpoints, separate from playable scenes: `merewood-arrival-painterly.webp` shows a russet-cloaked wayfarer holding a lantern at a willow-lined mere, facing a distant light; `elian-waystation-painterly.webp` shows Elian with a map, lantern, and heron at a wayside shelter. Both are 1536px-wide WebP panoramas registered in `artwork.ts`, composed with quiet left-hand space for text. The hero crops toward the right on mobile; the footer puts its painting above the text at narrow widths. Keep the game’s observatory reveal out of the welcome hero.
 
 ### Worlds, stories, and shared scenes
 
