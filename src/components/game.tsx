@@ -158,7 +158,6 @@ export default function Game({ scene }: { scene: ReactNode }) {
             </p>
           ) : (
             <>
-              <TrainingInvitation progress={progress} onTrain={() => router.push('/training')} />
               <ChapterScene
                 chapter={chapter}
                 artwork={
@@ -181,6 +180,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
               <StoryStrip chapter={chapter} progress={progress} onContinue={continueJourney} />
               <MobileCompanionCard onSpeak={companion} />
               <EncounterGrid chapter={chapter} progress={progress} onEncounter={openEncounter} />
+              <TrainingInvitation progress={progress} onTrain={() => router.push('/training')} />
               <AdventureFooter chapter={chapter} />
             </>
           )}

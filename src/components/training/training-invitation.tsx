@@ -12,7 +12,7 @@ export default function TrainingInvitation({
   return (
     <button
       onClick={onTrain}
-      className="mb-5 flex w-full items-center gap-4 border border-gold/30 bg-surface p-3 text-left hover:bg-surface-hover"
+      className="mt-6 mb-5 flex w-full items-center gap-4 border border-gold/30 bg-surface p-3 text-left hover:bg-surface-hover"
     >
       <span className="relative h-20 w-24 shrink-0 overflow-hidden border border-gold/20">
         <Image src={trainingArt.arithmetic.src} alt="" fill sizes="96px" className="object-cover" />
