@@ -4,7 +4,7 @@ import { worlds, loadChapter } from '../src/content/worlds';
 import { chapter } from '../src/content/merewood';
 import { storySteps } from '../src/content/story-lessons';
 import { levelEncounter } from '../src/lib/difficulty';
-import { normalizeProgress, switchWorld } from '../src/lib/progress';
+import { normalizeProgress, restartCurrentJourney, switchWorld } from '../src/lib/progress';
 import { applyStudyAction, storyLearning } from '../src/lib/story-learning';
 import { validateAnswer } from '../src/lib/challenges';
 
@@ -242,4 +242,43 @@ test('division practice accepts equivalent expressions without a false penalty',
   assert.equal(validateAnswer(guardian, { route: 'pulse', value: '18/3' }), true);
   assert.equal(validateAnswer(guardian, { route: 'pulse', value: '12/2' }), true);
   assert.equal(validateAnswer(guardian, { route: 'pulse', value: '5' }), false);
+});
+
+test('Start Fresh resets Resolve and current chapter learning while retaining other worlds and preferences', () => {
+  const other = worlds[1];
+  let p = normalizeProgress({
+    resolve: 19,
+    theme: 'light',
+    skill: 'developing',
+    profile: { name: 'Mira' },
+    done: ['bridge'],
+    journeys: { [other.id]: { done: [other.encounters[0]] } },
+    study: {
+      [`${chapter.id}:cistern`]: { level: 'developing', completed: 1, reviewing: true },
+      [`${other.id}:${other.encounters[1]}`]: { level: 'stretch', completed: 1, reviewing: true },
+    },
+  });
+  const original = p;
+  p = restartCurrentJourney(p);
+  assert.equal(p.resolve, 10);
+  assert.deepEqual(p.done, []);
+  assert.deepEqual(p.levels, {});
+  assert.equal(p.ending, null);
+  assert.equal(p.started, false);
+  assert.equal(p.study[`${chapter.id}:cistern`], undefined);
+  assert.deepEqual(
+    p.study[`${other.id}:${other.encounters[1]}`],
+    original.study[`${other.id}:${other.encounters[1]}`],
+  );
+  assert.equal(
+    p.history.some((r) => r.worldId === chapter.id),
+    false,
+  );
+  assert.deepEqual(p.journeys[other.id], original.journeys[other.id]);
+  assert.equal(p.theme, 'light');
+  assert.equal(p.skill, 'developing');
+  assert.equal(p.profile.name, 'Mira');
+  assert.equal(normalizeProgress(JSON.parse(JSON.stringify(p))).resolve, 10);
+  assert.equal(restartCurrentJourney({ ...original, resolve: 0 }).resolve, 10);
+  assert.equal(original.resolve, 19);
 });

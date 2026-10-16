@@ -180,6 +180,18 @@ export function switchWorld(progress: Progress, id: string): Progress {
   };
   return { ...progress, ...(journeys[id] ?? emptyJourney()), journeys, worldId: id };
 }
+export function restartCurrentJourney(progress: Progress): Progress {
+  return {
+    ...progress,
+    ...emptyJourney(),
+    resolve: initialProgress.resolve,
+    study: Object.fromEntries(
+      Object.entries(progress.study).filter(([key]) => !key.startsWith(`${progress.worldId}:`)),
+    ),
+    history: progress.history.filter((record) => record.worldId !== progress.worldId),
+    journeys: { ...progress.journeys, [progress.worldId]: emptyJourney() },
+  };
+}
 export function recordDiscovery(progress: Progress, id: string, chapter: Chapter): Progress {
   if (
     chapter.id !== progress.worldId ||

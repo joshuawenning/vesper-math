@@ -49,8 +49,8 @@ export function RestartContent({
   return (
     <>
       <Narrative>
-        Starting again clears this chapter’s discoveries and ending on this device. Your reading
-        preferences will stay.
+        Starting again clears this chapter’s discoveries and challenges, and resets Resolve to 10.
+        Your character, preferences, and other worlds will stay.
       </Narrative>
       <Actions>
         <Button onClick={onRestart}>Start fresh</Button>

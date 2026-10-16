@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { chapter as initialChapter } from '@/content/merewood';
 import { loadChapter, getWorld } from '@/content/worlds';
-import { encounterStatus, emptyJourney, switchWorld } from '@/lib/progress';
+import { encounterStatus, restartCurrentJourney, switchWorld } from '@/lib/progress';
 import { applyStudyAction, storyLearning, type StudyAction } from '@/lib/story-learning';
 import type { DialogView } from '@/lib/types';
 import { useProgress } from './use-progress';
@@ -92,15 +92,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
       setView({ kind: 'discovery', id });
   }
   function restart() {
-    setProgress((p) => ({
-      ...p,
-      ...emptyJourney(),
-      study: Object.fromEntries(
-        Object.entries(p.study).filter(([key]) => !key.startsWith(`${p.worldId}:`)),
-      ),
-      history: p.history.filter((record) => record.worldId !== p.worldId),
-      journeys: { ...p.journeys, [p.worldId]: emptyJourney() },
-    }));
+    setProgress(restartCurrentJourney);
     close();
   }
   return (
