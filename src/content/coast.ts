@@ -123,7 +123,7 @@ export const chapter: Chapter = {
         'The garden lanterns glow one by one. Across the dark water, a returning ship answers with a light of its own.',
       reward: 'Tideglass lantern',
       artwork: {
-        src: '/art/lantern-garden-illustrated.webp',
+        src: '/art/elian-lantern-painterly.webp',
         alt: 'Elian pours glowing moonwater into a garden lantern while a distant sailing ship carries a small answering light.',
       },
       hint: [

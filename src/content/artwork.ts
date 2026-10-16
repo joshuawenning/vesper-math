@@ -6,8 +6,8 @@ export const artwork = {
     alt: 'A moonlit, hand-illustrated observatory above a flooded woodland, with a stone crossing, a silver cistern, and an owl guardian.',
   },
   elian: {
-    src: '/art/elian-illustrated.webp',
-    alt: 'Elian, a thoughtful woman with wavy chestnut hair, a teal cloak, a compass, and a star chart.',
+    src: '/art/elian-painterly.webp',
+    alt: 'A loose watercolor portrait of Elian in a faded teal cloak, resting a hand on her map beside a misty lake.',
     portrait: true,
   },
   journal: {
