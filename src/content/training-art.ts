@@ -1,15 +1,20 @@
 import type { Artwork, TrainingMode } from '@/lib/types';
 export const trainingArt: Record<TrainingMode, Artwork> = {
   arithmetic: {
-    src: '/art/elian-training-counting.webp',
-    alt: 'Full-body illustration of Elian on a mossy bench, playfully arranging counting stones in a lantern-lit training courtyard.',
+    src: '/art/elian-training-counting-v2.webp',
+    alt: 'Elian shares counting stones with a halfling traveler on a wooden bridge in a fern-filled ravine.',
   },
   tables: {
-    src: '/art/elian-training-tables.webp',
-    alt: 'Full-body illustration of Elian conducting rows of floating brass orbs while a small winged lizard watches from an abacus.',
+    src: '/art/elian-training-tables-v2.webp',
+    alt: 'Elian and an elderly dwarf arrange mechanical moths in equal groups inside a clockmaker’s indigo pavilion.',
   },
   dice: {
-    src: '/art/elian-training-dice.webp',
-    alt: 'Full-body illustration of Elian tossing faceted gaming stones in a playful sidestep, with a curious crow beside the training circle.',
+    src: '/art/elian-training-dice-v2.webp',
+    alt: 'Elian plays a dice game with a fox-headed mage beneath a giant mushroom canopy.',
   },
+};
+
+export const libraryArt: Artwork = {
+  src: '/art/elian-library.webp',
+  alt: 'Elian shares a book with a scholarly faun in a mystic tree library, while an elf and magical creatures study nearby.',
 };
