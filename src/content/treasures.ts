@@ -23,5 +23,5 @@ const ids = [
   'remembering-seed',
 ] as const;
 export const treasureArt: Record<string, string> = Object.fromEntries(
-  ids.map((id) => [id, `/art/treasures/${id}.webp`]),
+  ids.map((id) => [id, `/art/treasures-painterly/${id}.webp`]),
 );

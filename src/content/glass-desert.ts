@@ -7,7 +7,7 @@ export const chapter: Chapter = {
   number: 4,
   heading: 'A thousand borrowed suns',
   scene: {
-    src: '/art/glass-desert.webp',
+    src: '/art/glass-desert-painterly.webp',
     alt: 'Rose-colored glass dunes surround a ruined mirror palace, with a turquoise serpent winding through the sand.',
   },
   subtitle: 'Not every reflection tells the whole story.',
@@ -29,7 +29,7 @@ export const chapter: Chapter = {
         'Sahirah seals the water jar. Beneath its surface, the reflection of a road appears. “What we keep for others becomes a path,” she says.',
       reward: 'Wellkeeper’s blue vessel',
       artwork: {
-        src: '/art/mirrors-well.webp',
+        src: '/art/mirrors-well-painterly.webp',
         alt: 'A woman in saffron robes pours turquoise water between ceramic vessels beside a desert well, watched by glass lizards.',
       },
       hint: [
@@ -81,7 +81,7 @@ export const chapter: Chapter = {
         'The little scarabs lift their baskets together. As they march, green shoots appear in the cracks between the glass dunes.',
       reward: 'Caravan’s seed charm',
       artwork: {
-        src: '/art/scarab-caravan.webp',
+        src: '/art/scarab-caravan-painterly.webp',
         alt: 'A silver-haired man in an indigo cloak tends a giant jewel scarab and smaller beetles carrying woven seed baskets.',
       },
       hint: [
@@ -133,7 +133,7 @@ export const chapter: Chapter = {
         'The last beam finds its place. The sphinx opens one enormous eye, bows, and becomes a flight of transparent birds. The reflected palace is finally real.',
       reward: 'Prism of true bearings',
       artwork: {
-        src: '/art/prism-gate.webp',
+        src: '/art/prism-gate-painterly.webp',
         alt: 'A many-eyed glass sphinx curls around an amber and teal prism gate amid broken mirrored towers.',
       },
       hint: [

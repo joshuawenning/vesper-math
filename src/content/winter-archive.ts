@@ -7,7 +7,7 @@ export const chapter: Chapter = {
   number: 5,
   heading: 'What the frost has kept',
   scene: {
-    src: '/art/winter-archive.webp',
+    src: '/art/winter-archive-painterly.webp',
     alt: 'A library carved into a frozen cliff glows with amber windows, snowy bridges and antlered owl spirits.',
   },
   subtitle: 'Some things must be understood before they can be kept.',
@@ -30,7 +30,7 @@ export const chapter: Chapter = {
         'The sand falls forward again. Maelin smiles as a lost afternoon returns to the shelves, smelling faintly of summer rain.',
       reward: 'Hourglass of returning moments',
       artwork: {
-        src: '/art/borrowed-hours.webp',
+        src: '/art/borrowed-hours-painterly.webp',
         alt: 'An older woman with white braids and a raven tends floating hourglasses in a frozen library chamber.',
       },
       hint: [
@@ -80,7 +80,7 @@ export const chapter: Chapter = {
         'The moths fold into pages, and Ivo writes your name on a blank leaf. Not as a borrower—as someone who helped a story find its way home.',
       reward: 'Moth-wing bookmark',
       artwork: {
-        src: '/art/frostbound-index.webp',
+        src: '/art/frostbound-index-painterly.webp',
         alt: 'A bearded archivist in moss-green robes opens a huge book as luminous moth spirits rise among frozen scrolls.',
       },
       hint: [
@@ -132,7 +132,7 @@ export const chapter: Chapter = {
         'The stag steps aside. Its hooves leave little pools of spring water. Behind the door, the archive’s oldest book opens to a page that has never been written.',
       reward: 'Candle of the first thaw',
       artwork: {
-        src: '/art/door-of-thaw.webp',
+        src: '/art/door-of-thaw-painterly.webp',
         alt: 'A skeletal stag spirit made of frost carries tiny candle flames in its antlers before a round wooden door.',
       },
       hint: [

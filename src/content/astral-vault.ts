@@ -7,7 +7,7 @@ export const chapter: Chapter = {
   number: 6,
   heading: 'Where the dark becomes a map',
   scene: {
-    src: '/art/astral-vault.webp',
+    src: '/art/astral-vault-painterly.webp',
     alt: 'An ancient observatory floats among violet nebulae, orbital bridges and luminous ray-like creatures.',
   },
   subtitle: 'Even an empty sky can hold a possibility.',
@@ -30,7 +30,7 @@ export const chapter: Chapter = {
         'The silver ray lifts the boat across a silent current. On the far bank, Neris ties the mooring to a star that was not there a moment ago.',
       reward: 'Silver ray’s scale',
       artwork: {
-        src: '/art/starless-ferry.webp',
+        src: '/art/starless-ferry-painterly.webp',
         alt: 'An auburn-haired woman pilots a crescent boat through a sea of stars beside a luminous silver manta spirit.',
       },
       hint: [
@@ -83,8 +83,8 @@ export const chapter: Chapter = {
         'The planets find their paths. The imp produces the last hidden light from behind one ear and solemnly insists that it was helping all along.',
       reward: 'Cael’s orbital ring',
       artwork: {
-        src: '/art/orrery-keeper.webp',
-        alt: 'A dark-haired male elf in an embroidered midnight robe turns a brass orrery while a tiny winged imp watches.',
+        src: '/art/orrery-keeper-painterly.webp',
+        alt: 'A dark-haired male elf in an midnight robe turns a brass orrery while a tiny winged imp watches.',
       },
       hint: [
         'Equal groups can be counted with multiplication.',
@@ -135,7 +135,7 @@ export const chapter: Chapter = {
         'The ember rises. A new constellation opens above every road you have traveled: the mere, the mountain, the coast, the glass, the frost. Elian leaves room on the map for your next question.',
       reward: 'The unwritten star',
       artwork: {
-        src: '/art/unwritten-star.webp',
+        src: '/art/unwritten-star-painterly.webp',
         alt: 'Ancient stone hands cradle a living golden star as translucent feathered serpents circle an open obsidian reliquary.',
       },
       hint: [

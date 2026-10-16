@@ -6,8 +6,8 @@ export const chapter: Chapter = {
   number: 3,
   heading: 'Where the waters part',
   scene: {
-    src: '/art/coast-illustrated.webp',
-    alt: 'An intricately illustrated moonlit harbor with sailing ships and lanterns.',
+    src: '/art/coast-painterly.webp',
+    alt: 'An loosely painted moonlit harbor with sailing ships and lanterns.',
   },
   subtitle: 'A careful measure can light the way.',
   intro: {
@@ -29,7 +29,7 @@ export const chapter: Chapter = {
         'The merchant ties your rope with a sailor\u2019s knot and points toward the retreating tide.',
       reward: 'Harbor token',
       artwork: {
-        src: '/art/fair-exchange-illustrated.webp',
+        src: '/art/fair-exchange-painterly.webp',
         alt: 'A harbor merchant offers a coiled rope across a counter with copper coins and brass scales, against a moonlit harbor.',
       },
       hint: [
@@ -72,7 +72,7 @@ export const chapter: Chapter = {
         'Your measured rope spans the gap. A line of pale stones leads toward the lantern garden.',
       reward: 'Tidekeeper\u2019s cord',
       artwork: {
-        src: '/art/tidekeepers-measure-illustrated.webp',
+        src: '/art/tidekeepers-measure-painterly.webp',
         alt: 'A knotted measuring rope spans a gap beside a weathered tidal marker and a moonlit sea causeway.',
       },
       hint: [

@@ -1,0 +1,277 @@
+{
+  "mode": "Built-in image_gen tool",
+  "styleReference": "public/art/elian-painterly.webp",
+  "assets": [
+    {
+      "id": "observatory",
+      "old": "/art/observatory-illustrated.webp",
+      "asset": "public/art/observatory-painterly.webp",
+      "kind": "world",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A moonlit, hand-illustrated observatory above a flooded woodland, with a stone crossing, a silver cistern, and an owl guardian. Wide landscape 3:2. Large calm shapes with near and far layers, no fussy scenery. Keep the main landmark legible in the upper middle; dark foreground at bottom provides space for the game title overlay. Let some peripheral edges dissolve into paper.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-5af3bc43-8582-48d7-a38f-53dcac6c48d6.png"
+    },
+    {
+      "id": "journal",
+      "old": "/art/journal-illustrated.webp",
+      "asset": "public/art/journal-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A candlelit wayfarer’s journal with a compass, moonwater vial, quill, and maps. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-9ed07960-4ab8-4808-89c2-dedf637aa493.png"
+    },
+    {
+      "id": "preferences",
+      "old": "/art/preferences-illustrated.webp",
+      "asset": "public/art/preferences-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A quiet outfitting alcove with a teal traveling cloak, a brass lantern, spectacles, lenses, and carefully arranged traveling tools. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-3719627d-94b3-4c75-abdf-e7b7326f9e1f.png"
+    },
+    {
+      "id": "bridge",
+      "old": "/art/bridge-illustrated.webp",
+      "asset": "public/art/bridge-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A broken mossy crossing over teal water, with oak planks and measuring tools on the bank. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-219cb404-c2b0-42b6-ba2f-244d8c7d2054.png"
+    },
+    {
+      "id": "cistern",
+      "old": "/art/cistern-illustrated.webp",
+      "asset": "public/art/cistern-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A moonlit stone cistern, a brass pitcher, and the observatory’s ancient celestial mechanism. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-7ccd2384-32e6-40f8-a056-8b0cd45f8a33.png"
+    },
+    {
+      "id": "guardian",
+      "old": "/art/guardian-illustrated.webp",
+      "asset": "public/art/guardian-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A stone owl unfolds its wings over an ancient star chart, in a large quiet shadow. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-39a41dc5-2922-45f3-a65d-2b6359182268.png"
+    },
+    {
+      "id": "foundry",
+      "old": "/art/foundry-illustrated.webp",
+      "asset": "public/art/foundry-painterly.webp",
+      "kind": "world",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: An loosely painted mountain foundry with brass wheels and warm furnaces. Wide landscape 3:2. Large calm shapes with near and far layers, no fussy scenery. Keep the main landmark legible in the upper middle; dark foreground at bottom provides space for the game title overlay. Let some peripheral edges dissolve into paper.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-4f92559c-a5c7-4ab4-9dd5-a6bcaa609fe3.png"
+    },
+    {
+      "id": "counterweight",
+      "old": "/art/counterweight-illustrated.webp",
+      "asset": "public/art/counterweight-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A copper lift suspended beside a mountain workshop, with a brass balancing arm and hanging stone counterweights. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-0b2c5385-14ff-44dc-83e9-0282f92b447e.png"
+    },
+    {
+      "id": "brass-chorus",
+      "old": "/art/brass-chorus-corrected.webp",
+      "asset": "public/art/brass-chorus-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: An elderly dwarf gear keeper arranges brass gear teeth at a workbench as a great wheel glows behind her. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-a170ef14-d0f8-4bba-ab62-1f8f935ce21c.png"
+    },
+    {
+      "id": "makers-mosaic",
+      "old": "/art/makers-mosaic-illustrated.webp",
+      "asset": "public/art/makers-mosaic-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A teal, ochre, and ivory foundry floor mosaic with a loose final tile and a brass maker’s compass. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-fa33bdfa-30e7-4908-b20f-8cd1ab56d549.png"
+    },
+    {
+      "id": "coast",
+      "old": "/art/coast-illustrated.webp",
+      "asset": "public/art/coast-painterly.webp",
+      "kind": "world",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: An loosely painted moonlit harbor with sailing ships and lanterns. Wide landscape 3:2. Large calm shapes with near and far layers, no fussy scenery. Keep the main landmark legible in the upper middle; dark foreground at bottom provides space for the game title overlay. Let some peripheral edges dissolve into paper.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-fce43cf5-906c-4f04-bcb5-1e9101628b91.png"
+    },
+    {
+      "id": "fair-exchange",
+      "old": "/art/fair-exchange-illustrated.webp",
+      "asset": "public/art/fair-exchange-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A harbor merchant offers a coiled rope across a counter with copper coins and brass scales, against a moonlit harbor. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-eb88788e-bcea-41f2-87d8-dcc4ef54311f.png"
+    },
+    {
+      "id": "tidekeepers-measure",
+      "old": "/art/tidekeepers-measure-illustrated.webp",
+      "asset": "public/art/tidekeepers-measure-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A knotted measuring rope spans a gap beside a weathered tidal marker and a moonlit sea causeway. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-0ba17b95-412e-4842-962e-3ed799b8c1c7.png"
+    },
+    {
+      "id": "glass-desert",
+      "old": "/art/glass-desert.webp",
+      "asset": "public/art/glass-desert-painterly.webp",
+      "kind": "world",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: Rose-colored glass dunes surround a ruined mirror palace, with a turquoise serpent winding through the sand. Wide landscape 3:2. Large calm shapes with near and far layers, no fussy scenery. Keep the main landmark legible in the upper middle; dark foreground at bottom provides space for the game title overlay. Let some peripheral edges dissolve into paper.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-a394d8ff-75c8-4742-afbb-f57f2d90b969.png"
+    },
+    {
+      "id": "mirrors-well",
+      "old": "/art/mirrors-well.webp",
+      "asset": "public/art/mirrors-well-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A woman in saffron robes pours turquoise water between ceramic vessels beside a desert well, watched by glass lizards. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-7a702272-7001-421b-baba-9401055aca17.png"
+    },
+    {
+      "id": "scarab-caravan",
+      "old": "/art/scarab-caravan.webp",
+      "asset": "public/art/scarab-caravan-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A silver-haired man in an indigo cloak tends a giant jewel scarab and smaller beetles carrying woven seed baskets. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-ce113555-bd33-4aa2-b9fb-608755f7b25d.png"
+    },
+    {
+      "id": "prism-gate",
+      "old": "/art/prism-gate.webp",
+      "asset": "public/art/prism-gate-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A many-eyed glass sphinx curls around an amber and teal prism gate amid broken mirrored towers. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-37d77702-78fe-487b-a322-372a2a6ae41f.png"
+    },
+    {
+      "id": "winter-archive",
+      "old": "/art/winter-archive.webp",
+      "asset": "public/art/winter-archive-painterly.webp",
+      "kind": "world",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A library carved into a frozen cliff glows with amber windows, snowy bridges and antlered owl spirits. Wide landscape 3:2. Large calm shapes with near and far layers, no fussy scenery. Keep the main landmark legible in the upper middle; dark foreground at bottom provides space for the game title overlay. Let some peripheral edges dissolve into paper.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-26e0a88b-2eda-48cd-bd61-3a4c8f67e5ec.png"
+    },
+    {
+      "id": "borrowed-hours",
+      "old": "/art/borrowed-hours.webp",
+      "asset": "public/art/borrowed-hours-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: An older woman with white braids and a raven tends floating hourglasses in a frozen library chamber. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-e02b6b56-b614-4b82-9ffb-605ea67bd53f.png"
+    },
+    {
+      "id": "frostbound-index",
+      "old": "/art/frostbound-index.webp",
+      "asset": "public/art/frostbound-index-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A bearded archivist in moss-green robes opens a huge book as luminous moth spirits rise among frozen scrolls. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-fd53b292-7e8c-4438-8c14-30cebec97ac3.png"
+    },
+    {
+      "id": "door-of-thaw",
+      "old": "/art/door-of-thaw.webp",
+      "asset": "public/art/door-of-thaw-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A skeletal stag spirit made of frost carries tiny candle flames in its antlers before a round wooden door. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-35b158bf-acd5-468b-bfdd-9795f605c2aa.png"
+    },
+    {
+      "id": "astral-vault",
+      "old": "/art/astral-vault.webp",
+      "asset": "public/art/astral-vault-painterly.webp",
+      "kind": "world",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: An ancient observatory floats among violet nebulae, orbital bridges and luminous ray-like creatures. Wide landscape 3:2. Large calm shapes with near and far layers, no fussy scenery. Keep the main landmark legible in the upper middle; dark foreground at bottom provides space for the game title overlay. Let some peripheral edges dissolve into paper.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-dbda3ecd-71b4-47a2-a979-9443691c3bdb.png"
+    },
+    {
+      "id": "starless-ferry",
+      "old": "/art/starless-ferry.webp",
+      "asset": "public/art/starless-ferry-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: An auburn-haired woman pilots a crescent boat through a sea of stars beside a luminous silver manta spirit. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-e5977b7e-0bbd-46de-8601-0a1745c34332.png"
+    },
+    {
+      "id": "orrery-keeper",
+      "old": "/art/orrery-keeper.webp",
+      "asset": "public/art/orrery-keeper-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A dark-haired male elf in an plain midnight robe turns a brass orrery while a tiny winged imp watches. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-2a28ed8a-f597-405b-b921-85420070e9f9.png"
+    },
+    {
+      "id": "unwritten-star",
+      "old": "/art/unwritten-star.webp",
+      "asset": "public/art/unwritten-star-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: Ancient stone hands cradle a living golden star as translucent feathered serpents circle an open obsidian reliquary. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-b4d4707e-693f-49e9-bda8-47b07d1d4f00.png"
+    },
+    {
+      "id": "hollow-orchard",
+      "old": "/art/hollow-orchard.webp",
+      "asset": "public/art/hollow-orchard-painterly.webp",
+      "kind": "world",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A moonlit orchard of hollow trees and translucent fruit holding tiny castles, watched by a pomegranate-antlered creature. Wide landscape 3:2. Large calm shapes with near and far layers, no fussy scenery. Keep the main landmark legible in the upper middle; dark foreground at bottom provides space for the game title overlay. Let some peripheral edges dissolve into paper.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-e2d903f4-6698-42c1-807d-9d6bbf86782f.png"
+    },
+    {
+      "id": "honey-debt",
+      "old": "/art/honey-debt.webp",
+      "asset": "public/art/honey-debt-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A silver-haired woman beekeeper in plum robes opens an amber honey jar as tiny winged golden keys circle her veil. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-ad18cf96-4aba-47b8-8864-e8c71ffb0d2d.png"
+    },
+    {
+      "id": "snails-bargain",
+      "old": "/art/snails-bargain.webp",
+      "asset": "public/art/snails-bargain-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: A wooden-masked male merchant in an plain wine-red coat measures ribbon beside a giant snail with a brass spiral shell. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-26e19f8d-1456-418f-a4cf-673db2cd5b0f.png"
+    },
+    {
+      "id": "remembering-seed",
+      "old": "/art/remembering-seed.webp",
+      "asset": "public/art/remembering-seed-painterly.webp",
+      "kind": "scene",
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Subject/concept to preserve: An uncanny deer grown from pomegranate rind and twisted roots bows over an open seedpod, with a lantern-heart glowing inside its chest. Landscape 3:2 narrative scene, a clear focal figure or object, simple background and ample quiet space. Reduce surface decoration. Important objects remain recognizable at small sizes.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-59a285ed-e5a2-42a7-9780-5f1fc7564918.png"
+    },
+    {
+      "id": "personas",
+      "old": "/art/personas-illustrated.webp",
+      "asset": "public/art/personas-painterly.webp",
+      "kind": "portraits",
+      "prompt": "Use case: style-transfer. Image 1 (Elian) is the exact desired medium and restraint. Image 2 is the old character atlas: preserve the six identities, clothing color families, facial structure, hair colors and order, but repaint them in the spare watercolor/gouache style of Image 1. This is one 3-column by 2-row sprite sheet, six equal square cells without gaps, borders or labels, landscape 3:2. Each bust safely centered, quiet ivory watercolor paper background, shoulders dissolve into paper. TOP ROW: dark-skinned curly-haired woman arcanist in muted purple; red-haired freckled woman ranger in moss green; East Asian woman warden in ivory with simple brass armor. BOTTOM ROW: dark curly-haired man arcanist in muted purple; Black man ranger with locs in moss green; silver-haired brown-skinned man warden in ivory with simple brass armor. Remove elaborate gold ornaments, embroidery and tiny decorative details. Keep natural thoughtful faces, varied quiet gazes. Broad translucent washes, selective irregular pencil contours, few facial marks, soft unfinished edges. No glossy digital painting, no photography, no all-over sharp hatching, no ornamental texture, no words. Simplify the actual drawing instead of merely applying paper grain.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-711133ef-829c-48d9-941f-63287ac1cf30.png",
+      "references": ["public/art/elian-painterly.webp", "public/art/personas-illustrated.webp"]
+    },
+    {
+      "id": "treasures",
+      "asset": "public/art/treasures-painterly-atlas.webp",
+      "kind": "atlas",
+      "cells": [
+        "bridge",
+        "cistern",
+        "guardian",
+        "copper-lift",
+        "gearworks",
+        "forge-floor",
+        "harbor-trade",
+        "tidal-mark",
+        "lantern-garden",
+        "mirrors-well",
+        "scarab-caravan",
+        "prism-gate",
+        "borrowed-hours",
+        "frostbound-index",
+        "door-of-thaw",
+        "starless-ferry",
+        "orrery-keeper",
+        "unwritten-star",
+        "honey-debt",
+        "snails-bargain",
+        "remembering-seed"
+      ],
+      "prompt": "Use case: illustration-story. An original fantasy game illustration matching the supplied Elian painting in MEDIUM, RESTRAINT and painted surface, not copying its character or composition. Hand-painted thin gouache and watercolor on warm ivory paper, irregular selective pencil and pen contours. Broad simple shapes, softly incomplete edges, uneven transparent pigment. Suggest more than you describe. Spacious, evocative old fantasy paperback painting. Quiet grown-up atmosphere, believable people and strange solemn creatures. Muted colors, restrained lighting. No glossy digital rendering, photographic detail, intricate filigree, cute cartoon faces, embroidery, sharp all-over detail, intricate hair strands, volumetric cinematic light, sparkles or uniformly repeated crosshatching. Texture must come from sparse painting, not a filter laid over a hyper-detailed scene. No words, watermark, frame or decorative border. Asset type: a square inventory sprite atlas of exactly 5 columns and 5 rows, 25 equal square cells, no visible dividing lines, no labels. Each cell has the SAME warm ivory paper background. Each object small and centered safely INSIDE its own cell with very generous blank margin, no touching adjoining cells. Light handmade natural-history watercolor study, sparse loose strokes, faded colors, soft simple shadow. No people or landscapes. Reading left to right top to bottom, first 21 cells contain: 1: a simple brass cloak clasp; 2: a blue glass vial of moonwater; 3: a folded parchment star chart; 4: a copper balance seal with two pans; 5: a brass tuning key; 6: an old brass compass; 7: a copper harbor token; 8: a knotted tide-measuring cord; 9: a little tideglass lantern; 10: a blue ceramic vessel; 11: a woven seed charm with a small beetle bead; 12: a simple triangular glass prism; 13: a small hourglass; 14: a moth-wing-shaped bookmark; 15: a stub of candle with a thawing ice ring; 16: a silver ray scale; 17: a brass orbital ring; 18: a small golden star in cupped dark stone; 19: a honeycomb with one tiny key; 20: a curled red ribbon; 21: a single reddish seed in an open pod. Last four cells blank ivory paper. Keep layout mechanically regular; all drawings isolated. Not shiny product photography, not game loot with jeweled gold ornament.",
+      "source": "/Users/joshuawenning/.codex/generated_images/01a13fad-90f4-78b1-914e-7461804606a1/exec-3074364e-72a2-4339-88d4-dfc6a15f68cc.png"
+    }
+  ]
+}

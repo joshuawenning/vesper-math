@@ -2,7 +2,7 @@ import type { Artwork } from '@/lib/types';
 
 export const artwork = {
   observatory: {
-    src: '/art/observatory-illustrated.webp',
+    src: '/art/observatory-painterly.webp',
     alt: 'A moonlit, hand-illustrated observatory above a flooded woodland, with a stone crossing, a silver cistern, and an owl guardian.',
   },
   elian: {
@@ -11,11 +11,11 @@ export const artwork = {
     portrait: true,
   },
   journal: {
-    src: '/art/journal-illustrated.webp',
+    src: '/art/journal-painterly.webp',
     alt: 'A candlelit wayfarer’s journal with a compass, moonwater vial, quill, and maps.',
   },
   preferences: {
-    src: '/art/preferences-illustrated.webp',
+    src: '/art/preferences-painterly.webp',
     alt: 'A quiet outfitting alcove with a teal traveling cloak, a brass lantern, spectacles, lenses, and carefully arranged traveling tools.',
   },
 } satisfies Record<string, Artwork>;

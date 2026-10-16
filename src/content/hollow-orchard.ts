@@ -7,7 +7,7 @@ export const chapter: Chapter = {
   number: 7,
   heading: 'What grows in the dark',
   scene: {
-    src: '/art/hollow-orchard.webp',
+    src: '/art/hollow-orchard-painterly.webp',
     alt: 'A moonlit orchard of hollow trees and translucent fruit holding tiny castles, watched by a pomegranate-antlered creature.',
   },
   subtitle: 'A small kindness can take a very strange shape.',
@@ -30,7 +30,7 @@ export const chapter: Chapter = {
         'The key-bees hum your name into the wax. A lock hidden in the bark clicks open. Veyra gives you a honeycomb that tastes faintly of a summer you have not yet lived.',
       reward: 'Keykeeper’s honeycomb',
       artwork: {
-        src: '/art/honey-debt.webp',
+        src: '/art/honey-debt-painterly.webp',
         alt: 'A silver-haired woman beekeeper in plum robes opens an amber honey jar as tiny winged golden keys circle her veil.',
       },
       hint: [
@@ -84,8 +84,8 @@ export const chapter: Chapter = {
         'The snail extends a very formal eye-stalk. The merchant knots your measured ribbon to a root. The road shortens just enough for the snail to arrive before its tea goes cold.',
       reward: 'Ribbon of unhurried roads',
       artwork: {
-        src: '/art/snails-bargain.webp',
-        alt: 'A wooden-masked male merchant in an embroidered wine-red coat measures ribbon beside a giant snail with a brass spiral shell.',
+        src: '/art/snails-bargain-painterly.webp',
+        alt: 'A wooden-masked male merchant in an wine-red coat measures ribbon beside a giant snail with a brass spiral shell.',
       },
       hint: [
         'The total length is the sum of the separate lengths.',
@@ -136,7 +136,7 @@ export const chapter: Chapter = {
         'The seeds turn in the air. The creature speaks a name older than the orchard, then touches its antlers to the earth. Every sleeping castle opens a tiny window. Elian writes your name beside the root that brought you here.',
       reward: 'Seed of a remembered name',
       artwork: {
-        src: '/art/remembering-seed.webp',
+        src: '/art/remembering-seed-painterly.webp',
         alt: 'An uncanny deer grown from pomegranate rind and twisted roots bows over an open seedpod, with a lantern-heart glowing inside its chest.',
       },
       hint: [
