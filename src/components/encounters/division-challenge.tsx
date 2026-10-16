@@ -1,4 +1,5 @@
 import type { Challenge, Support } from '@/lib/types';
+import type { ReactNode } from 'react';
 import { Toolbox } from '../ui/panels';
 import { Eyebrow } from '../ui/typography';
 
@@ -9,6 +10,7 @@ export default function DivisionChallenge({
   support,
   onRoute,
   onValue,
+  narration,
 }: {
   challenge: Extract<Challenge, { kind: 'division' }>;
   route: string;
@@ -16,6 +18,7 @@ export default function DivisionChallenge({
   support: Support;
   onRoute: (route: string) => void;
   onValue: (value: string) => void;
+  narration?: ReactNode;
 }) {
   const tactic = challenge.routes.find((r) => r.id === route) ?? challenge.routes[0];
   return (
@@ -47,9 +50,12 @@ export default function DivisionChallenge({
           </button>
         ))}
       </div>
-      <label className="mt-[18px] block text-xs" htmlFor="answer">
-        {tactic.question}
-      </label>
+      <div className="mt-[18px] flex items-center justify-between gap-2">
+        <label className="min-w-0 flex-1 text-xs" htmlFor="answer">
+          {tactic.question}
+        </label>
+        {narration}
+      </div>
       <input
         id="answer"
         className="mt-[9px] mr-2 w-[90px] border border-[#89977f] bg-[#fff9e7] p-2.5 font-story text-[1.5625rem] text-[#253a2c]"

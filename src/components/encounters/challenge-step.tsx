@@ -67,6 +67,15 @@ export default function ChallengeStep({
         : c.kind === 'fraction'
           ? 'Turn the mechanism'
           : (c.routes.find((r) => r.id === answer.route)?.action ?? 'Cast the spell');
+  const narration = (
+    <ReadAloud
+      compact
+      settings={progress.speech}
+      text={`${encounter.title}. ${index === 0 ? encounter[progress.reading] : ''} Challenge ${index + 1} of 3. ${index === 0 ? `Elian’s starting point: ${step.hint[0]}.` : ''} ${c.kind === 'number' ? c.question : c.kind === 'sum' ? `Choose ${c.count} planks totaling ${c.target} ${c.unit}. Available lengths: ${c.planks.join(', ')}.` : c.kind === 'fraction' ? `The cistern starts at ${c.start}/${c.denominator}. Reach ${c.target}/${c.denominator} by adding or removing measures.` : `${c.total} sparks. ${c.routes.find((r) => r.id === answer.route)?.label}. ${c.routes.find((r) => r.id === answer.route)?.question}`}${
+        hint > 0 ? ` Hint: ${step.hint[hint - 1]}. Why this works: ${principle}` : ''
+      }`}
+    />
+  );
   return (
     <form
       onSubmit={(event) => {
@@ -85,12 +94,6 @@ export default function ChallengeStep({
         onStudy(encounter.id, { kind: 'submit', step: index, answer });
       }}
     >
-      <ReadAloud
-        settings={progress.speech}
-        text={`${encounter.title}. ${index === 0 ? encounter[progress.reading] : ''} Challenge ${index + 1} of 3. ${index === 0 ? `Elian’s starting point: ${step.hint[0]}.` : ''} ${c.kind === 'number' ? c.question : c.kind === 'sum' ? `Choose ${c.count} planks totaling ${c.target} ${c.unit}. Available lengths: ${c.planks.join(', ')}.` : c.kind === 'fraction' ? `The cistern starts at ${c.start}/${c.denominator}. Reach ${c.target}/${c.denominator} by adding or removing measures.` : `${c.total} sparks. ${c.routes.find((r) => r.id === answer.route)?.label}. ${c.routes.find((r) => r.id === answer.route)?.question}`}${
-          hint > 0 ? ` Hint: ${step.hint[hint - 1]}. Why this works: ${principle}` : ''
-        }`}
-      />
       {index === 0 && (
         <p className="mb-4 border-l-2 border-[#ac9963] pl-3 text-sm leading-relaxed text-[#43533e]">
           Elian’s starting point: {step.hint[0]}
@@ -98,6 +101,7 @@ export default function ChallengeStep({
       )}
       {c.kind === 'number' && (
         <NumberChallenge
+          narration={narration}
           challenge={c}
           value={answer.value ?? ''}
           onChange={(value) => update({ value })}
@@ -105,6 +109,7 @@ export default function ChallengeStep({
       )}
       {c.kind === 'sum' && (
         <SumChallenge
+          narration={narration}
           challenge={c}
           selected={answer.selected ?? []}
           onChange={(selected) => update({ selected })}
@@ -112,6 +117,7 @@ export default function ChallengeStep({
       )}
       {c.kind === 'fraction' && (
         <FractionChallenge
+          narration={narration}
           challenge={c}
           fill={answer.fill ?? c.start}
           support={progress.support}
@@ -120,6 +126,7 @@ export default function ChallengeStep({
       )}
       {c.kind === 'division' && (
         <DivisionChallenge
+          narration={narration}
           challenge={c}
           route={answer.route ?? c.routes[0].id}
           value={answer.value ?? ''}

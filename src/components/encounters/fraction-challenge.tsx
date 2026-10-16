@@ -1,4 +1,6 @@
 import type { Challenge, Support } from '@/lib/types';
+import type { ReactNode } from 'react';
+import ChallengePrompt from './challenge-prompt';
 import Button from '../ui/button';
 import { Actions, Meter, Toolbox } from '../ui/panels';
 
@@ -7,18 +9,20 @@ export default function FractionChallenge({
   fill,
   support,
   onChange,
+  narration,
 }: {
   challenge: Extract<Challenge, { kind: 'fraction' }>;
   fill: number;
   support: Support;
   onChange: (fill: number) => void;
+  narration?: ReactNode;
 }) {
   return (
     <Toolbox>
-      <p className="mb-4 font-story text-xl leading-[1.5]">
+      <ChallengePrompt narration={narration}>
         The cistern is {challenge.start}/{challenge.denominator} full. Reach {challenge.target}/
         {challenge.denominator} using measures of 1/{challenge.denominator}.
-      </p>
+      </ChallengePrompt>
       <div className="flex flex-col items-center justify-center gap-[25px] min-[480px]:flex-row">
         <div
           className="relative flex h-40 w-[95px] shrink-0 flex-col-reverse overflow-hidden rounded-[4px_4px_28px_28px] border-2 border-[#6b8074] bg-[#eee8d5]"

@@ -62,13 +62,17 @@ export default function EncounterPanel({
       </h3>
       {learning.reviewing ? (
         <div role="status">
-          <ReadAloud
-            settings={progress.speech}
-            text={`Well reasoned. ${step.lesson}. Resolve restored by 2, up to 20.`}
-          />
-          <p className="mb-3 text-sm font-semibold text-[#384a3b]">
-            Well reasoned · +2 Resolve (up to 20)
-          </p>
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <p className="text-sm font-semibold text-[#384a3b]">
+              Well reasoned · +2 Resolve (up to 20)
+            </p>
+            <ReadAloud
+              compact
+              label="Read explanation aloud"
+              settings={progress.speech}
+              text={`Well reasoned. ${step.lesson}. Resolve restored by 2, up to 20.`}
+            />
+          </div>
           <Narrative>{step.lesson}</Narrative>
           <p className="mb-5 text-sm text-[#43533e]">
             Take a moment to follow the reasoning before you continue.

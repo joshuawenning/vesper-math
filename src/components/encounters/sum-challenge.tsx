@@ -1,21 +1,25 @@
 import type { Challenge } from '@/lib/types';
+import type { ReactNode } from 'react';
+import ChallengePrompt from './challenge-prompt';
 import { Meter, Toolbox } from '../ui/panels';
 
 export default function SumChallenge({
   challenge,
   selected,
   onChange,
+  narration,
 }: {
   challenge: Extract<Challenge, { kind: 'sum' }>;
   selected: number[];
   onChange: (selected: number[]) => void;
+  narration?: ReactNode;
 }) {
   return (
     <Toolbox>
-      <p className="mb-4 font-story text-xl leading-[1.5]">
+      <ChallengePrompt narration={narration}>
         The crossing has a {challenge.target}-foot gap. Choose exactly {challenge.count} timbers
         whose lengths add up to {challenge.target} feet.
-      </p>
+      </ChallengePrompt>
       <div className="flex flex-wrap justify-center gap-[9px]">
         {challenge.planks.map((length) => (
           <button

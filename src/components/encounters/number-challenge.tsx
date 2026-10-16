@@ -1,18 +1,22 @@
 import type { Challenge } from '@/lib/types';
+import type { ReactNode } from 'react';
+import ChallengePrompt from './challenge-prompt';
 import { Toolbox } from '../ui/panels';
 
 export default function NumberChallenge({
   challenge,
   value,
   onChange,
+  narration,
 }: {
   challenge: Extract<Challenge, { kind: 'number' }>;
   value: string;
   onChange: (value: string) => void;
+  narration?: ReactNode;
 }) {
   return (
     <Toolbox>
-      <p className="mb-4 font-story text-xl leading-[1.5]">{challenge.question}</p>
+      <ChallengePrompt narration={narration}>{challenge.question}</ChallengePrompt>
       <label className="block text-xs" htmlFor="world-answer">
         Your answer
       </label>
