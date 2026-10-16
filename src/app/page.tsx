@@ -7,6 +7,7 @@ import BrandMark from '@/components/brand-mark';
 import Icon from '@/components/icon';
 import WorldAtmosphere from '@/components/adventure/world-atmosphere';
 import JourneyLink from '@/components/welcome/journey-link';
+import Copyright from '@/components/welcome/copyright';
 
 export default function Home() {
   return (
@@ -174,7 +175,7 @@ export default function Home() {
       </main>
       <footer className="mx-auto flex max-w-[1280px] flex-wrap justify-between gap-3 px-5 py-8 text-xs leading-relaxed text-subtle tablet:px-10">
         <span>Vesper Math · Follow your curiosity.</span>
-        <span>Learn at your pace. Keep your own story.</span>
+        <Copyright />
       </footer>
     </WorldAtmosphere>
   );
