@@ -210,3 +210,28 @@ test('a six-world save gains an empty seventh trail without changing earlier dis
   assert.equal(next.journeys[astral.id].ending, 'refuge');
   assert.equal(next.history.length, 6);
 });
+
+test('the last discovery completes every world without an ending choice', () => {
+  let p = normalizeProgress({});
+  for (const chapter of [merewood, foundry, coast, desert, winter, astral, orchard]) {
+    p = switchWorld(p, chapter.id);
+    for (const [index, encounter] of chapter.encounters.entries()) {
+      p = recordDiscovery(p, encounter.id, chapter);
+      assert.equal(p.ending, index === chapter.encounters.length - 1 ? 'beacon' : null);
+    }
+    const restored = normalizeProgress(JSON.parse(JSON.stringify(p)));
+    assert.equal(restored.ending, 'beacon');
+    assert.deepEqual(restored.done, p.done);
+  }
+});
+
+test('completed older saves gain a conclusion while preserving existing endings', () => {
+  const done = merewood.encounters.map((e) => e.id);
+  assert.equal(normalizeProgress({ done, ending: null }).ending, 'beacon');
+  assert.equal(normalizeProgress({ done, ending: 'refuge' }).ending, 'refuge');
+  assert.equal(normalizeProgress({ done: done.slice(0, 2), ending: 'beacon' }).ending, null);
+  const p = normalizeProgress({
+    journeys: { [foundry.id]: { done: foundry.encounters.map((e) => e.id) } },
+  });
+  assert.equal(switchWorld(p, foundry.id).ending, 'beacon');
+});

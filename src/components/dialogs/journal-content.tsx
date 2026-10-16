@@ -27,13 +27,11 @@ export default function JournalContent({
   chapter,
   progress,
   onWorld,
-  onFinale,
   onAtlas,
 }: {
   chapter: Chapter;
   progress: Progress;
   onWorld: (id: string) => Promise<void>;
-  onFinale: () => void;
   onAtlas: () => void;
 }) {
   return (
@@ -43,7 +41,6 @@ export default function JournalContent({
         chapter={chapter}
         progress={progress}
         onWorld={onWorld}
-        onFinale={onFinale}
         onAtlas={onAtlas}
       />
       {progress.done.length ? (

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { chapter as initialChapter } from '@/content/merewood';
 import { loadChapter, getWorld } from '@/content/worlds';
 import { encounterStatus, emptyJourney, recordDiscovery, switchWorld } from '@/lib/progress';
-import type { DialogView, Ending } from '@/lib/types';
+import type { DialogView } from '@/lib/types';
 import { useProgress } from './use-progress';
 import GameHeader from './game-header';
 import ChapterSidebar from './chapter-sidebar';
@@ -69,7 +69,7 @@ export default function Game({ scene }: { scene: ReactNode }) {
     });
   }
   function continueJourney() {
-    if (progress.ending) setView({ kind: 'journal' });
+    if (progress.ending) setView({ kind: 'complete' });
     else if (!next) setView({ kind: 'finale' });
     else if (!progress.started) setView({ kind: 'welcome' });
     else openEncounter(next.id);
@@ -82,10 +82,6 @@ export default function Game({ scene }: { scene: ReactNode }) {
   function complete(id: string) {
     setProgress((p) => recordDiscovery(p, id, chapter));
     setView({ kind: 'discovery', id });
-  }
-  function chooseEnding(ending: Ending) {
-    setProgress((p) => ({ ...p, ending }));
-    setView({ kind: 'complete' });
   }
   function restart() {
     setProgress((p) => ({
@@ -161,7 +157,6 @@ export default function Game({ scene }: { scene: ReactNode }) {
           onContinue={continueJourney}
           onStart={start}
           onComplete={complete}
-          onEnding={chooseEnding}
           onRestart={restart}
         />
       )}

@@ -44,10 +44,7 @@ function normalizeJourney(value: unknown, ids: readonly string[]): Journey {
   return {
     done,
     started: raw.started === true || done.length > 0,
-    ending:
-      done.length === ids.length && (raw.ending === 'beacon' || raw.ending === 'refuge')
-        ? raw.ending
-        : null,
+    ending: done.length === ids.length ? (raw.ending === 'refuge' ? 'refuge' : 'beacon') : null,
     levels: Object.fromEntries(done.map((id) => [id, cleanLevel(levels[id])])),
   };
 }
@@ -158,6 +155,7 @@ export function recordDiscovery(progress: Progress, id: string, chapter: Chapter
   return {
     ...progress,
     done: [...progress.done, id],
+    ending: progress.done.length + 1 === chapter.encounters.length ? 'beacon' : null,
     levels: { ...progress.levels, [id]: progress.skill },
     history: [
       ...progress.history,
@@ -174,9 +172,10 @@ export function encounterStatus(id: string, progress: Progress, chapter: Chapter
 export function endingText(ending: Ending | null, chapter?: Chapter): string {
   if (chapter?.completion)
     return (
-      chapter.completion.choices.find((c) => c.id === ending)?.result ?? chapter.completion.question
+      chapter.completion.choices.find((c) => c.id === ending)?.result ??
+      chapter.completion.choices[0].result
     );
-  return ending === 'beacon'
+  return ending !== 'refuge'
     ? 'The observatory shines again. Far beyond the mere, a traveler sees your beacon and finds the way home.'
     : 'The light burns low and warm. Beneath its dome, the observatory becomes a refuge for every traveler who needs one.';
 }

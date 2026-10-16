@@ -2,7 +2,7 @@
 import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
 import { artwork } from '@/content/artwork';
-import type { Artwork, Chapter, DialogView, Ending, Progress } from '@/lib/types';
+import type { Artwork, Chapter, DialogView, Progress } from '@/lib/types';
 import Dialog from './dialog';
 import { levelEncounter } from '@/lib/difficulty';
 const TutorChat = dynamic(() => import('./tutor/tutor-chat'));
@@ -13,7 +13,7 @@ import EncounterPanel from './encounters/encounter-panel';
 import JournalContent from './dialogs/journal-content';
 import WorldMapContent from './dialogs/world-map-content';
 import DiscoveryContent from './dialogs/discovery-content';
-import { EndingChoice, ChapterComplete } from './dialogs/ending-content';
+import { ChapterComplete } from './dialogs/ending-content';
 import { WelcomeContent, RestartContent } from './dialogs/journey-content';
 
 interface Props {
@@ -28,7 +28,6 @@ interface Props {
   onContinue: () => void;
   onStart: () => void;
   onComplete: (id: string) => void;
-  onEnding: (ending: Ending) => void;
   onRestart: () => void;
 }
 
@@ -59,8 +58,8 @@ const definitions = {
     artwork: artwork.journal,
   },
   finale: {
-    title: 'A future of your making',
-    label: 'The final choice',
+    title: 'The chapter is yours',
+    label: 'Chapter complete',
     artwork: artwork.observatory,
   },
   complete: {
@@ -82,7 +81,6 @@ export default function GameDialog({
   onContinue,
   onStart,
   onComplete,
-  onEnding,
   onRestart,
 }: Props) {
   const next = chapter.encounters.find((e) => !progress.done.includes(e.id));
@@ -179,16 +177,8 @@ export default function GameDialog({
         content = (
           <DiscoveryContent
             encounter={encounter}
-            action={
-              next
-                ? 'Continue exploring'
-                : progress.ending
-                  ? 'Read your journal'
-                  : 'Decide this place’s future'
-            }
-            onNext={
-              next ? onDismiss : () => onNavigate({ kind: progress.ending ? 'journal' : 'finale' })
-            }
+            action={next ? 'Continue exploring' : 'See this chapter’s conclusion'}
+            onNext={next ? onDismiss : () => onNavigate({ kind: 'complete' })}
             onDismiss={onDismiss}
           />
         );
@@ -209,14 +199,11 @@ export default function GameDialog({
           chapter={chapter}
           progress={progress}
           onWorld={onWorld}
-          onFinale={() => onNavigate({ kind: 'finale' })}
           onAtlas={() => onNavigate({ kind: 'map' })}
         />
       );
       break;
     case 'finale':
-      content = <EndingChoice chapter={chapter} onEnding={onEnding} />;
-      break;
     case 'complete':
       content = (
         <ChapterComplete

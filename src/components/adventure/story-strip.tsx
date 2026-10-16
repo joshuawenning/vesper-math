@@ -17,15 +17,14 @@ export default function StoryStrip({
     ? endingText(progress.ending, chapter)
     : next
       ? chapter.intro[progress.reading]
-      : (chapter.completion?.question ??
-        'The star chart is yours. One decision remains: what will you do with the observatory’s light?');
+      : endingText(null, chapter);
   const action = progress.ending
-    ? 'Read your discoveries'
+    ? 'See this chapter’s conclusion'
     : next
       ? progress.started
         ? 'Continue the journey'
         : 'Begin the journey'
-      : 'Choose your ending';
+      : 'See this chapter’s conclusion';
   return (
     <div className="relative grid grid-cols-1 items-center gap-4 bg-paper p-[19px] text-ink tablet:gap-6 tablet:px-[25px] tablet:py-[22px] desktop:grid-cols-[1fr_auto]">
       <p className="max-w-[690px] font-story text-[1.125rem] leading-[1.45] first-letter:text-[1.875rem] first-letter:leading-none first-letter:text-[#655730]">
