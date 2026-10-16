@@ -104,7 +104,7 @@ function Setup() {
                     onClick={() => setPersona(character.id)}
                     className={`relative overflow-hidden border ${persona === character.id ? 'border-forest ring-2 ring-forest ring-offset-2 ring-offset-paper' : 'border-[#909c8370] hover:border-forest'}`}
                   >
-                    <CharacterPortrait persona={character.id} className="aspect-[4/5] w-full" />
+                    <CharacterPortrait persona={character.id} className="aspect-square w-full" />
                     {persona === character.id && (
                       <span className="absolute bottom-1 right-1 grid size-6 place-items-center rounded-full bg-forest text-paper">
                         <Icon name="check" className="size-4" />
