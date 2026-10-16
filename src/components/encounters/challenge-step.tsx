@@ -14,6 +14,8 @@ import Icon from '../icon';
 import Button from '../ui/button';
 import { Actions, Feedback } from '../ui/panels';
 
+const answerFormatHint = 'Use a number, decimal, or fraction such as 1/2. No units needed.';
+
 export default function ChallengeStep({
   encounter,
   step,
@@ -72,7 +74,9 @@ export default function ChallengeStep({
       compact
       settings={progress.speech}
       text={`${encounter.title}. ${index === 0 ? encounter[progress.reading] : ''} Challenge ${index + 1} of 3. ${index === 0 ? `Elian’s starting point: ${step.hint[0]}.` : ''} ${c.kind === 'number' ? c.question : c.kind === 'sum' ? `Choose ${c.count} planks totaling ${c.target} ${c.unit}. Available lengths: ${c.planks.join(', ')}.` : c.kind === 'fraction' ? `The cistern starts at ${c.start}/${c.denominator}. Reach ${c.target}/${c.denominator} by adding or removing measures.` : `${c.total} sparks. ${c.routes.find((r) => r.id === answer.route)?.label}. ${c.routes.find((r) => r.id === answer.route)?.question}`}${
-        hint > 0 ? ` Hint: ${step.hint[hint - 1]}. Why this works: ${principle}` : ''
+        hint > 0
+          ? ` Hint: ${step.hint[hint - 1]}. Why this works: ${principle}. ${c.kind === 'number' ? answerFormatHint : ''}`
+          : ''
       }`}
     />
   );
@@ -102,6 +106,7 @@ export default function ChallengeStep({
       {c.kind === 'number' && (
         <NumberChallenge
           narration={narration}
+          answerHintId={hint > 0 ? 'story-answer-format' : undefined}
           challenge={c}
           value={answer.value ?? ''}
           onChange={(value) => update({ value })}
@@ -138,6 +143,7 @@ export default function ChallengeStep({
       {feedback && <Feedback>{feedback}</Feedback>}
       {hint > 0 && (
         <div
+          id="story-hint"
           className="mt-[17px] border-l-2 border-[#ac9963] pl-[14px] font-story text-[1.125rem] italic leading-[1.5]"
           aria-live="polite"
         >
@@ -145,6 +151,14 @@ export default function ChallengeStep({
           <p className="mt-3 font-sans text-sm not-italic leading-relaxed">
             Why this works: {principle}
           </p>
+          {c.kind === 'number' && (
+            <p
+              id="story-answer-format"
+              className="mt-3 font-sans text-xs not-italic leading-relaxed text-[#43533e]"
+            >
+              {answerFormatHint}
+            </p>
+          )}
         </div>
       )}
       {learning.attempted.length > 0 && (
@@ -159,8 +173,11 @@ export default function ChallengeStep({
           {action}
           <Icon name="arrow" />
         </Button>
-        <Button
-          variant="secondary"
+        <button
+          type="button"
+          aria-expanded={hint > 0}
+          aria-controls={hint > 0 ? 'story-hint' : undefined}
+          className="min-h-11 px-2 text-sm text-[#775a26] underline decoration-[#775a2660] underline-offset-4 disabled:opacity-50 disabled:no-underline"
           disabled={hint === step.hint.length && (!learning.attempted.length || learning.recovered)}
           onClick={() => {
             setHint((n) => Math.min(step.hint.length, n + 1));
@@ -169,12 +186,12 @@ export default function ChallengeStep({
         >
           {hint === step.hint.length
             ? learning.attempted.length && !learning.recovered
-              ? 'Reflect with Elian · +1 Resolve'
+              ? 'Reflect · +1 Resolve'
               : 'Explanation shown'
             : hint > 0
               ? 'Another hint'
-              : 'Ask Elian for a hint'}
-        </Button>
+              : 'Hint'}
+        </button>
       </Actions>
     </form>
   );

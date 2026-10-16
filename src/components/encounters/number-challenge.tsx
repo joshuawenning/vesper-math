@@ -8,11 +8,13 @@ export default function NumberChallenge({
   value,
   onChange,
   narration,
+  answerHintId,
 }: {
   challenge: Extract<Challenge, { kind: 'number' }>;
   value: string;
   onChange: (value: string) => void;
   narration?: ReactNode;
+  answerHintId?: string;
 }) {
   return (
     <Toolbox>
@@ -29,11 +31,8 @@ export default function NumberChallenge({
         maxLength={160}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        aria-describedby="answer-format"
+        aria-describedby={answerHintId}
       />
-      <p id="answer-format" className="mt-2 text-[0.75rem] text-[#43533e]">
-        Use a number, decimal, or fraction such as 1/2. No units needed.
-      </p>
     </Toolbox>
   );
 }
