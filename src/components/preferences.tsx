@@ -17,10 +17,12 @@ export default function Preferences({
   onChange,
   transfer = false,
   onRestart,
+  section = 'all',
 }: {
   progress: Progress;
   onChange: (value: Progress) => void;
   transfer?: boolean;
+  section?: 'all' | 'skill' | 'experience';
   onRestart?: () => void;
 }) {
   const input = useRef<HTMLInputElement>(null);
@@ -78,74 +80,89 @@ export default function Preferences({
             ? 'Settings saved'
             : 'Couldn’t save settings. Changes apply only for this session.')}
       </StatusNotice>
-      <PreferenceChoices
-        label="Appearance"
-        value={progress.theme}
-        onChange={(theme) => changeSettings({ ...progress, theme })}
-        options={[
-          { value: 'system', label: 'System', icon: 'monitor' },
-          { value: 'light', label: 'Light', icon: 'sun' },
-          { value: 'dark', label: 'Dark', icon: 'moon' },
-        ]}
-      />
-      <fieldset className="my-6 min-w-0 border-y border-[#909c8350] py-2">
-        <legend className="px-2 font-story text-2xl">Accessibility</legend>
-        <TextSizeControl
-          value={progress.textSize}
-          onChange={(textSize) => changeSettings({ ...progress, textSize })}
-        />
-        <Muted>
-          Text also follows your browser’s zoom and font settings. Animations respect your device’s
-          reduced-motion preference.
-        </Muted>
-        <SpeechPreferences
-          value={progress.speech}
-          onChange={(speech) => changeSettings({ ...progress, speech })}
-        />
-        <details className="my-4 text-sm leading-relaxed">
-          <summary className="cursor-pointer py-3">Keyboard controls</summary>
-          <p>
-            Use Tab and Shift+Tab to move between controls, Enter or Space to activate a button, and
-            Escape to close a window. Focus stays inside an open window and returns to where you
-            opened it. The first Tab on the page offers “Skip to adventure.”
-          </p>
-        </details>
-      </fieldset>
-      <PreferenceChoices
-        label="Math skill level"
-        value={progress.skill}
-        onChange={(skill) => changeSettings({ ...progress, skill })}
-        options={skillLevels.map((level) => ({
-          value: level.id,
-          label: level.label,
-          description: level.description,
-        }))}
-      />
-      <Muted>
-        Your choice changes new encounters and Elian’s quizzes. Earlier discoveries keep their
-        original record.
-      </Muted>
-      <PreferenceChoices
-        label="Storytelling"
-        value={progress.reading}
-        onChange={(reading) => changeSettings({ ...progress, reading })}
-        options={[
-          { value: 'rich', label: 'Rich & literary' },
-          { value: 'plain', label: 'Plain & concise' },
-        ]}
-      />
-      <PreferenceSwitch
-        label="Visual guidance"
-        description="Show visual support while you explore. Hints are always available."
-        checked={progress.support === 'guided'}
-        onChange={(checked) =>
-          changeSettings({ ...progress, support: checked ? 'guided' : 'light' })
-        }
-      />
-      <Muted>
-        The math stays the same when you change the storytelling. You can change these preferences
-        at any time.
-      </Muted>
+      {section !== 'skill' && (
+        <>
+          <PreferenceChoices
+            label="Appearance"
+            value={progress.theme}
+            onChange={(theme) => changeSettings({ ...progress, theme })}
+            options={[
+              { value: 'system', label: 'System', icon: 'monitor' },
+              { value: 'light', label: 'Light', icon: 'sun' },
+              { value: 'dark', label: 'Dark', icon: 'moon' },
+            ]}
+          />
+          <fieldset className="my-6 min-w-0 border-y border-[#909c8350] py-2">
+            <legend className="px-2 font-story text-2xl">Accessibility</legend>
+            <TextSizeControl
+              value={progress.textSize}
+              onChange={(textSize) => changeSettings({ ...progress, textSize })}
+            />
+            <Muted>
+              Text also follows your browser’s zoom and font settings. Animations respect your
+              device’s reduced-motion preference.
+            </Muted>
+            <SpeechPreferences
+              value={progress.speech}
+              onChange={(speech) => changeSettings({ ...progress, speech })}
+            />
+            {section === 'all' && (
+              <details className="my-4 text-sm leading-relaxed">
+                <summary className="cursor-pointer py-3">Keyboard controls</summary>
+                <p>
+                  Use Tab and Shift+Tab to move between controls, Enter or Space to activate a
+                  button, and Escape to close a window. Focus stays inside an open window and
+                  returns to where you opened it. The first Tab on the page offers “Skip to
+                  adventure.”
+                </p>
+              </details>
+            )}
+          </fieldset>
+        </>
+      )}
+      {section !== 'experience' && (
+        <>
+          <PreferenceChoices
+            label="Math skill level"
+            value={progress.skill}
+            onChange={(skill) => changeSettings({ ...progress, skill })}
+            options={skillLevels.map((level) => ({
+              value: level.id,
+              label: level.label,
+              description: level.description,
+            }))}
+          />
+          <Muted>
+            Your choice changes new encounters and Elian’s quizzes. Earlier discoveries keep their
+            original record.
+          </Muted>
+        </>
+      )}
+      {section !== 'skill' && (
+        <>
+          <PreferenceChoices
+            label="Storytelling"
+            value={progress.reading}
+            onChange={(reading) => changeSettings({ ...progress, reading })}
+            options={[
+              { value: 'rich', label: 'Rich & literary' },
+              { value: 'plain', label: 'Plain & concise' },
+            ]}
+          />
+          <PreferenceSwitch
+            label="Visual guidance"
+            description="Show visual support while you explore. Hints are always available."
+            checked={progress.support === 'guided'}
+            onChange={(checked) =>
+              changeSettings({ ...progress, support: checked ? 'guided' : 'light' })
+            }
+          />
+          <Muted>
+            The math stays the same when you change the storytelling. You can change these
+            preferences at any time.
+          </Muted>
+        </>
+      )}
       {transfer && (
         <>
           <Muted className="mt-[18px]">

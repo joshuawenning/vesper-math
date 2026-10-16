@@ -14,12 +14,37 @@ import Button from '../ui/button';
 import WorldAtmosphere from '../adventure/world-atmosphere';
 import { useProgress } from '../use-progress';
 
+const steps = [
+  {
+    id: 'character',
+    label: 'Your character',
+    title: 'Who walks this road?',
+    description:
+      'A name for Elian to remember. A face for the adventures ahead. Every class can follow every path.',
+  },
+  {
+    id: 'skill',
+    label: 'Math level',
+    title: 'Find your footing.',
+    description:
+      'Choose a comfortable starting point. This shapes the challenges ahead, and you can change it later in Settings.',
+  },
+  {
+    id: 'experience',
+    label: 'Your experience',
+    title: 'Make yourself at home.',
+    description:
+      'Choose how the story is told, and make the page easy to read. You can change everything later in Settings.',
+  },
+] as const;
+
 function Setup() {
   const { progress, setProgress } = useProgress();
   const router = useRouter();
-  const [step, setStep] = useState<'character' | 'preferences'>('character');
+  const [step, setStep] = useState<(typeof steps)[number]['id']>('character');
   const [name, setName] = useState(progress.profile.name);
   const [persona, setPersona] = useState<PersonaId>(progress.profile.persona);
+  const currentStep = steps.find((item) => item.id === step)!;
   const heading = useRef<HTMLHeadingElement>(null);
   const moved = useRef(false);
   useEffect(() => {
@@ -38,12 +63,10 @@ function Setup() {
           tabIndex={-1}
           className="font-story text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] focus:outline-none focus:shadow-none"
         >
-          {step === 'character' ? 'Who walks this road?' : 'Make yourself at home.'}
+          {currentStep.title}
         </h1>
         <p className="my-5 max-w-md text-base leading-relaxed text-subtle">
-          {step === 'character'
-            ? 'A name for Elian to remember. A face for the adventures ahead. Every class can follow every path.'
-            : 'Start where you feel comfortable. Choose how the story is told, and make the page easy to read. You can change everything later in Settings.'}
+          {currentStep.description}
         </p>
         <figure className="relative mt-7 hidden aspect-[4/5] overflow-hidden border border-line tablet:block">
           <Image
@@ -60,25 +83,22 @@ function Setup() {
         aria-label="Set up your journey"
       >
         <ol className="mb-7 flex flex-wrap gap-x-6 gap-y-2 border-b border-[#909c8350] pb-4 text-sm">
-          <li
-            aria-current={step === 'character' ? 'step' : undefined}
-            className={step === 'character' ? 'font-semibold' : 'text-[#43533e]'}
-          >
-            01 · Your character
-          </li>
-          <li
-            aria-current={step === 'preferences' ? 'step' : undefined}
-            className={step === 'preferences' ? 'font-semibold' : 'text-[#43533e]'}
-          >
-            02 · Your preferences
-          </li>
+          {steps.map((item, index) => (
+            <li
+              key={item.id}
+              aria-current={step === item.id ? 'step' : undefined}
+              className={step === item.id ? 'font-semibold' : 'text-[#43533e]'}
+            >
+              0{index + 1} · {item.label}
+            </li>
+          ))}
         </ol>
         {step === 'character' ? (
           <form
             onSubmit={(event) => {
               event.preventDefault();
               setProgress({ ...progress, profile: { name: cleanName(name), persona } });
-              setStep('preferences');
+              setStep('skill');
             }}
           >
             <label className="block text-sm">
@@ -126,24 +146,33 @@ function Setup() {
               {getPersona(persona).description}
             </p>
             <Button type="submit">
-              Choose my preferences <Icon name="arrow" />
+              Choose my math level <Icon name="arrow" />
             </Button>
           </form>
         ) : (
           <>
-            <Preferences progress={progress} onChange={setProgress} />
+            <Preferences key={step} progress={progress} onChange={setProgress} section={step} />
             <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-[#909c8350] pt-5">
-              <Button variant="secondary" onClick={() => setStep('character')}>
-                Back to character
-              </Button>
               <Button
-                onClick={() => {
-                  setProgress((current) => ({ ...current, started: true }));
-                  router.push('/adventure');
-                }}
+                variant="secondary"
+                onClick={() => setStep(step === 'skill' ? 'character' : 'skill')}
               >
-                Enter the world <Icon name="arrow" />
+                {step === 'skill' ? 'Back to character' : 'Back to math level'}
               </Button>
+              {step === 'skill' ? (
+                <Button onClick={() => setStep('experience')}>
+                  Story & accessibility <Icon name="arrow" />
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    setProgress((current) => ({ ...current, started: true }));
+                    router.push('/adventure');
+                  }}
+                >
+                  Enter the world <Icon name="arrow" />
+                </Button>
+              )}
             </div>
           </>
         )}
