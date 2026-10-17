@@ -17,6 +17,7 @@ import { useProgress } from '../use-progress';
 const steps = [
   {
     id: 'character',
+    illustration: artwork.elianPathForward,
     label: 'Your character',
     title: 'Who walks this road?',
     description:
@@ -24,6 +25,7 @@ const steps = [
   },
   {
     id: 'skill',
+    illustration: artwork.elianMathLevel,
     label: 'Math level',
     title: 'Find your footing.',
     description:
@@ -31,6 +33,7 @@ const steps = [
   },
   {
     id: 'experience',
+    illustration: artwork.elianExperience,
     label: 'Your experience',
     title: 'Make yourself at home.',
     description:
@@ -70,8 +73,8 @@ function Setup() {
         </p>
         <figure className="relative mt-7 hidden aspect-[4/5] overflow-hidden border border-line tablet:block">
           <Image
-            src={step === 'character' ? artwork.elianPathForward.src : artwork.preferences.src}
-            alt={step === 'character' ? artwork.elianPathForward.alt : artwork.preferences.alt}
+            src={currentStep.illustration.src}
+            alt={currentStep.illustration.alt}
             fill
             sizes="(max-width:750px) 0px, 450px"
             className="object-cover"
