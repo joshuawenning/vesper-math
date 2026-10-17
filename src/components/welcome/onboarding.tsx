@@ -70,8 +70,8 @@ function Setup() {
         </p>
         <figure className="relative mt-7 hidden aspect-[4/5] overflow-hidden border border-line tablet:block">
           <Image
-            src={step === 'character' ? artwork.elian.src : artwork.preferences.src}
-            alt={step === 'character' ? artwork.elian.alt : artwork.preferences.alt}
+            src={step === 'character' ? artwork.elianPathForward.src : artwork.preferences.src}
+            alt={step === 'character' ? artwork.elianPathForward.alt : artwork.preferences.alt}
             fill
             sizes="(max-width:750px) 0px, 450px"
             className="object-cover"

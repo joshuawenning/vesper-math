@@ -5,6 +5,11 @@ export const artwork = {
     src: '/art/merewood-arrival-painterly.webp',
     alt: 'A watercolor of a russet-cloaked wayfarer holding a lantern beneath a willow, looking toward a distant light across the Merewood marsh.',
   },
+  elianPathForward: {
+    src: '/art/elian-path-forward-painterly.webp',
+    alt: 'Elian holds a folded map and gestures toward a misty woodland path, guiding a fellow traveler in an ochre cloak.',
+    portrait: true,
+  },
   elianWaystation: {
     src: '/art/elian-waystation-painterly.webp',
     alt: 'Elian studies her map at a quiet wayside shelter, with a heron by the water and a brass lantern at her feet.',
