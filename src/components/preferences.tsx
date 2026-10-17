@@ -96,7 +96,7 @@ export default function Preferences({
               ]}
             />
           )}
-          <fieldset className="my-6 min-w-0 border-y border-[#909c8350] py-2">
+          <fieldset className="mt-6 min-w-0 border-t border-[#909c8350] pt-2">
             <legend className="px-2 font-story text-2xl">Accessibility</legend>
             <TextSizeControl
               value={progress.textSize}
@@ -144,7 +144,7 @@ export default function Preferences({
       )}
       {section !== 'skill' && (
         <>
-          <fieldset className="my-6 min-w-0 border-y border-[#909c8350] py-2">
+          <fieldset className="mt-6 min-w-0 border-t border-[#909c8350] pt-2">
             <legend className="px-2 font-story text-2xl">Storytelling</legend>
             <PreferenceChoices
               label="Narrative style"
