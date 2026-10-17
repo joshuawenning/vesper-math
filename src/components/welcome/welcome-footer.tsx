@@ -51,7 +51,7 @@ export default function WelcomeFooter() {
             <span className="font-story text-2xl">Vesper Math</span>
           </div>
           <p className="text-sm text-[#d2dccd]">Follow your curiosity.</p>
-          <div className="text-xs leading-relaxed text-[#d2dccd]">
+          <div className="text-sm leading-relaxed text-[#d2dccd]">
             <Copyright />
           </div>
         </div>
