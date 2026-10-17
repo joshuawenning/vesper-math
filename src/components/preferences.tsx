@@ -97,16 +97,19 @@ export default function Preferences({
             />
           )}
           <fieldset className="mt-6 min-w-0 border-t border-[#909c8350] pt-2">
-            <legend className="px-2 font-story text-2xl">Accessibility</legend>
+            <legend className="pr-2 font-story text-2xl">Accessibility</legend>
             <TextSizeControl
               value={progress.textSize}
               onChange={(textSize) => changeSettings({ ...progress, textSize })}
             />
-            <Muted>
-              Text also follows your browser’s zoom and font settings. Animations respect your
-              device’s reduced-motion preference.
-            </Muted>
+            {section === 'all' && (
+              <Muted>
+                Text also follows your browser’s zoom and font settings. Animations respect your
+                device’s reduced-motion preference.
+              </Muted>
+            )}
             <SpeechPreferences
+              showDetails={section === 'all'}
               value={progress.speech}
               onChange={(speech) => changeSettings({ ...progress, speech })}
             />
@@ -145,7 +148,7 @@ export default function Preferences({
       {section !== 'skill' && (
         <>
           <fieldset className="mt-6 min-w-0 border-t border-[#909c8350] pt-2">
-            <legend className="px-2 font-story text-2xl">Storytelling</legend>
+            <legend className="pr-2 font-story text-2xl">Storytelling</legend>
             <PreferenceChoices
               label="Narrative style"
               value={progress.reading}

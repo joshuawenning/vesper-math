@@ -11,7 +11,9 @@ import { useSpeech } from './use-speech';
 export default function SpeechPreferences({
   value,
   onChange,
+  showDetails = true,
 }: {
+  showDetails?: boolean;
   value: Progress['speech'];
   onChange: (value: Progress['speech']) => void;
 }) {
@@ -20,7 +22,7 @@ export default function SpeechPreferences({
     <>
       <PreferenceSwitch
         label="Read-aloud controls"
-        description="Show a speaker beside problems and Elian’s replies."
+        description="Show a speaker beside problems and replies. Reading starts only when you press the button."
         checked={value.enabled}
         onChange={(enabled) => onChange({ ...value, enabled })}
       />
@@ -76,11 +78,13 @@ export default function SpeechPreferences({
           </p>
         </>
       )}
-      <Muted>
-        Reading starts only when you press a read button. Only natural on-device English narrators
-        are listed, with one voice per available accent. No audio is sent to a server by Vesper
-        Math. Your device supplies the available voices.
-      </Muted>
+      {showDetails && (
+        <Muted>
+          Reading starts only when you press a read button. Only natural on-device English narrators
+          are listed, with one voice per available accent. No audio is sent to a server by Vesper
+          Math. Your device supplies the available voices.
+        </Muted>
+      )}
     </>
   );
 }
