@@ -10,7 +10,7 @@ export default function Copyright() {
       © {year}{' '}
       <a
         href="https://joshuawenning.com"
-        className="underline decoration-current/40 underline-offset-4 hover:text-gold"
+        className="underline decoration-current/40 underline-offset-4"
       >
         @joshuawenning
       </a>

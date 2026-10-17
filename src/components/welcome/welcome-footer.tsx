@@ -33,8 +33,11 @@ export default function WelcomeFooter() {
             You have good company.
           </h2>
           <p className="my-6 max-w-[520px] text-lg leading-relaxed text-[#e4e9dd]">
-            Elian is a cartographer with a fondness for questions. Ask about an idea, work through a
-            calculation, or invite her to quiz you. There is always another way to understand.
+            Elian is a cartographer with a fondness for questions.
+            <span className="block">
+              Ask about an idea, work through a calculation, or invite her to quiz you. There is
+              always another way to understand.
+            </span>
           </p>
           <p className="mb-7 max-w-[520px] font-story text-2xl italic leading-tight text-[#dfc998]">
             “One small idea, then another. That is how we find our way.”
