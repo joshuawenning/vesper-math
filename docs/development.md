@@ -18,7 +18,7 @@ Keep mathematical rules and state transitions in pure library functions. Compone
 
 ## Entry and navigation
 
-`/` is the illustrated introduction. `/begin` has three steps: character, math skill level, then storytelling and accessibility (without the Settings keyboard reference). It then enters `/adventure`. Returning players can continue directly from the introduction; existing saves require no migration. Setup edits identity and preferences without resetting discoveries or Resolve. The brand inside the game returns to the current adventure.
+`/` is the illustrated introduction. `/begin` has three steps: character, math skill level, then storytelling and accessibility (without the Settings keyboard reference). Appearance stays in Settings; Storytelling and Accessibility use matching section headings in setup. It then enters `/adventure`. Returning players can continue directly from the introduction; existing saves require no migration. Setup edits identity and preferences without resetting discoveries or Resolve. The brand inside the game returns to the current adventure.
 
 `/training` returns to `/adventure`, with optional `resume` (an encounter ID) or `panel` (map, journal, settings, profile) query parameters. Keep these links together when changing routes. The welcome page is rendered on the server; only its saved-journey links need browser state. Character creation and preferences load on the separate setup route. Setup suppresses save-success notices; Settings retains them. Storage failures are still reported in both places.
 

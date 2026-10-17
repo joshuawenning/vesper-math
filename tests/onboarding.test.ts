@@ -32,18 +32,18 @@ test('the math setup step contains only skill choices', () => {
     assert.ok(!html.includes(label));
 });
 
-test('the experience setup step contains storytelling and accessibility without math or keyboard reference', () => {
+test('the experience setup step contains storytelling and accessibility without appearance, math or keyboard reference', () => {
   const html = renderPreferences('experience');
   for (const label of [
     'Storytelling',
     'Accessibility',
-    'Appearance',
     'Text size',
     'Read-aloud controls',
     'Visual guidance',
   ])
     assert.ok(html.includes(label));
-  for (const label of ['Math skill level', 'Keyboard controls']) assert.ok(!html.includes(label));
+  for (const label of ['Appearance', 'Math skill level', 'Keyboard controls'])
+    assert.ok(!html.includes(label));
 });
 
 test('full Settings retains all preference groups and keyboard instructions', () => {

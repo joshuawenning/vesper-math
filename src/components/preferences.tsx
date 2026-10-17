@@ -84,16 +84,18 @@ export default function Preferences({
       </StatusNotice>
       {section !== 'skill' && (
         <>
-          <PreferenceChoices
-            label="Appearance"
-            value={progress.theme}
-            onChange={(theme) => changeSettings({ ...progress, theme })}
-            options={[
-              { value: 'system', label: 'System', icon: 'monitor' },
-              { value: 'light', label: 'Light', icon: 'sun' },
-              { value: 'dark', label: 'Dark', icon: 'moon' },
-            ]}
-          />
+          {section === 'all' && (
+            <PreferenceChoices
+              label="Appearance"
+              value={progress.theme}
+              onChange={(theme) => changeSettings({ ...progress, theme })}
+              options={[
+                { value: 'system', label: 'System', icon: 'monitor' },
+                { value: 'light', label: 'Light', icon: 'sun' },
+                { value: 'dark', label: 'Dark', icon: 'moon' },
+              ]}
+            />
+          )}
           <fieldset className="my-6 min-w-0 border-y border-[#909c8350] py-2">
             <legend className="px-2 font-story text-2xl">Accessibility</legend>
             <TextSizeControl
@@ -142,23 +144,26 @@ export default function Preferences({
       )}
       {section !== 'skill' && (
         <>
-          <PreferenceChoices
-            label="Storytelling"
-            value={progress.reading}
-            onChange={(reading) => changeSettings({ ...progress, reading })}
-            options={[
-              { value: 'rich', label: 'Rich & literary' },
-              { value: 'plain', label: 'Plain & concise' },
-            ]}
-          />
-          <PreferenceSwitch
-            label="Visual guidance"
-            description="Show visual support while you explore. Hints are always available."
-            checked={progress.support === 'guided'}
-            onChange={(checked) =>
-              changeSettings({ ...progress, support: checked ? 'guided' : 'light' })
-            }
-          />
+          <fieldset className="my-6 min-w-0 border-y border-[#909c8350] py-2">
+            <legend className="px-2 font-story text-2xl">Storytelling</legend>
+            <PreferenceChoices
+              label="Narrative style"
+              value={progress.reading}
+              onChange={(reading) => changeSettings({ ...progress, reading })}
+              options={[
+                { value: 'rich', label: 'Rich & literary' },
+                { value: 'plain', label: 'Plain & concise' },
+              ]}
+            />
+            <PreferenceSwitch
+              label="Visual guidance"
+              description="Show visual support while you explore. Hints are always available."
+              checked={progress.support === 'guided'}
+              onChange={(checked) =>
+                changeSettings({ ...progress, support: checked ? 'guided' : 'light' })
+              }
+            />
+          </fieldset>
         </>
       )}
       {transfer && (
